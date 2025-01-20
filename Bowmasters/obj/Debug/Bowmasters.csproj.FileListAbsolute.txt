@@ -1,7 +1,0 @@
-C:\Users\ps46bhd\Desktop\Projets_320\Bowmasters\Bowmasters\bin\Debug\Bowmasters.exe.config
-C:\Users\ps46bhd\Desktop\Projets_320\Bowmasters\Bowmasters\bin\Debug\Bowmasters.exe
-C:\Users\ps46bhd\Desktop\Projets_320\Bowmasters\Bowmasters\bin\Debug\Bowmasters.pdb
-C:\Users\ps46bhd\Desktop\Projets_320\Bowmasters\Bowmasters\obj\Debug\Bowmasters.csproj.AssemblyReference.cache
-C:\Users\ps46bhd\Desktop\Projets_320\Bowmasters\Bowmasters\obj\Debug\Bowmasters.csproj.CoreCompileInputs.cache
-C:\Users\ps46bhd\Desktop\Projets_320\Bowmasters\Bowmasters\obj\Debug\Bowmasters.exe
-C:\Users\ps46bhd\Desktop\Projets_320\Bowmasters\Bowmasters\obj\Debug\Bowmasters.pdb
