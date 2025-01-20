@@ -17,6 +17,8 @@ namespace Bowmasters
     public class Ball
     {
         //Déclaraton des propriétés ***************************************
+        private double _initialXPosition;
+        private double _initialYPosition;
         private double _xPosition;
         private double _yPosition;
         private double _velocity;
@@ -24,12 +26,14 @@ namespace Bowmasters
         private Balistic balistic = new Balistic();
 
         //Déclaration des constructeurs ***********************************
-        public Ball(double velocity, double angle, double xPosition, double yPosition)
+        public Ball(double velocity, double angle, double initialXPosition, double initialYPosition)
         {
             this._velocity = velocity;
             this._angle = angle;
-            this._xPosition = xPosition;
-            this._yPosition = yPosition;
+            this._initialXPosition = initialXPosition;
+            this._initialYPosition = initialYPosition;
+            _xPosition = initialXPosition;
+            _yPosition = initialYPosition;
         }
 
         /// <summary>
@@ -39,8 +43,8 @@ namespace Bowmasters
         public void DisplayBallInTime(double time)
         {
 
-            _xPosition = balistic.MovementOnXAxis(time: time, velocity: this._velocity, angle: this._angle);
-            _yPosition = balistic.MovementOnYAxis(time: time, velocity: this._velocity, angle: this._angle);
+            _xPosition = balistic.MovementOnXAxis(initialX: _initialXPosition, time: time, velocity: this._velocity, angle: this._angle);
+            _yPosition = balistic.MovementOnYAxis(initialY: _initialYPosition, time: time, velocity: this._velocity, angle: this._angle);
 
             Console.SetCursorPosition(Convert.ToInt16(Math.Round(_xPosition)), Convert.ToInt16(Math.Round(_yPosition)));
 

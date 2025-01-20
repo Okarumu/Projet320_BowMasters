@@ -20,15 +20,15 @@ namespace Bowmasters
         private const double GRAVITATIONAL_CONSTANT = 9.81; //constante gravitationnelle
 
         //movement on y axis
-        public double MovementOnYAxis(double time, double velocity, double angle)
+        public double MovementOnYAxis(double initialY, double time, double velocity, double angle)
         {
-            return (velocity * Math.Sin(angle) * time) - ((GRAVITATIONAL_CONSTANT * Math.Pow(time, 2)) / 2);
+            return initialY - ((velocity * Math.Sin(angle) * time) - ((GRAVITATIONAL_CONSTANT * Math.Pow(time, 2)) / 2));
         }
 
         //movement on x axis
-        public double MovementOnXAxis(double time, double velocity, double angle)
+        public double MovementOnXAxis(double initialX, double time, double velocity, double angle)
         {
-            return velocity * Math.Cos(angle) * time;
+            return initialX + (velocity * Math.Cos(angle) * time);
         }
     }
 }

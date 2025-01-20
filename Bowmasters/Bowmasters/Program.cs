@@ -28,6 +28,8 @@ namespace Bowmasters
             Console.BufferWidth = Config.SCREEN_WIDTH;
             Console.BufferHeight = Config.SCREEN_HEIGHT;
 
+            Console.CursorVisible = false;
+
             Player player1 = new Player(life: 3, xPosition: 20, yPosition: 37) ;
 
             Player player2 = new Player(life: 3, xPosition: 127, yPosition: 37);
@@ -35,7 +37,7 @@ namespace Bowmasters
             Tower tower1 = new Tower(towerHeight: 6, towerWidth: 3, xPosition: 40, yPosition: 34);
             Tower tower2 = new Tower(towerHeight: 6, towerWidth: 3, xPosition: 107, yPosition: 34);
 
-            Ball ball = new Ball(velocity: 5, angle: 45, xPosition: 44, yPosition: 35);
+            Ball ball = new Ball(velocity: 25, angle: 0.785398, initialXPosition: 24, initialYPosition: 35);
 
             player1.Display();
             player2.Display();
@@ -47,10 +49,10 @@ namespace Bowmasters
             for(int i = 0; i < 20; i++)
             {
                 ball.DisplayBallInTime(time);
-                Thread.Sleep(100);
+                Thread.Sleep(70);
                 ball.ErasePreviousBall();
-                Thread.Sleep(100);
-                time += 0.2;
+                Thread.Sleep(30);
+                time += 0.5;
             }
 
             Console.ReadLine();
