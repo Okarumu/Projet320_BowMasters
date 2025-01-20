@@ -47,9 +47,9 @@ namespace Bowmasters
         }
 
         /// <summary>
-        /// Affiche la balle avec sa velocite et tout blablabla
+        /// Affiche la balle
         /// </summary>
-        /// <param name="time">temps</param>
+        /// 
         public void DisplayBallInTime()
         {
             
@@ -57,6 +57,9 @@ namespace Bowmasters
             Console.Write("X");
         }
 
+        /// <summary>
+        /// Effacer la balle
+        /// </summary>
         public void ErasePreviousBall()
         {
             Console.SetCursorPosition(Convert.ToInt16(Math.Round(_xPosition)), Convert.ToInt16(Math.Round(_yPosition)));
