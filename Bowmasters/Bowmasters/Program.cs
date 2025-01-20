@@ -37,7 +37,7 @@ namespace Bowmasters
             Tower tower1 = new Tower(towerHeight: 6, towerWidth: 3, xPosition: 40, yPosition: 34);
             Tower tower2 = new Tower(towerHeight: 6, towerWidth: 3, xPosition: 107, yPosition: 34);
 
-            Ball ball = new Ball(velocity: 25, angle: 0.785398, initialXPosition: 24, initialYPosition: 35);
+            Ball ball = new Ball(velocity: 28, angle: 0.785398, initialXPosition: 24, initialYPosition: 35);
 
             player1.Display();
             player2.Display();
@@ -46,13 +46,18 @@ namespace Bowmasters
 
             double time = 0;
 
-            for(int i = 0; i < 20; i++)
+            for(int i = 0; i < 200; i++)
             {
-                ball.DisplayBallInTime(time);
-                Thread.Sleep(70);
-                ball.ErasePreviousBall();
-                Thread.Sleep(30);
-                time += 0.5;
+                ball.UpdateBallPosition(time);
+                Thread.Sleep(50);
+                time += 0.05;
+
+                if(Math.Round(time % 0.01, 1) == 0)
+                {
+                    ball.DisplayBallInTime();
+                    Thread.Sleep(100);
+                    ball.ErasePreviousBall();
+                }               
             }
 
             Console.ReadLine();

@@ -37,17 +37,23 @@ namespace Bowmasters
         }
 
         /// <summary>
+        /// Update la position de la balle en fonction du temps
+        /// </summary>
+        /// <param name="time">temps</param>
+        public void UpdateBallPosition(double time)
+        {
+            _xPosition = balistic.MovementOnXAxis(initialX: _initialXPosition, time: time, velocity: this._velocity, angle: this._angle);
+            _yPosition = balistic.MovementOnYAxis(initialY: _initialYPosition, time: time, velocity: this._velocity, angle: this._angle);
+        }
+
+        /// <summary>
         /// Affiche la balle avec sa velocite et tout blablabla
         /// </summary>
         /// <param name="time">temps</param>
-        public void DisplayBallInTime(double time)
+        public void DisplayBallInTime()
         {
-
-            _xPosition = balistic.MovementOnXAxis(initialX: _initialXPosition, time: time, velocity: this._velocity, angle: this._angle);
-            _yPosition = balistic.MovementOnYAxis(initialY: _initialYPosition, time: time, velocity: this._velocity, angle: this._angle);
-
+            
             Console.SetCursorPosition(Convert.ToInt16(Math.Round(_xPosition)), Convert.ToInt16(Math.Round(_yPosition)));
-
             Console.Write("X");
         }
 
