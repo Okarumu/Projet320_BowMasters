@@ -31,14 +31,14 @@ namespace BowMastersTests
             int initialX = 0;
             double time = 5;
             double velocity = 20;
-            double angle = 0.785398;
+            double angle = 2.35619;
             double result;
 
             // Act
             result = Balistic.MovementOnXAxis(initialX, time, velocity, angle);
 
             // Assert
-            Assert.AreEqual(70.71, Math.Round(result, 2), "Le résultat doit être 70.71");
+            Assert.AreEqual(-70.71, Math.Round(result, 2), "Le résultat doit être -70.71");
         }
     }
 }
