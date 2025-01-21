@@ -23,7 +23,6 @@ namespace Bowmasters
         private double _yPosition;
         private double _velocity;
         private double _angle;
-        private Balistic balistic = new Balistic();
 
         //Déclaration des constructeurs ***********************************
         public Ball(double velocity, double angle, double initialXPosition, double initialYPosition)
@@ -42,8 +41,8 @@ namespace Bowmasters
         /// <param name="time">temps</param>
         public void UpdateBallPosition(double time)
         {
-            _xPosition = balistic.MovementOnXAxis(initialX: _initialXPosition, time: time, velocity: this._velocity, angle: this._angle);
-            _yPosition = balistic.MovementOnYAxis(initialY: _initialYPosition, time: time, velocity: this._velocity, angle: this._angle);
+            _xPosition = Balistic.MovementOnXAxis(initialX: _initialXPosition, time: time, velocity: this._velocity, angle: this._angle);
+            _yPosition = Balistic.MovementOnYAxis(initialY: _initialYPosition, time: time, velocity: this._velocity, angle: this._angle);
         }
 
         /// <summary>

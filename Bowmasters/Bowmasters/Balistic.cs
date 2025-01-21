@@ -13,20 +13,20 @@ using System.Threading.Tasks;
 
 namespace Bowmasters
 {
-    public class Balistic
+    public static class Balistic
     {
         //properties **************************************************
 
         private const double GRAVITATIONAL_CONSTANT = 9.81; //constante gravitationnelle
 
         //movement on y axis
-        public double MovementOnYAxis(double initialY, double time, double velocity, double angle)
+        public static double MovementOnYAxis(double initialY, double time, double velocity, double angle)
         {
             return initialY - ((velocity * Math.Sin(angle) * time) - ((GRAVITATIONAL_CONSTANT * Math.Pow(time, 2)) / 2));
         }
 
         //movement on x axis
-        public double MovementOnXAxis(double initialX, double time, double velocity, double angle)
+        public static double MovementOnXAxis(double initialX, double time, double velocity, double angle)
         {
             return initialX + (velocity * Math.Cos(angle) * time);
         }
