@@ -58,23 +58,30 @@ namespace Bowmasters
         }
 
         /// <summary>
-        /// Affiche la balle
+        /// Affiche la balle si elle est dans la console
         /// </summary>
         /// 
         public void DisplayBallInTime()
         {
-            
-            Console.SetCursorPosition(Convert.ToInt16(Math.Round(_xPosition)), Convert.ToInt16(Math.Round(_yPosition)));
-            Console.Write("X");
+            try
+            {
+                Console.SetCursorPosition(Convert.ToInt16(Math.Round(_xPosition)), Convert.ToInt16(Math.Round(_yPosition)));
+                Console.Write("X");
+            }
+            catch (System.ArgumentOutOfRangeException) { }          
         }
 
         /// <summary>
-        /// Effacer la balle
+        /// Effacer la balle si elle est dans la console
         /// </summary>
         public void ErasePreviousBall()
         {
-            Console.SetCursorPosition(Convert.ToInt16(Math.Round(_xPosition)), Convert.ToInt16(Math.Round(_yPosition)));
-            Console.Write(" ");
+            try
+            {
+                Console.SetCursorPosition(Convert.ToInt16(Math.Round(_xPosition)), Convert.ToInt16(Math.Round(_yPosition)));
+                Console.Write(" ");
+            }
+            catch(System.ArgumentOutOfRangeException) { }           
         }
     }
 }
