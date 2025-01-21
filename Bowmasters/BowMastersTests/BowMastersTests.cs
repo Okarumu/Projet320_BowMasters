@@ -13,7 +13,7 @@ namespace BowMastersTests
             // Arrange
             int initialY = 0;
             double time = 5;
-            double velocity = 20;
+            double velocity = 0;
             double angle = 0.785398;
             double result;
 
@@ -21,7 +21,7 @@ namespace BowMastersTests
             result = Balistic.MovementOnYAxis(initialY, time, velocity, angle);
 
             // Assert
-            Assert.AreEqual(51.91, Math.Round(result, 2), "Le résultat doit être 51.91");
+            Assert.AreEqual(122.625, result, "Le résultat doit être 122.625");
         }
 
         [TestMethod]

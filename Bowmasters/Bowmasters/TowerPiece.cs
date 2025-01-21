@@ -21,6 +21,18 @@ namespace Bowmasters
         private byte _xPosition;                        //position x de la pièce
         private byte _yPosition;                        //position y de la pièce
 
+        public byte XPosition
+        {
+            get { return _xPosition; }
+            set { _xPosition = value; }
+        }
+
+        public byte YPosition
+        {
+            get { return _yPosition; }
+            set { _yPosition = value; }
+        }
+
         //Constructeur **************************************************
 
         /// <summary>

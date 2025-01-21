@@ -24,6 +24,18 @@ namespace Bowmasters
         private double _velocity;
         private double _angle;
 
+        public double XPosition
+        {
+            get { return _xPosition; }
+            set { _xPosition = value; }
+        }
+
+        public double YPosition
+        {
+            get { return _yPosition; }
+            set { _yPosition = value; }
+        }
+
         //Déclaration des constructeurs ***********************************
         public Ball(double velocity, double angle, double initialXPosition, double initialYPosition)
         {
