@@ -76,7 +76,7 @@ namespace Bowmasters
             Console.SetCursorPosition(0, 2);
             Console.Write(Balistic.RadToDeg(test2));
 
-            Ball ball2 = new Ball(velocity: 28, angle: 2.35619, initialXPosition: (Convert.ToByte(player2.Position.X - 2)), initialYPosition: Convert.ToByte(player2.Position.Y - 3));
+            Ball ball2 = new Ball(velocity: 28, angle: test2, initialXPosition: (Convert.ToByte(player2.Position.X - 2)), initialYPosition: Convert.ToByte(player2.Position.Y - 3));
             time = 0;
 
             while (true)
