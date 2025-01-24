@@ -30,5 +30,17 @@ namespace Bowmasters
         {
             return initialX + (velocity * Math.Cos(angle) * time);
         }
+
+        //from degree to radian
+        public static double DegToRad(double degree)
+        {
+            return degree * (Math.PI / 180);
+        }
+
+        //from radian to degree
+        public static double RadToDeg(double radian)
+        {
+            return radian * (180 / Math.PI);
+        }
     }
 }

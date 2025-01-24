@@ -60,8 +60,14 @@ namespace Bowmasters
         /// <param name="time">temps</param>
         public void UpdateBallPosition(double time)
         {
-            ActualPosition.X = Convert.ToByte(Balistic.MovementOnXAxis(initialX: InitialPosition.X, time: time, velocity: this._velocity, angle: this._angle));
-            ActualPosition.Y = Convert.ToByte(Balistic.MovementOnYAxis(initialY: InitialPosition.Y, time: time, velocity: this._velocity, angle: this._angle));
+            try
+            {
+                ActualPosition.X = Convert.ToByte(Balistic.MovementOnXAxis(initialX: InitialPosition.X, time: time, velocity: this._velocity, angle: this._angle));
+                ActualPosition.Y = Convert.ToByte(Balistic.MovementOnYAxis(initialY: InitialPosition.Y, time: time, velocity: this._velocity, angle: this._angle));
+            }
+            catch (System.OverflowException)
+            {
+            }
         }
 
         /// <summary>

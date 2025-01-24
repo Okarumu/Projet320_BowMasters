@@ -52,7 +52,7 @@
     <Compile Include="PositionDouble.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShootBall.cs" />
+    <Compile Include="ShootAngle.cs" />
     <Compile Include="Tower.cs" />
     <Compile Include="TowerPiece.cs" />
   </ItemGroup>

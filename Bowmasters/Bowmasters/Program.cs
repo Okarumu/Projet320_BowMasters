@@ -33,8 +33,6 @@ namespace Bowmasters
             Tower tower1 = new Tower(towerHeight: 6, towerWidth: 3, xPosition: 40, yPosition: 34);
             Tower tower2 = new Tower(towerHeight: 6, towerWidth: 3, xPosition: 107, yPosition: 34);
 
-            Ball ball = new Ball(velocity: 28, angle: 0.785398, initialXPosition: 24, initialYPosition: 34);
-
             player1.Display();
             player2.Display();
             tower1.DisplayTower();
@@ -42,8 +40,15 @@ namespace Bowmasters
 
             double time = 0;
 
-            while(true)
+            double test = ShootAngle.UpdateBallAngle(Convert.ToByte(player1.Position.X + 2), Convert.ToByte(player1.Position.Y - 3), true);
+            Console.SetCursorPosition(0, 0);
+            Console.Write(Balistic.RadToDeg(test));
+
+            Ball ball = new Ball(velocity: 28, angle: test, initialXPosition: 24, initialYPosition: 34);
+
+            while (true)
             {
+                
                 ball.UpdateBallPosition(time);
                 time += 0.05;
 
@@ -65,6 +70,40 @@ namespace Bowmasters
                     Thread.Sleep(100);
                     ball.ErasePreviousBall();
                 }               
+            }
+
+            double test2 = ShootAngle.UpdateBallAngle(Convert.ToByte(player2.Position.X - 2), Convert.ToByte(player2.Position.Y - 3), false);
+            Console.SetCursorPosition(0, 2);
+            Console.Write(Balistic.RadToDeg(test2));
+
+            Ball ball2 = new Ball(velocity: 28, angle: 2.35619, initialXPosition: (Convert.ToByte(player2.Position.X - 2)), initialYPosition: Convert.ToByte(player2.Position.Y - 3));
+            time = 0;
+
+            while (true)
+            {
+                
+                ball2.UpdateBallPosition(time);
+                time += 0.05;
+
+                if ((ball2.ActualPosition.X > tower1.TowerPosition.X - 1 && ball2.ActualPosition.X < tower1.TowerPosition.X + 4)
+                    && (ball2.ActualPosition.Y > tower1.TowerPosition.Y - 1 && ball2.ActualPosition.Y < tower1.TowerPosition.Y + 8))
+                {
+                    foreach (TowerPiece piece in tower1.Pieces)
+                    {
+                        if (ball2.ActualPosition.X == piece.Position.X && ball2.ActualPosition.Y == piece.Position.Y)
+                        {
+                            piece.DestroyPiece();
+                        }
+                    }
+                    break;
+                }
+
+                if (Math.Round(time % 0.2, 1) == 0)
+                {
+                    ball2.DisplayBallInTime();
+                    Thread.Sleep(100);
+                    ball2.ErasePreviousBall();
+                }
             }
 
             Console.ReadLine();
