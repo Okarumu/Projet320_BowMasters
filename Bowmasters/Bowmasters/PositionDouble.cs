@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bowmasters
 {
-    public class PositionDouble
+    /*public class PositionDouble
     {
         /// <summary>
         /// Attributs
@@ -54,5 +54,5 @@ namespace Bowmasters
             X = xPosition;
             Y = yPosition;
         }
-    }
+    }*/
 }

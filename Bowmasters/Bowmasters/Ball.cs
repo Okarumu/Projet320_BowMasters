@@ -19,10 +19,11 @@ namespace Bowmasters
         //Déclaraton des propriétés ***************************************
         private double _velocity;
         private double _angle;
-        private readonly PositionDouble _initialPosition;
-        private PositionDouble _actualPosition;
+        private readonly PositionByte _initialPosition;
+        private PositionByte _actualPosition;
 
-        public PositionDouble InitialPosition
+
+        public PositionByte InitialPosition
         {
             get
             {
@@ -30,7 +31,7 @@ namespace Bowmasters
             }
         }
 
-        public PositionDouble ActualPosition
+        public PositionByte ActualPosition
         {
             get
             {
@@ -43,12 +44,12 @@ namespace Bowmasters
         }
 
         //Déclaration des constructeurs ***********************************
-        public Ball(double velocity, double angle, double initialXPosition, double initialYPosition)
+        public Ball(double velocity, double angle, byte initialXPosition, byte initialYPosition)
         {
             this._velocity = velocity;
             this._angle = angle;
-            _initialPosition = new PositionDouble(initialXPosition, initialYPosition);
-            ActualPosition = new PositionDouble(initialXPosition, initialYPosition);
+            _initialPosition = new PositionByte(initialXPosition, initialYPosition);
+            ActualPosition = new PositionByte(initialXPosition, initialYPosition);
         }
 
         /// <summary>
@@ -57,8 +58,8 @@ namespace Bowmasters
         /// <param name="time">temps</param>
         public void UpdateBallPosition(double time)
         {
-            ActualPosition.X = Balistic.MovementOnXAxis(initialX: InitialPosition.X, time: time, velocity: this._velocity, angle: this._angle);
-            ActualPosition.Y = Balistic.MovementOnYAxis(initialY: InitialPosition.Y, time: time, velocity: this._velocity, angle: this._angle);
+            ActualPosition.X = Convert.ToByte(Balistic.MovementOnXAxis(initialX: InitialPosition.X, time: time, velocity: this._velocity, angle: this._angle));
+            ActualPosition.Y = Convert.ToByte(Balistic.MovementOnYAxis(initialY: InitialPosition.Y, time: time, velocity: this._velocity, angle: this._angle));
         }
 
         /// <summary>
@@ -69,7 +70,7 @@ namespace Bowmasters
         {
             try
             {
-                Console.SetCursorPosition(Convert.ToInt16(Math.Round(ActualPosition.X)), Convert.ToInt16(Math.Round(ActualPosition.Y)));
+                Console.SetCursorPosition(Convert.ToInt16(ActualPosition.X), Convert.ToInt16(ActualPosition.Y));
                 Console.Write("X");
             }
             catch (System.ArgumentOutOfRangeException) { }          
@@ -82,7 +83,7 @@ namespace Bowmasters
         {
             try
             {
-                Console.SetCursorPosition(Convert.ToInt16(Math.Round(ActualPosition.X)), Convert.ToInt16(Math.Round(ActualPosition.Y)));
+                Console.SetCursorPosition(Convert.ToInt16(ActualPosition.X), Convert.ToInt16(ActualPosition.Y));
                 Console.Write(" ");
             }
             catch(System.ArgumentOutOfRangeException) { }           

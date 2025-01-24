@@ -33,7 +33,7 @@ namespace Bowmasters
             Tower tower1 = new Tower(towerHeight: 6, towerWidth: 3, xPosition: 40, yPosition: 34);
             Tower tower2 = new Tower(towerHeight: 6, towerWidth: 3, xPosition: 107, yPosition: 34);
 
-            Ball ball = new Ball(velocity: 28, angle: 0.785398, initialXPosition: 24.0, initialYPosition: 34.0);
+            Ball ball = new Ball(velocity: 28, angle: 0.785398, initialXPosition: 24, initialYPosition: 34);
 
             player1.Display();
             player2.Display();
@@ -47,11 +47,11 @@ namespace Bowmasters
                 ball.UpdateBallPosition(time);
                 time += 0.05;
 
-                if((ball.ActualPosition.X > tower2.TowerPosition.X && ball.ActualPosition.X < tower2.TowerPosition.X + 3) 
-                    && (ball.ActualPosition.Y > tower2.TowerPosition.Y && ball.ActualPosition.Y < tower2.TowerPosition.Y + 7))
+                if((ball.ActualPosition.X > tower2.TowerPosition.X - 1 && ball.ActualPosition.X < tower2.TowerPosition.X + 4) 
+                    && (ball.ActualPosition.Y > tower2.TowerPosition.Y - 1 && ball.ActualPosition.Y < tower2.TowerPosition.Y + 8))
                 {
                     foreach (TowerPiece piece in tower2.Pieces){
-                        if (Math.Round(ball.ActualPosition.X) == piece.Position.X && Math.Round(ball.ActualPosition.Y) == piece.Position.Y)
+                        if (ball.ActualPosition.X == piece.Position.X && ball.ActualPosition.Y == piece.Position.Y)
                         {
                             piece.DestroyPiece();
                         }
