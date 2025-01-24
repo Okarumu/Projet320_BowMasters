@@ -26,9 +26,9 @@ namespace Bowmasters
 
             Console.CursorVisible = false;
 
-            Player player1 = new Player(life: 3, xPosition: 20, yPosition: 37) ;
+            Player player1 = new Player(life: 3, xPosition: 20, yPosition: 37, color: ConsoleColor.Green) ;
 
-            Player player2 = new Player(life: 3, xPosition: 127, yPosition: 37);
+            Player player2 = new Player(life: 3, xPosition: 127, yPosition: 37, color: ConsoleColor.Red);
 
             Tower tower1 = new Tower(towerHeight: 6, towerWidth: 3, xPosition: 40, yPosition: 34);
             Tower tower2 = new Tower(towerHeight: 6, towerWidth: 3, xPosition: 107, yPosition: 34);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace Bowmasters
         private double _angle;
         private readonly PositionByte _initialPosition;
         private PositionByte _actualPosition;
-
+        private ConsoleColor _color;
 
         public PositionByte InitialPosition
         {
@@ -50,6 +51,7 @@ namespace Bowmasters
             this._angle = angle;
             _initialPosition = new PositionByte(initialXPosition, initialYPosition);
             ActualPosition = new PositionByte(initialXPosition, initialYPosition);
+            _color = Custom.GetRandomColor();
         }
 
         /// <summary>
@@ -68,12 +70,14 @@ namespace Bowmasters
         /// 
         public void DisplayBallInTime()
         {
+            Console.ForegroundColor = _color;
             try
             {
                 Console.SetCursorPosition(Convert.ToInt16(ActualPosition.X), Convert.ToInt16(ActualPosition.Y));
                 Console.Write("X");
             }
-            catch (System.ArgumentOutOfRangeException) { }          
+            catch (System.ArgumentOutOfRangeException) { }
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         /// <summary>

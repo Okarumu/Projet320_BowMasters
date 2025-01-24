@@ -43,6 +43,7 @@ namespace Bowmasters
 			@" / \ ",
 		};
 
+		private readonly ConsoleColor _color;
 
 
         //Constructeurs du joueur **************************************************************
@@ -53,10 +54,11 @@ namespace Bowmasters
         /// <param name="life">Nombre de vies</param>
         /// <param name="xPosition">Position x du joueur</param>
 		/// <param name="yPosition">Position y du joueur</param>
-        public Player(byte life, byte xPosition, byte yPosition)
+        public Player(byte life, byte xPosition, byte yPosition, ConsoleColor color)
 		{
 			this.Life = life;
 			this._position = new PositionByte(xPosition, yPosition);
+			this._color = color;
 		}
 
 		/// <summary>
@@ -74,6 +76,8 @@ namespace Bowmasters
 		/// </summary>
 		public void Display()
 		{
+			Console.ForegroundColor = this._color;
+
 			//boucle pour parcourir les strings
 			for(byte i = 0; i < playerModel.Length; i++)
 			{
@@ -86,6 +90,8 @@ namespace Bowmasters
 
 			//on remet la position Y du joueur à celle de base
 			Position.Y = Convert.ToByte(Position.Y - playerModel.Length);
+
+			Console.ForegroundColor = ConsoleColor.White;
 		}
 
 		/// <summary>

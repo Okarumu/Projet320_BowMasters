@@ -19,6 +19,7 @@ namespace Bowmasters
 
         private const string _TOWERPIECEMODEL = "█";  //modèle d'une pièce
         private readonly PositionByte _position;
+        private const ConsoleColor _COLOR = ConsoleColor.DarkGray;
 
 
         public PositionByte Position
@@ -48,9 +49,11 @@ namespace Bowmasters
         /// </summary>
         public void DisplayPiece()
         {
+            Console.ForegroundColor = _COLOR;
             //se met à la position de la pièce et l'affiche
             Console.SetCursorPosition(Position.X, Position.Y);
             Console.Write(_TOWERPIECEMODEL);
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         /// <summary>
