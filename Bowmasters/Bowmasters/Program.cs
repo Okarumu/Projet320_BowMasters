@@ -15,18 +15,14 @@ namespace Bowmasters
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             //Déclaration des constantes *****************************************************************************
 
             //Déclaration des variables ******************************************************************************
 
             //Changement de taille de la fenêtre de jeu
-            Console.SetWindowSize(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
-
-            //Bloque la taille de l'écran
-            Console.BufferWidth = Config.SCREEN_WIDTH;
-            Console.BufferHeight = Config.SCREEN_HEIGHT;
+            Config.SetWindowSize();
 
             Console.CursorVisible = false;
 
@@ -37,7 +33,7 @@ namespace Bowmasters
             Tower tower1 = new Tower(towerHeight: 6, towerWidth: 3, xPosition: 40, yPosition: 34);
             Tower tower2 = new Tower(towerHeight: 6, towerWidth: 3, xPosition: 107, yPosition: 34);
 
-            Ball ball = new Ball(velocity: 28, angle: 0.785398, initialXPosition: 24, initialYPosition: 35);
+            Ball ball = new Ball(velocity: 28, angle: 0.785398, initialXPosition: 24.0, initialYPosition: 34.0);
 
             player1.Display();
             player2.Display();
@@ -51,10 +47,11 @@ namespace Bowmasters
                 ball.UpdateBallPosition(time);
                 time += 0.05;
 
-                if((ball.XPosition > tower2.XPosition && ball.XPosition < tower2.XPosition + 3) && (ball.YPosition > tower2.YPosition && ball.YPosition < tower2.YPosition + 7))
+                if((ball.ActualPosition.X > tower2.TowerPosition.X && ball.ActualPosition.X < tower2.TowerPosition.X + 3) 
+                    && (ball.ActualPosition.Y > tower2.TowerPosition.Y && ball.ActualPosition.Y < tower2.TowerPosition.Y + 7))
                 {
                     foreach (TowerPiece piece in tower2.Pieces){
-                        if (Math.Round(ball.XPosition) == piece.XPosition && Math.Round(ball.YPosition) == piece.YPosition)
+                        if (Math.Round(ball.ActualPosition.X) == piece.Position.X && Math.Round(ball.ActualPosition.Y) == piece.Position.Y)
                         {
                             piece.DestroyPiece();
                         }

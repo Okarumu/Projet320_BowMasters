@@ -11,9 +11,10 @@ namespace Bowmasters
         public const int SCREEN_HEIGHT = 40;
         public const int SCREEN_WIDTH = 150;
 
-        /* public void SetWindowSize()
+        static public void SetWindowSize()
         {
             Console.SetWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-        } */
+            Console.SetBufferSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+        }
     }
 }

@@ -18,19 +18,15 @@ namespace Bowmasters
         //Propriétés ****************************************************
 
         private const string _TOWERPIECEMODEL = "█";  //modèle d'une pièce
-        private byte _xPosition;                        //position x de la pièce
-        private byte _yPosition;                        //position y de la pièce
+        private readonly PositionByte _position;
 
-        public byte XPosition
-        {
-            get { return _xPosition; }
-            set { _xPosition = value; }
-        }
 
-        public byte YPosition
+        public PositionByte Position
         {
-            get { return _yPosition; }
-            set { _yPosition = value; }
+            get 
+            { 
+                return _position; 
+            }
         }
 
         //Constructeur **************************************************
@@ -42,8 +38,7 @@ namespace Bowmasters
         /// <param name="yPosition">position y de la pièce</param>
         public TowerPiece(byte xPosition, byte yPosition)
         {
-            this._xPosition = xPosition;
-            this._yPosition = yPosition;
+            _position = new PositionByte(xPosition, yPosition);    
         }
 
         //Méthodes ******************************************************
@@ -54,7 +49,7 @@ namespace Bowmasters
         public void DisplayPiece()
         {
             //se met à la position de la pièce et l'affiche
-            Console.SetCursorPosition(_xPosition, _yPosition);
+            Console.SetCursorPosition(Position.X, Position.Y);
             Console.Write(_TOWERPIECEMODEL);
         }
 
@@ -64,7 +59,7 @@ namespace Bowmasters
         public void DestroyPiece()
         {
             //se met à la position de la pièce et l'enlève
-            Console.SetCursorPosition(_xPosition, _yPosition);
+            Console.SetCursorPosition(Position.X, Position.Y);
             Console.Write(" ");
         }
     }

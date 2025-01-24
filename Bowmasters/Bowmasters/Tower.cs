@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using static Bowmasters.TowerPiece;
@@ -48,18 +49,14 @@ namespace Bowmasters
             }
         }
 
-        private byte _xPosition;            //position x de la tour
-        public byte XPosition
-        {
-            get { return _xPosition; }
-            set { _xPosition = value; }
-        }
+        private readonly PositionByte _towerPosition;
 
-        private byte _yPosition;            //position y de la tour
-        public byte YPosition
+        public PositionByte TowerPosition
         {
-            get { return _yPosition; }
-            set { _yPosition = value; }
+            get
+            {
+                return _towerPosition;
+            }
         }
 
         //Constructeur de Tower ****************************************************
@@ -75,8 +72,7 @@ namespace Bowmasters
         {
             this._towerHeight = towerHeight;
             this._towerWidth = towerWidth;
-            this._xPosition = xPosition;
-            this._yPosition = yPosition;
+            _towerPosition = new PositionByte(xPosition, yPosition);
 
             //déclare la liste des pièces
             _pieces = new TowerPiece[towerWidth, towerHeight];
@@ -85,7 +81,7 @@ namespace Bowmasters
             {
                 for (int j = 0; j < _towerHeight; j++)
                 {
-                    _pieces[i, j] = new TowerPiece(xPosition: Convert.ToByte(this._xPosition + i), yPosition: Convert.ToByte(this._yPosition + j));
+                    _pieces[i, j] = new TowerPiece(xPosition: Convert.ToByte(this.TowerPosition.X + i), yPosition: Convert.ToByte(this.TowerPosition.Y + j));
                 }
             }
 

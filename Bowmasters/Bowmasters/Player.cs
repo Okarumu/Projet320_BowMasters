@@ -25,20 +25,15 @@ namespace Bowmasters
 			set { _life = value; }
 		}
 
-		private byte _xPosition;			//position X du joueur
-		public byte XPosition
-		{
-			get { return _xPosition; }
-			set { _xPosition = value; }
-		}
+		private readonly PositionByte _position;
 
-		private byte _yPosition;			//position Y du joueur
-		public byte YPosition
+		public PositionByte Position
 		{
-			get { return _yPosition; }
-			set { _yPosition = value; }
+			get
+			{
+				return _position;
+			}
 		}
-
 
 
 		private string[] playerModel =		//modèle du joueur
@@ -60,9 +55,8 @@ namespace Bowmasters
 		/// <param name="yPosition">Position y du joueur</param>
         public Player(byte life, byte xPosition, byte yPosition)
 		{
-			this._life = life;
-			this._xPosition = xPosition;
-			this._yPosition = yPosition;
+			this.Life = life;
+			this._position = new PositionByte(xPosition, yPosition);
 		}
 
 		/// <summary>
@@ -84,14 +78,14 @@ namespace Bowmasters
 			for(byte i = 0; i < playerModel.Length; i++)
 			{
 				//endroit ou le string doit etre placé
-				Console.SetCursorPosition(XPosition, YPosition);
+				Console.SetCursorPosition(Position.X, Position.Y);
 				Console.Write(playerModel[i]);
 				//on descend de 1
-				YPosition++;
+				Position.Y++;
 			}
 
 			//on remet la position Y du joueur à celle de base
-			YPosition = Convert.ToByte(YPosition - playerModel.Length);
+			Position.Y = Convert.ToByte(Position.Y - playerModel.Length);
 		}
 
 		/// <summary>

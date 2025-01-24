@@ -17,23 +17,29 @@ namespace Bowmasters
     public class Ball
     {
         //Déclaraton des propriétés ***************************************
-        private double _initialXPosition;
-        private double _initialYPosition;
-        private double _xPosition;
-        private double _yPosition;
         private double _velocity;
         private double _angle;
+        private readonly PositionDouble _initialPosition;
+        private PositionDouble _actualPosition;
 
-        public double XPosition
+        public PositionDouble InitialPosition
         {
-            get { return _xPosition; }
-            set { _xPosition = value; }
+            get
+            {
+                return _initialPosition;
+            }
         }
 
-        public double YPosition
+        public PositionDouble ActualPosition
         {
-            get { return _yPosition; }
-            set { _yPosition = value; }
+            get
+            {
+                return _actualPosition;
+            }
+            set
+            {
+                _actualPosition = value;
+            }
         }
 
         //Déclaration des constructeurs ***********************************
@@ -41,10 +47,8 @@ namespace Bowmasters
         {
             this._velocity = velocity;
             this._angle = angle;
-            this._initialXPosition = initialXPosition;
-            this._initialYPosition = initialYPosition;
-            _xPosition = initialXPosition;
-            _yPosition = initialYPosition;
+            _initialPosition = new PositionDouble(initialXPosition, initialYPosition);
+            ActualPosition = new PositionDouble(initialXPosition, initialYPosition);
         }
 
         /// <summary>
@@ -53,8 +57,8 @@ namespace Bowmasters
         /// <param name="time">temps</param>
         public void UpdateBallPosition(double time)
         {
-            _xPosition = Balistic.MovementOnXAxis(initialX: _initialXPosition, time: time, velocity: this._velocity, angle: this._angle);
-            _yPosition = Balistic.MovementOnYAxis(initialY: _initialYPosition, time: time, velocity: this._velocity, angle: this._angle);
+            ActualPosition.X = Balistic.MovementOnXAxis(initialX: InitialPosition.X, time: time, velocity: this._velocity, angle: this._angle);
+            ActualPosition.Y = Balistic.MovementOnYAxis(initialY: InitialPosition.Y, time: time, velocity: this._velocity, angle: this._angle);
         }
 
         /// <summary>
@@ -65,7 +69,7 @@ namespace Bowmasters
         {
             try
             {
-                Console.SetCursorPosition(Convert.ToInt16(Math.Round(_xPosition)), Convert.ToInt16(Math.Round(_yPosition)));
+                Console.SetCursorPosition(Convert.ToInt16(Math.Round(ActualPosition.X)), Convert.ToInt16(Math.Round(ActualPosition.Y)));
                 Console.Write("X");
             }
             catch (System.ArgumentOutOfRangeException) { }          
@@ -78,7 +82,7 @@ namespace Bowmasters
         {
             try
             {
-                Console.SetCursorPosition(Convert.ToInt16(Math.Round(_xPosition)), Convert.ToInt16(Math.Round(_yPosition)));
+                Console.SetCursorPosition(Convert.ToInt16(Math.Round(ActualPosition.X)), Convert.ToInt16(Math.Round(ActualPosition.Y)));
                 Console.Write(" ");
             }
             catch(System.ArgumentOutOfRangeException) { }           
