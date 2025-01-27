@@ -62,5 +62,10 @@ namespace Bowmasters
             X = xPosition;
             Y = yPosition;
         }
+
+        public override string ToString()
+        {
+            return $"X : {X}, Y : {Y}";
+        }
     }
 }

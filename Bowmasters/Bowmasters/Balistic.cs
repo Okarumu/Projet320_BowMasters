@@ -22,13 +22,13 @@ namespace Bowmasters
         //movement on y axis
         public static double MovementOnYAxis(double initialY, double time, double velocity, double angle)
         {
-            return initialY - ((velocity * Math.Sin(angle) * time) - ((GRAVITATIONAL_CONSTANT * Math.Pow(time, 2)) / 2));
+            return initialY - ((velocity * Math.Sin(DegToRad(angle)) * time) - ((GRAVITATIONAL_CONSTANT * Math.Pow(time, 2)) / 2));
         }
 
         //movement on x axis
         public static double MovementOnXAxis(double initialX, double time, double velocity, double angle)
         {
-            return initialX + (velocity * Math.Cos(angle) * time);
+            return initialX + (velocity * Math.Cos(DegToRad(angle)) * time);
         }
 
         //from degree to radian

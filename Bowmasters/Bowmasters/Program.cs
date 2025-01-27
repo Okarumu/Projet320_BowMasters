@@ -42,7 +42,7 @@ namespace Bowmasters
 
             double test = ShootAngle.UpdateBallAngle(Convert.ToByte(player1.Position.X + 2), Convert.ToByte(player1.Position.Y - 3), true);
             Console.SetCursorPosition(0, 0);
-            Console.Write(Balistic.RadToDeg(test));
+            Console.Write(test);
 
             Ball ball = new Ball(velocity: 28, angle: test, initialXPosition: 24, initialYPosition: 34);
 
@@ -52,8 +52,8 @@ namespace Bowmasters
                 ball.UpdateBallPosition(time);
                 time += 0.05;
 
-                if((ball.ActualPosition.X > tower2.TowerPosition.X - 1 && ball.ActualPosition.X < tower2.TowerPosition.X + 4) 
-                    && (ball.ActualPosition.Y > tower2.TowerPosition.Y - 1 && ball.ActualPosition.Y < tower2.TowerPosition.Y + 8))
+                if((ball.ActualPosition.X > tower2.TowerPosition.X - 1 && ball.ActualPosition.X < tower2.TowerPosition.X + 3) 
+                    && (ball.ActualPosition.Y > tower2.TowerPosition.Y - 1 && ball.ActualPosition.Y < tower2.TowerPosition.Y + 7))
                 {
                     foreach (TowerPiece piece in tower2.Pieces){
                         if (ball.ActualPosition.X == piece.Position.X && ball.ActualPosition.Y == piece.Position.Y)
@@ -72,9 +72,9 @@ namespace Bowmasters
                 }               
             }
 
-            double test2 = ShootAngle.UpdateBallAngle(Convert.ToByte(player2.Position.X - 2), Convert.ToByte(player2.Position.Y - 3), false);
+            double test2 = ShootAngle.UpdateBallAngle(Convert.ToByte(player2.Position.X - 2), Convert.ToByte(player2.Position.Y), false);
             Console.SetCursorPosition(0, 2);
-            Console.Write(Balistic.RadToDeg(test2));
+            Console.Write(test2);
 
             Ball ball2 = new Ball(velocity: 28, angle: test2, initialXPosition: (Convert.ToByte(player2.Position.X - 2)), initialYPosition: Convert.ToByte(player2.Position.Y - 3));
             time = 0;
@@ -85,8 +85,8 @@ namespace Bowmasters
                 ball2.UpdateBallPosition(time);
                 time += 0.05;
 
-                if ((ball2.ActualPosition.X > tower1.TowerPosition.X - 1 && ball2.ActualPosition.X < tower1.TowerPosition.X + 4)
-                    && (ball2.ActualPosition.Y > tower1.TowerPosition.Y - 1 && ball2.ActualPosition.Y < tower1.TowerPosition.Y + 8))
+                if ((ball2.ActualPosition.X > tower1.TowerPosition.X - 1 && ball2.ActualPosition.X < tower1.TowerPosition.X + 3)
+                    && (ball2.ActualPosition.Y > tower1.TowerPosition.Y - 1 && ball2.ActualPosition.Y < tower1.TowerPosition.Y + 7))
                 {
                     foreach (TowerPiece piece in tower1.Pieces)
                     {
