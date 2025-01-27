@@ -19,6 +19,9 @@ namespace Bowmasters
         {
             //Déclaration des constantes *****************************************************************************
 
+            PressSpace tesfdsat = new PressSpace();
+            Console.WriteLine(tesfdsat.Testc());
+
             //Déclaration des variables ******************************************************************************
 
             //Changement de taille de la fenêtre de jeu
