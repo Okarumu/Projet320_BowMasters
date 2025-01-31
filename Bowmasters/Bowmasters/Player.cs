@@ -43,7 +43,22 @@ namespace Bowmasters
 			@" / \ ",
 		};
 
+		private readonly byte playerNumber;
+
 		private readonly ConsoleColor _color;
+
+		private int _score;
+		public int Score
+		{
+			get
+			{
+				return _score;
+			}
+			set
+			{
+				_score = value;
+			}
+		}
 
 
         //Constructeurs du joueur **************************************************************
@@ -54,11 +69,12 @@ namespace Bowmasters
         /// <param name="life">Nombre de vies</param>
         /// <param name="xPosition">Position x du joueur</param>
 		/// <param name="yPosition">Position y du joueur</param>
-        public Player(byte life, byte xPosition, byte yPosition, ConsoleColor color)
+        public Player(byte life, byte xPosition, byte yPosition, ConsoleColor color, byte playernumber)
 		{
 			this.Life = life;
 			this._position = new PositionByte(xPosition, yPosition);
 			this._color = color;
+			this.playerNumber = playernumber;
 		}
 
 		/// <summary>
@@ -102,5 +118,39 @@ namespace Bowmasters
 		{
 			Life -= damage;
 		}
-	}
+
+		public void DisplayInfo()
+		{
+			Console.ForegroundColor = this._color;
+			Console.SetCursorPosition(Position.X - 5, Position.Y - 30);
+			Console.Write("╔═════════════════════╗");
+            Console.SetCursorPosition(Position.X - 5, Position.Y - 29);
+			Console.Write($"║  Joueur {playerNumber}           ║");
+            Console.SetCursorPosition(Position.X - 5, Position.Y - 28);
+			Console.Write($"║  Score :            ║");
+            Console.SetCursorPosition(Position.X - 5, Position.Y - 27);
+			Console.Write("╚═════════════════════╝");
+
+			DisplayLife();
+			DisplayScore();
+
+			Console.ForegroundColor = ConsoleColor.White;
+        }
+
+		private void DisplayLife()
+		{
+			Console.SetCursorPosition(Position.X + 12, Position.Y - 29);
+            for(byte i = 0; i < Life; i++)
+			{
+                Console.Write("♥");
+            }
+        }
+
+		private void DisplayScore()
+		{
+            Console.SetCursorPosition(Position.X + 12, Position.Y - 28);
+			Console.Write(Score);
+        }
+
+    }
 }

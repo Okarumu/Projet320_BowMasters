@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
+using System.Diagnostics;
+[assembly:InternalsVisibleTo("BowMastersTests")]
 
 /// ETML
 /// Auteur : Maël Naudet
@@ -18,9 +21,7 @@ namespace Bowmasters
         static void Main()
         {
             //Déclaration des constantes *****************************************************************************
-
-            PressSpace tesfdsat = new PressSpace();
-            Console.WriteLine(tesfdsat.Testc());
+            
 
             //Déclaration des variables ******************************************************************************
 
@@ -29,27 +30,34 @@ namespace Bowmasters
 
             Console.CursorVisible = false;
 
-            Player player1 = new Player(life: 3, xPosition: 20, yPosition: 37, color: ConsoleColor.Green) ;
+            Player player1 = new Player(life: 3, xPosition: 20, yPosition: 37, color: ConsoleColor.Green, 1) ;
 
-            Player player2 = new Player(life: 3, xPosition: 127, yPosition: 37, color: ConsoleColor.Red);
+            Player player2 = new Player(life: 3, xPosition: 127, yPosition: 37, color: ConsoleColor.Red, 2);
 
             Tower tower1 = new Tower(towerHeight: 6, towerWidth: 3, xPosition: 40, yPosition: 34);
             Tower tower2 = new Tower(towerHeight: 6, towerWidth: 3, xPosition: 107, yPosition: 34);
 
+            PressSpace testSpace = new PressSpace(5, 0, 10);
+
             player1.Display();
             player2.Display();
+            player1.DisplayInfo();
+            player2.DisplayInfo();
             tower1.DisplayTower();
             tower2.DisplayTower();
 
             double time = 0;
 
+            
+
             double test = ShootAngle.UpdateBallAngle(Convert.ToByte(player1.Position.X + 2), Convert.ToByte(player1.Position.Y - 3), true);
-            Console.SetCursorPosition(0, 0);
-            Console.Write(test);
+            
+            float timeSpace = testSpace.Start();
 
-            Ball ball = new Ball(velocity: 28, angle: test, initialXPosition: 24, initialYPosition: 34);
+            float velocity = timeSpace * 9;
+            Ball ball = new Ball(velocity: velocity, angle: test, initialXPosition: 24, initialYPosition: 34);
 
-            while (true)
+            while (ball.ActualPosition.X > 0 && ball.ActualPosition.X < Console.WindowWidth && ball.ActualPosition.Y < Console.WindowHeight)
             {
                 
                 ball.UpdateBallPosition(time);
@@ -75,14 +83,14 @@ namespace Bowmasters
                 }               
             }
 
+            testSpace.EraseBar();
+
             double test2 = ShootAngle.UpdateBallAngle(Convert.ToByte(player2.Position.X - 2), Convert.ToByte(player2.Position.Y), false);
-            Console.SetCursorPosition(0, 2);
-            Console.Write(test2);
 
             Ball ball2 = new Ball(velocity: 28, angle: test2, initialXPosition: (Convert.ToByte(player2.Position.X - 2)), initialYPosition: Convert.ToByte(player2.Position.Y - 3));
             time = 0;
 
-            while (true)
+            while (ball2.ActualPosition.X > 0 && ball2.ActualPosition.X < Console.WindowWidth && ball2.ActualPosition.Y < Console.WindowHeight)
             {
                 
                 ball2.UpdateBallPosition(time);

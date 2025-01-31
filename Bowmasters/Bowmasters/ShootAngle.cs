@@ -42,15 +42,6 @@ namespace Bowmasters
                 }
                 // affiche le point
                 Console.Write(_model);
-                Console.SetCursorPosition(0, 3);
-                if(_isRight)
-                {
-                    Console.Write(_position[Convert.ToInt16(Math.Round(_angle, 1) / 22.5)]);
-                }
-                else
-                {
-                    Console.Write(_position[Convert.ToInt16((Math.Round(_angle, 1) - 90) / 22.5)]);
-                }
                 
                 // attend un peu
                 Thread.Sleep(500);
@@ -83,7 +74,7 @@ namespace Bowmasters
                 Console.Write(" ");
             }
         }
-
+        
         /// <summary>
         /// Affiche des points et retourne un angle en fonction d'un input utilisateur
         /// </summary>

@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Threading.Tasks;
 
 ///ETML
 ///Auteur : Maël Naudet
@@ -13,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bowmasters
 {
-    public static class Balistic
+    internal static class Balistic
     {
         //properties **************************************************
 

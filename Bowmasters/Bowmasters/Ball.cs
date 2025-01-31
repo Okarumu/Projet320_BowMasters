@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 ///ETML
 ///Auteur : Maël Naudet
@@ -67,6 +61,7 @@ namespace Bowmasters
             }
             catch (System.OverflowException)
             {
+                
             }
         }
 

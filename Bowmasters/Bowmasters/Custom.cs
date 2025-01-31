@@ -1,16 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+///ETML
+///Auteur : Maël Naudet
+///Date : 31.01.2025
 
 namespace Bowmasters
 {
+    /// <summary>
+    /// classe permettant la customisation d'objet (pour l'instant uniquement la couleur)
+    /// </summary>
     static class Custom
     {
         //liste des couleurs possibles
-        static public ConsoleColor[] colors = {
-            ConsoleColor.Black,
+        static private ConsoleColor[] colors = {
             ConsoleColor.DarkBlue,
             ConsoleColor.DarkGreen,
             ConsoleColor.DarkCyan,
@@ -22,6 +24,10 @@ namespace Bowmasters
             ConsoleColor.Blue
         };
 
+        /// <summary>
+        /// retourne une couleur aléatoire
+        /// </summary>
+        /// <returns></returns>
         public static ConsoleColor GetRandomColor()
         {
             return colors[new Random().Next(colors.Length)];
