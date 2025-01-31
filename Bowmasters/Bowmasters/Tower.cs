@@ -85,7 +85,7 @@ namespace Bowmasters
         /// <summary>
         /// Affiche la tour
         /// </summary>
-        public void DisplayTower()
+        public void Display()
         {
             for (int i = 0; i < _towerWidth; i++)
             {

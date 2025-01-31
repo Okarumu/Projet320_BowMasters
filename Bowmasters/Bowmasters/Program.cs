@@ -30,7 +30,7 @@ namespace Bowmasters
 
             Console.CursorVisible = false;
 
-            Player player1 = new Player(life: 3, xPosition: 20, yPosition: 37, color: ConsoleColor.Green, 1) ;
+            Player player1 = new Player(life: 3, xPosition: 20, yPosition: 37, color: ConsoleColor.Green, 1);
 
             Player player2 = new Player(life: 3, xPosition: 127, yPosition: 37, color: ConsoleColor.Red, 2);
 
@@ -43,8 +43,8 @@ namespace Bowmasters
             player2.Display();
             player1.DisplayInfo();
             player2.DisplayInfo();
-            tower1.DisplayTower();
-            tower2.DisplayTower();
+            tower1.Display();
+            tower2.Display();
 
             double time = 0;
 
