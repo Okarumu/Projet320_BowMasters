@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ball.cs" />
+    <Compile Include="BowGame.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Balistic.cs" />
     <Compile Include="Custom.cs" />
