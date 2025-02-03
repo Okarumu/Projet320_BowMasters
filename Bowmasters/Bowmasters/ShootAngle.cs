@@ -10,20 +10,21 @@ namespace Bowmasters
     /// <summary>
     /// permet de faire une méthode qui peut afficher des points et donner un angle en fonction de ces points
     /// </summary>
-    static class ShootAngle
+    internal class ShootAngle
     {
         /// <summary>
         /// propreties
         /// </summary>
-        private static char _model = '.';           // modèle graphique du point
-        public static PositionByte[] _position;    // positions possibles des points
-        private static double _angle = 0;           // angle à retourner
-        private static bool _isRight;
+        private char _model = '.';           // modèle graphique du point
+        private readonly Player _player;
+        public PositionByte[] _position;    // positions possibles des points
+        private double _angle = 0;           // angle à retourner
+        private bool _isRight;
 
         /// <summary>
         /// Displays the points
         /// </summary>
-        private static void DisplayModel()
+        private void DisplayModel()
         {
             //si l'angle de la balle le permet
             if (Math.Round(_angle, 1) % 22.5 == 0)
@@ -53,7 +54,7 @@ namespace Bowmasters
         /// <summary>
         /// efface les points de l'endroits où ils sont censé être.
         /// </summary>
-        private static void EraseModel()
+        private void EraseModel()
         {
             // si l'angle le permet
             if (Math.Round(_angle, 1) % 22.5 == 0)
@@ -82,8 +83,9 @@ namespace Bowmasters
         /// <param name="yPosition">position y des points originaux</param>
         /// <param name="isRight">il faut tirer à droite (angle entre 0 et 90)</param>
         /// <returns>retourne l'angle en double</returns>
-        public static double UpdateBallAngle(byte xPosition, byte yPosition, bool isRight)
+        public double UpdateBallAngle(byte xPosition, byte yPosition, bool isRight)
         {
+            Console.ForegroundColor = ConsoleColor.White;
             // en fonction de si on tire à droite ou non
             _isRight = isRight;
             // on tire à droite
@@ -125,6 +127,7 @@ namespace Bowmasters
                             var key = Console.ReadKey(true);
                             if (key.Key == ConsoleKey.Spacebar)
                             {
+                                DisplayModel();
                                 // on retourne l'angle
                                 return _angle;
                             }

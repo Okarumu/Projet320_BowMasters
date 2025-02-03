@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,16 +49,16 @@ namespace Bowmasters
         {
             do
             {
-                
-
+                BallPowerAndAngle(_players[0], true);
+                BallPowerAndAngle(_players[1], false);
 
             } while (_players.Any(v => v.Life != 0));
         }
 
-        private bool checkCollisionsBallTower(Ball ball, Tower tower)
+        private bool CollisionsTower(Ball ball, Tower tower)
         {
-            if(ball.ActualPosition.X <= (tower.TowerPosition.X + 3) && ball.ActualPosition.X >= tower.TowerPosition.X
-                && ball.ActualPosition.Y <= tower.TowerPosition.Y + 10 && ball.ActualPosition.Y >= tower.TowerPosition.X) 
+            if(ball.ActualPosition.X < (tower.TowerPosition.X + tower.HitBox.Length) && ball.ActualPosition.X >= tower.TowerPosition.X
+                && ball.ActualPosition.Y < tower.TowerPosition.Y + tower.HitBox.Height && ball.ActualPosition.Y >= tower.TowerPosition.Y) 
             {
                 return true;
             }
@@ -64,6 +66,55 @@ namespace Bowmasters
             {
                 return false;
             }           
+        }
+
+        private bool CollisionsPlayer(Ball ball, Player ennemy)
+        {
+            if (ball.ActualPosition.X <= ennemy.Position.X + ennemy.Hitbox.Length && ball.ActualPosition.X > ennemy.Position.X
+                && ball.ActualPosition.Y <= ennemy.Position.Y + ennemy.Hitbox.Height && ball.ActualPosition.Y > ennemy.Position.Y)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool CheckBallInGame(Ball ball)
+        {
+            if (ball.ActualPosition.X <= Console.WindowWidth && ball.ActualPosition.X > 0 &&
+                ball.ActualPosition.Y <= Console.WindowHeight)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }          
+        }
+
+        private Ball BallPowerAndAngle(Player player, bool throwRight)
+        {
+            if(throwRight)
+            {
+                double ballAngle = ShootAngle.UpdateBallAngle(player.Position.X, (byte) (player.Position.Y - 3), throwRight);
+                double velocity = new PressSpace(player, 2, player.Color).Start();
+
+                return new Ball(velocity, ballAngle, (byte)(player.Position.X + 3), player.Position.Y);
+            }
+            else
+            {
+                double ballAngle = ShootAngle.UpdateBallAngle((byte)(player.Position.X - 1), (byte)(player.Position.Y), throwRight);
+                double velocity = new PressSpace(player, 2, player.Color).Start();
+
+                return new Ball(velocity, ballAngle, (byte)(player.Position.X + 3), player.Position.Y);
+            }
+        }
+
+        private void ThrowBall(Ball ball, Player ennemy, Tower myTower, Tower ennemyTower)
+        {
+            double time = 0;
+
+            while (true)
+                ball.UpdateBallPosition(time);
         }
     }
 }

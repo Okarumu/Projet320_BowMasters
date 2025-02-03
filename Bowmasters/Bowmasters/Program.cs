@@ -30,14 +30,27 @@ namespace Bowmasters
 
             Console.CursorVisible = false;
 
+            List<Player> players = new List<Player>();
+
             Player player1 = new Player(life: 3, xPosition: 20, yPosition: 37, color: ConsoleColor.Green, 1);
 
             Player player2 = new Player(life: 3, xPosition: 127, yPosition: 37, color: ConsoleColor.Red, 2);
 
+            players.Add(player1);
+            players.Add(player2);
+
+            List<Tower> tones = new List<Tower>();
             Tower tower1 = new Tower(towerHeight: 6, towerWidth: 3, xPosition: 40, yPosition: 34);
             Tower tower2 = new Tower(towerHeight: 6, towerWidth: 3, xPosition: 107, yPosition: 34);
+            tones.Add(tower1);
+            tones.Add(tower2);
 
-            PressSpace testSpace = new PressSpace(5, 0, 10);
+            BowGame game = new BowGame(players, tones);
+
+            game.Initialize();
+            game.GameLoop();
+            
+            /*PressSpace testSpace = new PressSpace(5, 0, 10);
 
             player1.Display();
             player2.Display();
@@ -116,7 +129,7 @@ namespace Bowmasters
                     ball2.ErasePreviousBall();
                 }
             }
-
+            */
             Console.ReadLine();
 
             

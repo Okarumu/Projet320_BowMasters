@@ -5,30 +5,11 @@ namespace Bowmasters
     public class Tower
     {
         //Propriétés *************************************************************
-        private byte _towerHeight;          //hauteur de la tour
-        public byte TowerHeight
-        {
-            get
-            {
-                return _towerHeight;
-            }
-            set
-            {
-                _towerHeight = value;
-            }
-        }
+        private readonly HitBox _hitBox;
 
-        private byte _towerWidth;           //largeur de la tour
-        public byte TowerWidth
-        {
-            get
-            {
-                return _towerWidth;
-            }
-            set
-            {
-                _towerWidth = value;
-            }
+        public HitBox HitBox 
+        { 
+            get { return _hitBox; } 
         }
 
         private TowerPiece[,] _pieces;      //liste de toutes les pièces
@@ -63,18 +44,17 @@ namespace Bowmasters
         /// <param name="yPosition">position y</param>
         public Tower(byte towerHeight, byte towerWidth, byte xPosition, byte yPosition)
         {
-            this._towerHeight = towerHeight;
-            this._towerWidth = towerWidth;
+            _hitBox = new HitBox(towerWidth, towerHeight);
             _towerPosition = new PositionByte(xPosition, yPosition);
 
             //déclare la liste des pièces
             _pieces = new TowerPiece[towerWidth, towerHeight];
 
-            for (int i = 0; i < _towerWidth; i++)
+            for (byte i = 0; i < HitBox.Length; i++)
             {
-                for (int j = 0; j < _towerHeight; j++)
+                for (int j = 0; j < HitBox.Height; j++)
                 {
-                    _pieces[i, j] = new TowerPiece(xPosition: Convert.ToByte(this.TowerPosition.X + i), yPosition: Convert.ToByte(this.TowerPosition.Y + j));
+                    _pieces[i, j] = new TowerPiece(xPosition: (byte)(this.TowerPosition.X + i), yPosition: (byte)(this.TowerPosition.Y + j));
                 }
             }
 
@@ -87,9 +67,9 @@ namespace Bowmasters
         /// </summary>
         public void Display()
         {
-            for (int i = 0; i < _towerWidth; i++)
+            for (int i = 0; i < HitBox.Length; i++)
             {
-                for (int j = 0; j < _towerHeight; j++)
+                for (int j = 0; j < HitBox.Height; j++)
                 {
                     _pieces[i, j].DisplayPiece();
                 }

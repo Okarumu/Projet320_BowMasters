@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 ///ETML
 ///Auteur : Maël Naudet
@@ -36,16 +32,33 @@ namespace Bowmasters
 		}
 
 
-		private string[] playerModel =		//modèle du joueur
+		private string[] _playerModel =		//modèle du joueur
 		{
 			@"  o  ",
 			@" /░\ ",
 			@" / \ ",
 		};
 
+		private readonly HitBox _hitbox;
+
+		public HitBox Hitbox
+		{
+			get
+			{
+				return _hitbox;
+			}
+		}
+
 		private readonly byte playerNumber;
 
 		private readonly ConsoleColor _color;
+		public ConsoleColor Color
+		{
+			get
+			{
+				return _color;
+			}
+		}
 
 		private int _score;
 		public int Score
@@ -75,6 +88,7 @@ namespace Bowmasters
 			this._position = new PositionByte(xPosition, yPosition);
 			this._color = color;
 			this.playerNumber = playernumber;
+			this._hitbox = new HitBox((byte)_playerModel[0].Length, (byte)_playerModel.Count());
 		}
 
 		/// <summary>
@@ -95,17 +109,17 @@ namespace Bowmasters
 			Console.ForegroundColor = this._color;
 
 			//boucle pour parcourir les strings
-			for(byte i = 0; i < playerModel.Length; i++)
+			for(byte i = 0; i < _playerModel.Length; i++)
 			{
 				//endroit ou le string doit etre placé
 				Console.SetCursorPosition(Position.X, Position.Y);
-				Console.Write(playerModel[i]);
+				Console.Write(_playerModel[i]);
 				//on descend de 1
 				Position.Y++;
 			}
 
 			//on remet la position Y du joueur à celle de base
-			Position.Y = Convert.ToByte(Position.Y - playerModel.Length);
+			Position.Y = Convert.ToByte(Position.Y - _playerModel.Length);
 
 			Console.ForegroundColor = ConsoleColor.White;
 		}

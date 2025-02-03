@@ -22,6 +22,8 @@ namespace Bowmasters
             set { position = value; }
         }
 
+        private readonly ConsoleColor _color;
+
         private  readonly float maxHoldTime;    //temps max possible de pression
         private float holdTime;                 //temps de pression 
 
@@ -31,11 +33,12 @@ namespace Bowmasters
         /// <param name="xPosition">position x</param>
         /// <param name="yPosition">position y</param>
         /// <param name="maxHoldTime">temps max de pression</param>
-        public PressSpace(byte xPosition, byte yPosition, float maxHoldTime)
+        public PressSpace(Player player, float maxHoldTime, ConsoleColor color)
         {
-            Position = new PositionByte(xPosition, yPosition);
+            Position = new PositionByte(player.Position.X, player.Position.Y);
             this.maxHoldTime = maxHoldTime;
             holdTime = 0;
+            this._color = color;
         }
 
         /// <summary>
@@ -43,7 +46,8 @@ namespace Bowmasters
         /// </summary>
         private void DisplayStartBar()
         {
-            Console.SetCursorPosition(Position.X + ((int)holdTime % 5) - 1, Position.Y);
+            Console.ForegroundColor = _color;
+            Console.SetCursorPosition(Position.X - 5, Position.Y - 26);
             Console.Write("[");
         }
 
@@ -52,8 +56,9 @@ namespace Bowmasters
         /// </summary>
         private void DisplayBar()
         {
+            Console.ForegroundColor = _color;
             // on se positionne en fonction du temps passé
-            Console.SetCursorPosition(Position.X + (int)holdTime * 2, Position.Y);
+            Console.SetCursorPosition(Position.X - 4 + (int)(holdTime / maxHoldTime * 20), Position.Y - 26);
             Console.Write("■");
         }
 
@@ -62,8 +67,9 @@ namespace Bowmasters
         /// </summary>
         private void DisplayEndBar()
         {
+            Console.ForegroundColor = _color;
             // on se positionne en fonction du temps max
-            Console.SetCursorPosition(Position.X + (int) maxHoldTime * 2 + 1, Position.Y);
+            Console.SetCursorPosition(Position.X + 17, Position.Y - 26);
             Console.Write("]");
         }
 
@@ -72,7 +78,7 @@ namespace Bowmasters
         /// </summary>
         public void EraseBar()
         {
-            for(int i = 0; i < (int)maxHoldTime * 2 + 3; i++) 
+            for(int i = 0; i < (int)(maxHoldTime * 4 + 3); i++) 
             {
                 Console.SetCursorPosition(Position.X - 1 + i, Position.Y);
                 Console.Write(" ");
