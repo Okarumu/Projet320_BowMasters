@@ -93,16 +93,18 @@ namespace Bowmasters
 
         private Ball BallPowerAndAngle(Player player, bool throwRight)
         {
-            if(throwRight)
-            {
-                double ballAngle = ShootAngle.UpdateBallAngle(player.Position.X, (byte) (player.Position.Y - 3), throwRight);
+            ShootAngle angle = new ShootAngle(player, throwRight);
+
+            if (throwRight)
+            {                
+                double ballAngle = angle.UpdateBallAngle();
                 double velocity = new PressSpace(player, 2, player.Color).Start();
 
                 return new Ball(velocity, ballAngle, (byte)(player.Position.X + 3), player.Position.Y);
             }
             else
             {
-                double ballAngle = ShootAngle.UpdateBallAngle((byte)(player.Position.X - 1), (byte)(player.Position.Y), throwRight);
+                double ballAngle = angle.UpdateBallAngle();
                 double velocity = new PressSpace(player, 2, player.Color).Start();
 
                 return new Ball(velocity, ballAngle, (byte)(player.Position.X + 3), player.Position.Y);
