@@ -15,8 +15,14 @@ namespace Bowmasters
 
         private const string _TOWERPIECEMODEL = "█";  //modèle d'une pièce
         private readonly PositionByte _position;
+        private bool _isDestroyed;
         private const ConsoleColor _COLOR = ConsoleColor.DarkGray;
 
+        public bool IsDestroyed
+        {
+            get { return _isDestroyed; }
+            set { _isDestroyed = value; }
+        }
 
         public PositionByte Position
         {
@@ -35,7 +41,8 @@ namespace Bowmasters
         /// <param name="yPosition">position y de la pièce</param>
         public TowerPiece(byte xPosition, byte yPosition)
         {
-            _position = new PositionByte(xPosition, yPosition);    
+            _position = new PositionByte(xPosition, yPosition);
+            IsDestroyed = false;
         }
 
         //Méthodes ******************************************************

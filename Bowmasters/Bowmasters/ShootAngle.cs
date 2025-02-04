@@ -20,32 +20,36 @@ namespace Bowmasters
         public PositionByte[] _position;    // positions possibles des points
         private double _angle;           // angle à retourner
         private bool _isRight;
+        private byte rightPosition = 0;
+        private byte previousPosition = 0;
+        private bool _goingUp;
 
 
         public ShootAngle(Player player, bool isRight)
         {
             _player = player;
             _isRight = isRight;
+            _goingUp = true;
             if (isRight)
             {
                 // création des positions des points
                 _position = new PositionByte[] {
-                new PositionByte(Convert.ToByte(player.Position.X + 5), Convert.ToByte(player.Position.Y - 3)),
-                new PositionByte(Convert.ToByte(player.Position.X + 5), Convert.ToByte(player.Position.Y - 2)),
+                new PositionByte(Convert.ToByte(player.Position.X + 5), Convert.ToByte(player.Position.Y + 0)),
                 new PositionByte(Convert.ToByte(player.Position.X + 5), Convert.ToByte(player.Position.Y - 1)),
-                new PositionByte(Convert.ToByte(player.Position.X + 3), Convert.ToByte(player.Position.Y - 1)),
-                new PositionByte(Convert.ToByte(player.Position.X + 1), Convert.ToByte(player.Position.Y - 1))
+                new PositionByte(Convert.ToByte(player.Position.X + 5), Convert.ToByte(player.Position.Y - 2)),
+                new PositionByte(Convert.ToByte(player.Position.X + 3), Convert.ToByte(player.Position.Y - 2)),
+                new PositionByte(Convert.ToByte(player.Position.X + 1), Convert.ToByte(player.Position.Y - 2))
                 };
             }
             else
             {
                 // création des positions des points
                 _position = new PositionByte[] {
-                new PositionByte(Convert.ToByte(player.Position.X + 4), Convert.ToByte(player.Position.Y - 2)),
                 new PositionByte(Convert.ToByte(player.Position.X + 2), Convert.ToByte(player.Position.Y - 2)),
-                new PositionByte(Convert.ToByte(player.Position.X), Convert.ToByte(player.Position.Y - 2)),
-                new PositionByte(Convert.ToByte(player.Position.X), Convert.ToByte(player.Position.Y - 1)),
-                new PositionByte(Convert.ToByte(player.Position.X ), Convert.ToByte(player.Position.Y))
+                new PositionByte(Convert.ToByte(player.Position.X + 0), Convert.ToByte(player.Position.Y - 2)),
+                new PositionByte(Convert.ToByte(player.Position.X - 2), Convert.ToByte(player.Position.Y - 2)),
+                new PositionByte(Convert.ToByte(player.Position.X - 2), Convert.ToByte(player.Position.Y - 1)),
+                new PositionByte(Convert.ToByte(player.Position.X - 2), Convert.ToByte(player.Position.Y))
                 };
             }
         }
@@ -55,24 +59,20 @@ namespace Bowmasters
         /// </summary>
         private void DisplayModel()
         {
-            //si l'angle de la balle le permet
-            if (Math.Round(_angle, 1) % 22.5 == 0)
-            {
-                // angle plus petit que 91 (pour tirer à droite)
-                if (_isRight)
+                Console.SetCursorPosition(_position[rightPosition].X, _position[rightPosition].Y);
+                previousPosition = rightPosition;
+                if (_goingUp)
                 {
-                    //on prend la bonne position en fonction de l'angle
-                    Console.SetCursorPosition(_position[(int)(Math.Round(_angle, 1) / 22.5)].X, _position[(int)(Math.Round(_angle, 1) / 22.5)].Y);
+                    rightPosition++;
                 }
-                // angle plus grand que 91 (pour tirer à gauche)
                 else
                 {
-                    //on prend la bonne position en fonction de l'angle
-                    Console.SetCursorPosition(_position[(int)((Math.Round(_angle, 1) - 90) / 22.5)].X, _position[(int)((Math.Round(_angle, 1) - 90) / 22.5)].Y);
+                    rightPosition--;
                 }
+
                 // affiche le point
                 Console.Write(_model);
-            }
+            
         }
 
         /// <summary>
@@ -81,24 +81,11 @@ namespace Bowmasters
         /// TODO REBIEN FAIRE FRR
         internal void EraseModel()
         {
-            // si l'angle le permet
-            if (Math.Round(_angle, 1) % 22.5 == 0)
-            {
-                // pour tirer à droite
-                if (_isRight)
-                {
-                    // position en fonction de l'angle
-                    Console.SetCursorPosition(_position[(int)((Math.Round(_angle, 1) / 22.5) - 1)].X, _position[(int)(Math.Round(_angle, 1) / 22.5)].Y);
-                }
-                // tirer à gauche
-                else
-                {
-                    // position en fonction de l'angle
-                    Console.SetCursorPosition(_position[(int)(((Math.Round(_angle, 1) - 90) / 22.5) - 1)].X, _position[(int)((Math.Round(_angle, 1) - 90) / 22.5)].Y);
-                }
+
+                Console.SetCursorPosition(_position[previousPosition].X, _position[previousPosition].Y);
                 // on écrit un ensemble vide
                 Console.Write(" ");
-            }
+            
         }
 
         /// <summary>
@@ -119,9 +106,11 @@ namespace Bowmasters
                 // boucle
                 while (true)
                 {
+                    _goingUp = true;
                     // de 0 à 90 degré
                     for (_angle = 0; _angle < 90; _angle += 0.5)
                     {
+                        
                         // si on appuie sur la touche espace
                         if (Console.KeyAvailable)
                         {
@@ -132,31 +121,37 @@ namespace Bowmasters
                                 return _angle;
                             }
                         }
-                        // TODO : FAIRE EN SORTE QUE CA EFFACE BIEN LE BON TRUC
-                        EraseModel();
-                        // on affiche le modèle si l'angle le permet
-                        DisplayModel();
-                        Thread.Sleep(50);
+                        if(_angle % 22.5 == 0)
+                        {
+                            // TODO : FAIRE EN SORTE QUE CA EFFACE BIEN LE BON TRUC
+                            EraseModel();
+                            // on affiche le modèle si l'angle le permet
+                            DisplayModel();
+                        }
+                        Thread.Sleep(10);
                     }
+                    _goingUp = false;
                     // de 90 à 0 degré
                     for (_angle = 90; _angle > 0; _angle -= 0.5)
-                    {
+                    {                       
                         // si on appuie sur la touche espace
                         if (Console.KeyAvailable)
                         {
                             var key = Console.ReadKey(true);
                             if (key.Key == ConsoleKey.Spacebar)
                             {
-                                EraseModel();
-                                DisplayModel();
                                 // on retourne l'angle
                                 return _angle;
                             }
                         }
-                        EraseModel();
-                        // on affiche le modèle
-                        DisplayModel();
-                        Thread.Sleep(50);
+                        if (_angle % 22.5 == 0)
+                        {
+                            // TODO : FAIRE EN SORTE QUE CA EFFACE BIEN LE BON TRUC
+                            EraseModel();
+                            // on affiche le modèle si l'angle le permet
+                            DisplayModel();
+                        }
+                        Thread.Sleep(10);
                     }
                 }
             }
@@ -169,6 +164,7 @@ namespace Bowmasters
                     // de 90 à 180 degrés
                     for (_angle = 90; _angle < 180; _angle += 0.5)
                     {
+                        _goingUp = true;
                         // si on appuie sur la touche espace
                         if (Console.KeyAvailable)
                         {
@@ -179,13 +175,19 @@ namespace Bowmasters
                                 return _angle;
                             }
                         }
-                        EraseModel();
-                        // on affiche le modèle
-                        DisplayModel();
+                        if (_angle % 22.5 == 0)
+                        {
+                            // TODO : FAIRE EN SORTE QUE CA EFFACE BIEN LE BON TRUC
+                            EraseModel();
+                            // on affiche le modèle si l'angle le permet
+                            DisplayModel();
+                        }
+                        Thread.Sleep(10);
                     }
                     // de 180 à 90 degré
                     for (_angle = 180; _angle > 90; _angle -= 0.5)
                     {
+                        _goingUp = false;
                         // on appuie sur la touche espace
                         if (Console.KeyAvailable)
                         {
@@ -196,9 +198,14 @@ namespace Bowmasters
                                 return _angle;
                             }
                         }
-                        EraseModel() ;
-                        // on affiche le modèle
-                        DisplayModel();
+                        if (_angle % 22.5 == 0)
+                        {
+                            // TODO : FAIRE EN SORTE QUE CA EFFACE BIEN LE BON TRUC
+                            EraseModel();
+                            // on affiche le modèle si l'angle le permet
+                            DisplayModel();
+                        }
+                        Thread.Sleep(10);
                     }
                 }
             }

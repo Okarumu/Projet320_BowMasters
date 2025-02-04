@@ -112,13 +112,6 @@ namespace Bowmasters
                 if ((ball2.ActualPosition.X > tower1.TowerPosition.X - 1 && ball2.ActualPosition.X < tower1.TowerPosition.X + 3)
                     && (ball2.ActualPosition.Y > tower1.TowerPosition.Y - 1 && ball2.ActualPosition.Y < tower1.TowerPosition.Y + 7))
                 {
-                    foreach (TowerPiece piece in tower1.Pieces)
-                    {
-                        if (ball2.ActualPosition.X == piece.Position.X && ball2.ActualPosition.Y == piece.Position.Y)
-                        {
-                            piece.DestroyPiece();
-                        }
-                    }
                     break;
                 }
 

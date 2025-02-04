@@ -135,6 +135,7 @@ namespace Bowmasters
 
 		public void DisplayInfo()
 		{
+			EraseInfo();
 			Console.ForegroundColor = this._color;
 			Console.SetCursorPosition(Position.X - 5, Position.Y - 30);
 			Console.Write("╔═════════════════════╗");
@@ -145,7 +146,10 @@ namespace Bowmasters
             Console.SetCursorPosition(Position.X - 5, Position.Y - 27);
 			Console.Write("╚═════════════════════╝");
 
-			DisplayLife();
+            Console.SetCursorPosition(Position.X - 5, Position.Y - 26);
+			Console.Write("[                     ]");
+
+            DisplayLife();
 			DisplayScore();
 
 			Console.ForegroundColor = ConsoleColor.White;
@@ -166,5 +170,18 @@ namespace Bowmasters
 			Console.Write(Score);
         }
 
+		private void EraseInfo()
+		{
+            Console.SetCursorPosition(Position.X - 5, Position.Y - 30);
+            Console.Write("                       ");
+            Console.SetCursorPosition(Position.X - 5, Position.Y - 29);
+            Console.Write("                       ");
+            Console.SetCursorPosition(Position.X - 5, Position.Y - 28);
+            Console.Write("                       ");
+            Console.SetCursorPosition(Position.X - 5, Position.Y - 27);
+            Console.Write("                       ");
+            Console.SetCursorPosition(Position.X - 5, Position.Y - 26);
+            Console.Write("                       ");
+        }
     }
 }

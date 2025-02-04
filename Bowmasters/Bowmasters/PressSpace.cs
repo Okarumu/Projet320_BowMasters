@@ -78,9 +78,9 @@ namespace Bowmasters
         /// </summary>
         public void EraseBar()
         {
-            for(int i = 0; i < (int)(maxHoldTime * 4 + 3); i++) 
+            for(int i = 0; i <  21; i++) 
             {
-                Console.SetCursorPosition(Position.X - 1 + i, Position.Y);
+                Console.SetCursorPosition(Position.X - 4 + i, Position.Y - 26);
                 Console.Write(" ");
             }
             
@@ -100,8 +100,8 @@ namespace Bowmasters
             bool notPressed = false;
 
             // affiche le début et la fin de la bar de progression
-            DisplayStartBar();
-            DisplayEndBar();
+            //DisplayStartBar();
+            //DisplayEndBar();
 
             // tant que l'utilisateur n'appuie pas
             while(!notPressed)
@@ -126,7 +126,7 @@ namespace Bowmasters
                 Thread.Sleep(50);
             }
             // retourne le temps 
-            return holdTime;
+            return (holdTime / maxHoldTime) * 50;
         }
     }
 }
