@@ -17,13 +17,14 @@ namespace Bowmasters
         /// </summary>
         private char _model = '.';           // modèle graphique du point
         private readonly Player _player;
-        public PositionByte[] _position;    // positions possibles des points
+        private readonly PositionByte[] _position;    // positions possibles des points
         private double _angle;           // angle à retourner
         private bool _isRight;
         private byte rightPosition = 0;
         private byte previousPosition = 0;
         private bool _goingUp;
 
+        public PositionByte[] Position { get { return _position; } }
 
         public ShootAngle(Player player, bool isRight)
         {
