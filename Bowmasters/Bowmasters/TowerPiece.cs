@@ -26,9 +26,9 @@ namespace Bowmasters
 
         public PositionByte Position
         {
-            get 
-            { 
-                return _position; 
+            get
+            {
+                return _position;
             }
         }
 

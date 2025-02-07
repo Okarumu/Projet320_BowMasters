@@ -31,6 +31,9 @@ namespace Bowmasters
         {
             DisplayPlayers(_players);
             DisplayTower(_towers);
+            SoundEffect.PreloadSound("throw", "SoundEffect/Bow Shot (Minecraft Sound) - Sound Effect for editingCUT.wav");
+            SoundEffect.PreloadSound("hitPlayer", "SoundEffect/Minecraft-Damage-_Oof_-Sound-Effect-_HD_Cut.wav");
+            SoundEffect.PreloadSound("hitTower", "SoundEffect/getting_thrown_againsed_something_(sound_effect)_outCut.wav");
         }
 
         public void GameLoop()
@@ -40,8 +43,10 @@ namespace Bowmasters
             {
                 // Player 1
                 ShootAngle anglePlayerOne = new ShootAngle(player: _players[0], isRight: true);
-                PressSpace velocityBarPlayerOne = new PressSpace(_players[0], 2, _players[0].Color);
+                PressSpace velocityBarPlayerOne = new PressSpace(_players[0], 2, _players[0].Color);               
                 Ball ballPlayerOne = BallPowerAndAngle(_players[0], anglePlayerOne, velocityBarPlayerOne, true);
+                SoundEffect.PlaySound("throw");
+                Thread.Sleep(150);
                 ThrowBall(ballPlayerOne, _players[0], _players[1], _towers[0], _towers[1]);
                 anglePlayerOne.EraseModel();
                 velocityBarPlayerOne.EraseBar();
@@ -53,6 +58,8 @@ namespace Bowmasters
                     ShootAngle anglePlayerTwo = new ShootAngle(player: _players[1], isRight: false);
                     PressSpace velocityBarPlayerTwo = new PressSpace(_players[1], 2, _players[1].Color);
                     Ball ballPlayerTwo = BallPowerAndAngle(_players[1], anglePlayerTwo, velocityBarPlayerTwo, false);
+                    SoundEffect.PlaySound("throw");
+                    Thread.Sleep(150);
                     ThrowBall(ballPlayerTwo, _players[1], _players[0], _towers[1], _towers[0]);
                     anglePlayerTwo.EraseModel();
                     velocityBarPlayerTwo.EraseBar();
@@ -135,7 +142,7 @@ namespace Bowmasters
         private void ThrowBall(Ball ball, Player thrower, Player ennemy, Tower myTower, Tower ennemyTower)
         {
             double time = 0;
-            Music.PlayMusic("SoundEffect/Bow Shot (Minecraft Sound) - Sound Effect for editing.wav");
+            //SoundEffect.PlaySound("throw");
             do
             {
 
@@ -145,7 +152,8 @@ namespace Bowmasters
 
                 if (CollisionsPlayer(ball, ennemy))
                 {
-                    Music.PlayMusic("SoundEffect/Minecraft-Damage-_Oof_-Sound-Effect-_HD_.wav");
+                    SoundEffect.PlaySound("hitPlayer");
+                    Thread.Sleep(100);
                     DisplayPlayers(_players);
                     ennemy.Life--;
                     thrower.Score += 15;
@@ -154,13 +162,15 @@ namespace Bowmasters
                 }
                 else if (CollisionsTower(ball, myTower))
                 {
-                    Music.PlayMusic("SoundEffect/getting_thrown_againsed_something_(sound_effect)_out.wav");
+                    SoundEffect.PlaySound("hitTower");
+                    Thread.Sleep(100);
                     thrower.Score -= 5;
                     thrower.DisplayInfo();
                 }
                 else if (CollisionsTower(ball, ennemyTower))
                 {
-                    Music.PlayMusic("SoundEffect/getting_thrown_againsed_something_(sound_effect)_out.wav");
+                    SoundEffect.PlaySound("hitTower");
+                    Thread.Sleep(100);
                     thrower.Score += 5;
                     thrower.DisplayInfo();
                 }
