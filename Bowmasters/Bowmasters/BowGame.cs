@@ -122,17 +122,14 @@ namespace Bowmasters
             double ballAngle = angle.UpdateBallAngle();
             
             double velocity = ballVelocity.Start();
-            //velocity = 50;
             Debug.Write(" angle : " + ballAngle + " || vitesse :  " + velocity);
 
             if (throwRight)
             {
-                //ballAngle = 2;
                 return new Ball(velocity, ballAngle, (byte)(angle.Position[(int)Math.Round(ballAngle / 22.5)].X + 1), (byte)(angle.Position[(int)Math.Round(ballAngle / 22.5)].Y));
             }
             else
             {
-                //ballAngle = 180;
                 return new Ball(velocity, ballAngle, (byte)(angle.Position[(int)Math.Round((ballAngle - 90) / 22.5)].X - 1), (byte)(angle.Position[(int)Math.Round((ballAngle - 90) / 22.5)].Y));
             }
 
