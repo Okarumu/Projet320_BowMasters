@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using System.Threading;
 ///ETML
 ///Auteur : Maël Naudet
@@ -15,6 +16,9 @@ namespace Bowmasters
         /// <summary>
         /// propreties
         /// </summary>
+        [DllImport("user32.dll")]
+        private static extern short GetAsyncKeyState(int vKey);
+        private const int VK_SPACE = 0x20;
         private char _model = '.';           // modèle graphique du point
         private readonly Player _player;
         private readonly PositionByte[] _position;    // positions possibles des points
@@ -23,6 +27,7 @@ namespace Bowmasters
         private byte rightPosition = 0;
         private byte previousPosition = 0;
         private bool _goingUp;
+
 
         public PositionByte[] Position { get { return _position; } }
 
@@ -60,20 +65,20 @@ namespace Bowmasters
         /// </summary>
         private void DisplayModel()
         {
-                Console.SetCursorPosition(_position[rightPosition].X, _position[rightPosition].Y);
-                previousPosition = rightPosition;
-                if (_goingUp)
-                {
-                    rightPosition++;
-                }
-                else
-                {
-                    rightPosition--;
-                }
+            Console.SetCursorPosition(_position[rightPosition].X, _position[rightPosition].Y);
+            previousPosition = rightPosition;
+            if (_goingUp)
+            {
+                rightPosition++;
+            }
+            else
+            {
+                rightPosition--;
+            }
 
-                // affiche le point
-                Console.Write(_model);
-            
+            // affiche le point
+            Console.Write(_model);
+
         }
 
         /// <summary>
@@ -83,10 +88,10 @@ namespace Bowmasters
         internal void EraseModel()
         {
 
-                Console.SetCursorPosition(_position[previousPosition].X, _position[previousPosition].Y);
-                // on écrit un ensemble vide
-                Console.Write(" ");
-            
+            Console.SetCursorPosition(_position[previousPosition].X, _position[previousPosition].Y);
+            // on écrit un ensemble vide
+            Console.Write(" ");
+
         }
 
         /// <summary>
@@ -111,8 +116,13 @@ namespace Bowmasters
                     // de 0 à 90 degré
                     for (_angle = 0; _angle < 90; _angle += 0.5)
                     {
+
+                        if ((GetAsyncKeyState(VK_SPACE) & 0x8000) != 0)
+                        {
+                            return _angle;
+                        }
                         
-                        // si on appuie sur la touche espace
+                        /*// si on appuie sur la touche espace
                         if (Console.KeyAvailable)
                         {
                             var key = Console.ReadKey(true);
@@ -121,10 +131,9 @@ namespace Bowmasters
                                 // on retourne l'angle
                                 return _angle;
                             }
-                        }
-                        if(_angle % 22.5 == 0)
+                        }*/
+                        if (_angle % 22.5 == 0)
                         {
-                            // TODO : FAIRE EN SORTE QUE CA EFFACE BIEN LE BON TRUC
                             EraseModel();
                             // on affiche le modèle si l'angle le permet
                             DisplayModel();
@@ -134,9 +143,13 @@ namespace Bowmasters
                     _goingUp = false;
                     // de 90 à 0 degré
                     for (_angle = 90; _angle > 0; _angle -= 0.5)
-                    {                       
+                    {
+                        if ((GetAsyncKeyState(VK_SPACE) & 0x8000) != 0)
+                        {
+                            return _angle;
+                        }
                         // si on appuie sur la touche espace
-                        if (Console.KeyAvailable)
+                        /*if (Console.KeyAvailable)
                         {
                             var key = Console.ReadKey(true);
                             if (key.Key == ConsoleKey.Spacebar)
@@ -144,7 +157,7 @@ namespace Bowmasters
                                 // on retourne l'angle
                                 return _angle;
                             }
-                        }
+                        }*/
                         if (_angle % 22.5 == 0)
                         {
                             // TODO : FAIRE EN SORTE QUE CA EFFACE BIEN LE BON TRUC
@@ -162,12 +175,17 @@ namespace Bowmasters
                 // boucle
                 while (true)
                 {
+                    _goingUp = true;
                     // de 90 à 180 degrés
                     for (_angle = 90; _angle < 180; _angle += 0.5)
                     {
-                        _goingUp = true;
+
+                        if ((GetAsyncKeyState(VK_SPACE) & 0x8000) != 0)
+                        {
+                            return _angle;
+                        }
                         // si on appuie sur la touche espace
-                        if (Console.KeyAvailable)
+                        /*if (Console.KeyAvailable)
                         {
                             var key = Console.ReadKey(true);
                             if (key.Key == ConsoleKey.Spacebar)
@@ -175,7 +193,7 @@ namespace Bowmasters
                                 // on retourne l'angle
                                 return _angle;
                             }
-                        }
+                        }*/
                         if (_angle % 22.5 == 0)
                         {
                             // TODO : FAIRE EN SORTE QUE CA EFFACE BIEN LE BON TRUC
@@ -185,12 +203,17 @@ namespace Bowmasters
                         }
                         Thread.Sleep(10);
                     }
+                    _goingUp = false;
                     // de 180 à 90 degré
                     for (_angle = 180; _angle > 90; _angle -= 0.5)
                     {
-                        _goingUp = false;
-                        // on appuie sur la touche espace
-                        if (Console.KeyAvailable)
+
+                        if ((GetAsyncKeyState(VK_SPACE) & 0x8000) != 0)
+                        {
+                            return _angle;
+                        }
+                        // si on appuie sur la touche espace
+                        /*if (Console.KeyAvailable)
                         {
                             var key = Console.ReadKey(true);
                             if (key.Key == ConsoleKey.Spacebar)
@@ -198,7 +221,7 @@ namespace Bowmasters
                                 // on retourne l'angle
                                 return _angle;
                             }
-                        }
+                        }*/
                         if (_angle % 22.5 == 0)
                         {
                             // TODO : FAIRE EN SORTE QUE CA EFFACE BIEN LE BON TRUC

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using System.Threading;
 
 ///ETML
@@ -12,6 +13,11 @@ namespace Bowmasters
     /// </summary>
     internal class PressSpace
     {
+        [DllImport("user32.dll")]
+        private static extern short GetAsyncKeyState(int vKey);
+        private const int VK_SPACE = 0x20;
+        private bool isSpaceHeld = false;
+        private DateTime startTime = DateTime.Now;
         /// <summary>
         /// Propriétés
         /// </summary>
@@ -61,8 +67,7 @@ namespace Bowmasters
             {
                 Console.SetCursorPosition(Position.X - 4 + i, Position.Y - 26);
                 Console.Write(" ");
-            }
-            
+            }           
         }
 
         /// <summary>
@@ -73,6 +78,32 @@ namespace Bowmasters
         /// <returns> le temps tenu </returns>
         public float Start()
         {
+            while (true)
+            {
+                if ((GetAsyncKeyState(VK_SPACE) & 0x8000) != 0)
+                {
+                    if (!isSpaceHeld)
+                    {
+                        startTime = DateTime.Now;
+                        isSpaceHeld = true;
+                    }
+                    holdTime = (float)(DateTime.Now - startTime).TotalSeconds;
+                    holdTime = Math.Min(holdTime, maxHoldTime); // Limite à maxHoldTime
+
+                    DisplayBar();
+
+                    //Thread.Sleep(50);
+                }
+                else
+                {
+                    if (isSpaceHeld)
+                    {
+                        return (holdTime / maxHoldTime) * 50;
+                    }
+                }
+            }
+            
+            /*
             // temps au début
             DateTime startTime = DateTime.Now;
             // pour savoir quand l'utilisateur appuie
@@ -101,7 +132,7 @@ namespace Bowmasters
                 Thread.Sleep(50);
             }
             // retourne le temps 
-            return (holdTime / maxHoldTime) * 50;
+            return (holdTime / maxHoldTime) * 50;*/
         }
     }
 }

@@ -35,11 +35,12 @@ namespace Bowmasters
 
         public void GameLoop()
         {
+            
             do
             {
                 // Player 1
                 ShootAngle anglePlayerOne = new ShootAngle(player: _players[0], isRight: true);
-                PressSpace velocityBarPlayerOne = new PressSpace(_players[0], 3, _players[0].Color);
+                PressSpace velocityBarPlayerOne = new PressSpace(_players[0], 2, _players[0].Color);
                 Ball ballPlayerOne = BallPowerAndAngle(_players[0], anglePlayerOne, velocityBarPlayerOne, true);
                 ThrowBall(ballPlayerOne, _players[0], _players[1], _towers[0], _towers[1]);
                 anglePlayerOne.EraseModel();
@@ -50,7 +51,7 @@ namespace Bowmasters
                 {
                     // Player 2
                     ShootAngle anglePlayerTwo = new ShootAngle(player: _players[1], isRight: false);
-                    PressSpace velocityBarPlayerTwo = new PressSpace(_players[1], 3, _players[1].Color);
+                    PressSpace velocityBarPlayerTwo = new PressSpace(_players[1], 2, _players[1].Color);
                     Ball ballPlayerTwo = BallPowerAndAngle(_players[1], anglePlayerTwo, velocityBarPlayerTwo, false);
                     ThrowBall(ballPlayerTwo, _players[1], _players[0], _towers[1], _towers[0]);
                     anglePlayerTwo.EraseModel();
@@ -60,6 +61,11 @@ namespace Bowmasters
 
             Console.Clear();
             Console.WriteLine("FINITO");
+        }
+
+        public void EndGame()
+        {
+
         }
 
         private bool CollisionsTower(Ball ball, Tower tower)
@@ -107,15 +113,19 @@ namespace Bowmasters
         {
 
             double ballAngle = angle.UpdateBallAngle();
+            
             double velocity = ballVelocity.Start();
+            //velocity = 50;
             Debug.Write(" angle : " + ballAngle + " || vitesse :  " + velocity);
 
             if (throwRight)
             {
+                //ballAngle = 2;
                 return new Ball(velocity, ballAngle, (byte)(angle.Position[(int)Math.Round(ballAngle / 22.5)].X + 1), (byte)(angle.Position[(int)Math.Round(ballAngle / 22.5)].Y));
             }
             else
             {
+                //ballAngle = 180;
                 return new Ball(velocity, ballAngle, (byte)(angle.Position[(int)Math.Round((ballAngle - 90) / 22.5)].X - 1), (byte)(angle.Position[(int)Math.Round((ballAngle - 90) / 22.5)].Y));
             }
 
@@ -125,7 +135,7 @@ namespace Bowmasters
         private void ThrowBall(Ball ball, Player thrower, Player ennemy, Tower myTower, Tower ennemyTower)
         {
             double time = 0;
-
+            Music.PlayMusic("SoundEffect/Bow Shot (Minecraft Sound) - Sound Effect for editing.wav");
             do
             {
 
@@ -135,6 +145,7 @@ namespace Bowmasters
 
                 if (CollisionsPlayer(ball, ennemy))
                 {
+                    Music.PlayMusic("SoundEffect/Minecraft-Damage-_Oof_-Sound-Effect-_HD_.wav");
                     DisplayPlayers(_players);
                     ennemy.Life--;
                     thrower.Score += 15;
@@ -143,11 +154,13 @@ namespace Bowmasters
                 }
                 else if (CollisionsTower(ball, myTower))
                 {
+                    Music.PlayMusic("SoundEffect/getting_thrown_againsed_something_(sound_effect)_out.wav");
                     thrower.Score -= 5;
                     thrower.DisplayInfo();
                 }
                 else if (CollisionsTower(ball, ennemyTower))
                 {
+                    Music.PlayMusic("SoundEffect/getting_thrown_againsed_something_(sound_effect)_out.wav");
                     thrower.Score += 5;
                     thrower.DisplayInfo();
                 }
@@ -177,7 +190,5 @@ namespace Bowmasters
                 towers[i].Display();
             }
         }
-
-        
     }
 }
