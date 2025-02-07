@@ -46,15 +46,20 @@ namespace Bowmasters
                 velocityBarPlayerOne.EraseBar();
                 DisplayPlayers(_players);
 
-                // Player 2
-                ShootAngle anglePlayerTwo = new ShootAngle(player: _players[1], isRight: false);
-                PressSpace velocityBarPlayerTwo = new PressSpace(_players[1], 3, _players[1].Color);
-                Ball ballPlayerTwo = BallPowerAndAngle(_players[1], anglePlayerTwo, velocityBarPlayerTwo, false);
-                ThrowBall(ballPlayerTwo, _players[1], _players[0], _towers[1], _towers[0]);
-                anglePlayerTwo.EraseModel();
-                velocityBarPlayerTwo.EraseBar();
+                if (_players[1].Life > 0)
+                {
+                    // Player 2
+                    ShootAngle anglePlayerTwo = new ShootAngle(player: _players[1], isRight: false);
+                    PressSpace velocityBarPlayerTwo = new PressSpace(_players[1], 3, _players[1].Color);
+                    Ball ballPlayerTwo = BallPowerAndAngle(_players[1], anglePlayerTwo, velocityBarPlayerTwo, false);
+                    ThrowBall(ballPlayerTwo, _players[1], _players[0], _towers[1], _towers[0]);
+                    anglePlayerTwo.EraseModel();
+                    velocityBarPlayerTwo.EraseBar();
+                }
+            } while (_players.All(v => v.Life != 0));
 
-            } while (_players.Any(v => v.Life != 0));
+            Console.Clear();
+            Console.WriteLine("FINITO");
         }
 
         private bool CollisionsTower(Ball ball, Tower tower)
@@ -62,12 +67,17 @@ namespace Bowmasters
             if (ball.ActualPosition.X < (tower.TowerPosition.X + tower.HitBox.Length) && ball.ActualPosition.X >= tower.TowerPosition.X
                 && ball.ActualPosition.Y < tower.TowerPosition.Y + tower.HitBox.Height && ball.ActualPosition.Y >= tower.TowerPosition.Y)
             {
+                foreach (TowerPiece piece in tower.Pieces)
+                {
+                    if (ball.ActualPosition.X == piece.Position.X && ball.ActualPosition.Y == piece.Position.Y && !piece.IsDestroyed)
+                    {
+                        piece.DestroyPiece();
+                        piece.IsDestroyed = true;
+                    }
+                }
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         private bool CollisionsPlayer(Ball ball, Player ennemy)
@@ -100,14 +110,15 @@ namespace Bowmasters
             double velocity = ballVelocity.Start();
             Debug.Write(" angle : " + ballAngle + " || vitesse :  " + velocity);
 
-            if(throwRight)
+            if (throwRight)
             {
-                return new Ball(velocity, ballAngle, (byte)(angle.Position[(int) Math.Round(ballAngle / 22.5)].X + 1), (byte)(angle.Position[(int) Math.Round(ballAngle / 22.5)].Y));
-            } else
-            {
-                return new Ball(velocity, ballAngle, (byte)(angle.Position[(int)Math.Round((ballAngle - 90 )/ 22.5)].X - 1), (byte)(angle.Position[(int)Math.Round((ballAngle - 90) / 22.5)].Y));
+                return new Ball(velocity, ballAngle, (byte)(angle.Position[(int)Math.Round(ballAngle / 22.5)].X + 1), (byte)(angle.Position[(int)Math.Round(ballAngle / 22.5)].Y));
             }
-            
+            else
+            {
+                return new Ball(velocity, ballAngle, (byte)(angle.Position[(int)Math.Round((ballAngle - 90) / 22.5)].X - 1), (byte)(angle.Position[(int)Math.Round((ballAngle - 90) / 22.5)].Y));
+            }
+
 
         }
 
@@ -117,10 +128,10 @@ namespace Bowmasters
 
             do
             {
+
                 ball.UpdateBallPosition(time);
-                time += 0.05;
+                time = Math.Round(time + 0.01, 2);
                 ball.DisplayBallInTime();
-                ball.ErasePreviousBall();
 
                 if (CollisionsPlayer(ball, ennemy))
                 {
@@ -128,19 +139,21 @@ namespace Bowmasters
                     ennemy.Life--;
                     thrower.Score += 15;
                     ennemy.DisplayInfo();
+                    thrower.DisplayInfo();
                 }
                 else if (CollisionsTower(ball, myTower))
                 {
-                    DestroyPiece(myTower, ball);
                     thrower.Score -= 5;
                     thrower.DisplayInfo();
                 }
                 else if (CollisionsTower(ball, ennemyTower))
                 {
-                    DestroyPiece(ennemyTower, ball);
                     thrower.Score += 5;
                     thrower.DisplayInfo();
                 }
+
+                Thread.Sleep(1);
+                ball.ErasePreviousBall();
 
             } while (CheckBallInGame(ball) && !CollisionsPlayer(ball, ennemy) && !CollisionsTower(ball, myTower) && !CollisionsTower(ball, ennemyTower));
 
@@ -165,16 +178,6 @@ namespace Bowmasters
             }
         }
 
-        private void DestroyPiece(Tower tower, Ball ball)
-        {
-            foreach (TowerPiece piece in tower.Pieces)
-            {
-                if (ball.ActualPosition.X == piece.Position.X && ball.ActualPosition.Y == piece.Position.Y && !piece.IsDestroyed)
-                {
-                    piece.DestroyPiece();
-                    piece.IsDestroyed = true;
-                }
-            }
-        }
+        
     }
 }

@@ -42,16 +42,6 @@ namespace Bowmasters
         }
 
         /// <summary>
-        /// Affiche le début de la bar de progression
-        /// </summary>
-        private void DisplayStartBar()
-        {
-            Console.ForegroundColor = _color;
-            Console.SetCursorPosition(Position.X - 5, Position.Y - 26);
-            Console.Write("[");
-        }
-
-        /// <summary>
         /// Affiche la progression de la bar
         /// </summary>
         private void DisplayBar()
@@ -60,17 +50,6 @@ namespace Bowmasters
             // on se positionne en fonction du temps passé
             Console.SetCursorPosition(Position.X - 4 + (int)(holdTime / maxHoldTime * 20), Position.Y - 26);
             Console.Write("■");
-        }
-
-        /// <summary>
-        /// Affiche la fin de la bar de progression
-        /// </summary>
-        private void DisplayEndBar()
-        {
-            Console.ForegroundColor = _color;
-            // on se positionne en fonction du temps max
-            Console.SetCursorPosition(Position.X + 17, Position.Y - 26);
-            Console.Write("]");
         }
 
         /// <summary>
@@ -98,10 +77,6 @@ namespace Bowmasters
             DateTime startTime = DateTime.Now;
             // pour savoir quand l'utilisateur appuie
             bool notPressed = false;
-
-            // affiche le début et la fin de la bar de progression
-            //DisplayStartBar();
-            //DisplayEndBar();
 
             // tant que l'utilisateur n'appuie pas
             while(!notPressed)
