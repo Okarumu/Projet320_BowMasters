@@ -44,7 +44,7 @@ namespace Bowmasters
                 // Player 1
                 ShootAngle anglePlayerOne = new ShootAngle(player: _players[0], isRight: true);
                 PressSpace velocityBarPlayerOne = new PressSpace(_players[0], 2, _players[0].Color);
-                Ball ballPlayerOne = BallPowerAndAngle(_players[0], anglePlayerOne, velocityBarPlayerOne, true);
+                Ball ballPlayerOne = BallPowerAndAngle(anglePlayerOne, velocityBarPlayerOne, true);
                 SoundEffect.PlaySound("throw");
                 Thread.Sleep(150);
                 ThrowBall(ballPlayerOne, _players[0], _players[1], _towers[0], _towers[1]);
@@ -57,7 +57,7 @@ namespace Bowmasters
                     // Player 2
                     ShootAngle anglePlayerTwo = new ShootAngle(player: _players[1], isRight: false);
                     PressSpace velocityBarPlayerTwo = new PressSpace(_players[1], 2, _players[1].Color);
-                    Ball ballPlayerTwo = BallPowerAndAngle(_players[1], anglePlayerTwo, velocityBarPlayerTwo, false);
+                    Ball ballPlayerTwo = BallPowerAndAngle(anglePlayerTwo, velocityBarPlayerTwo, false);
                     SoundEffect.PlaySound("throw");
                     Thread.Sleep(150);
                     ThrowBall(ballPlayerTwo, _players[1], _players[0], _towers[1], _towers[0]);
@@ -116,7 +116,7 @@ namespace Bowmasters
             }
         }
 
-        private Ball BallPowerAndAngle(Player player, ShootAngle angle, PressSpace ballVelocity, bool throwRight)
+        private Ball BallPowerAndAngle(ShootAngle angle, PressSpace ballVelocity, bool throwRight)
         {
 
             double ballAngle = angle.UpdateBallAngle();
@@ -146,49 +146,82 @@ namespace Bowmasters
         /// <param name="ennemyTower">la tour de l'ennemi</param>
         private void ThrowBall(Ball ball, Player thrower, Player ennemy, Tower myTower, Tower ennemyTower)
         {
+            // bool de controle pour terminer le tour
             bool endTurn = false;
+            // début du timer (référence à quand il a commencé)
             DateTime startTime = DateTime.Now;
+            // le timer est égal à 0
             double time = 0;
-            //SoundEffect.PlaySound("throw");
+            
+            // boucle do...while qui affiche la balle en fonction du temps et l'arrete si elle touche un élément
             do
             {
-
+                // on update la position de la balle en fonction du temps
                 ball.UpdateBallPosition(time);
+                // on augment le timer
                 time = (DateTime.Now - startTime).TotalSeconds;
+                // on affiche la balle
                 ball.DisplayBallInTime();
 
+                // on réaffiche les informations des personnages au cas où la balle les a effacés
+                ennemy.DisplayInfo();
+                thrower.DisplayInfo();
+
+                // s'il y a une collision avec l'ennemy
                 if (CollisionsPlayer(ball, ennemy))
                 {
+                    // on fait le son de hit
                     SoundEffect.PlaySound("hitPlayer");
                     Thread.Sleep(100);
-                    DisplayPlayers(_players);
+
+                    // on raffiche le joueur en lui enlevant de la vie
+                    ennemy.Display();
                     ennemy.Life--;
+                    // on rajoute du score au lanceur
                     thrower.Score += 15;
+
+                    // on raffiche les infos des joueurs updatés
                     ennemy.DisplayInfo();
                     thrower.DisplayInfo();
+
+                    // on indique que le tour est fini
                     endTurn = true;
                 }
+                // s'il y a une collision avec sa propre tour
                 else if (CollisionsTower(ball, myTower))
                 {
+                    // on fait le son de cassage de tour
                     SoundEffect.PlaySound("hitTower");
                     Thread.Sleep(100);
+                    // on enlève du score au joueur et on le remontre
                     thrower.Score -= 5;
                     thrower.DisplayInfo();
+
+                    // on indique que le tour est fini
                     endTurn = true;
                 }
+                // s'il y a une collision avec la tour ennemie
                 else if (CollisionsTower(ball, ennemyTower))
                 {
+                    // on fait le son de cassage de tour
                     SoundEffect.PlaySound("hitTower");
                     Thread.Sleep(100);
+
+                    // on ajoute du score au lanceur et on l'update
                     thrower.Score += 5;                   
                     thrower.DisplayInfo();
+
+                    // on indique que le tour est fini
                     endTurn = true;
                 }
 
                 Thread.Sleep(10);
+
+                // on efface la balle
                 ball.ErasePreviousBall();
 
-            } while (CheckBallInGame(ball) && !endTurn /*!CollisionsPlayer(ball, ennemy) && !CollisionsTower(ball, myTower) && !CollisionsTower(ball, ennemyTower)*/);
+            } // tant que la balle est dans le jeu et que le tour n'est pas fini 
+            while (CheckBallInGame(ball) && !endTurn);
 
         }
 
@@ -198,7 +231,7 @@ namespace Bowmasters
         /// <param name="players"></param>
         private void DisplayPlayers(List<Player> players)
         {
-            // displays all players
+            // affiche tous les joueurs et leurs infos
             for (byte i = 0; i < players.Count; i++)
             {
                 players[i].Display();
@@ -212,7 +245,7 @@ namespace Bowmasters
         /// <param name="towers">list of tower</param>
         private void DisplayTower(List<Tower> towers)
         {
-            // displays all towers
+            // affiche toutes les tours
             for (byte i = 0; i < towers.Count; i++)
             {
                 towers[i].Display();
