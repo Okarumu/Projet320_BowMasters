@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-using System.Timers;
 
 ///EMTL
 ///Auteur : Maël Naudet
@@ -39,12 +38,12 @@ namespace Bowmasters
 
         public void GameLoop()
         {
-            
+
             do
             {
                 // Player 1
                 ShootAngle anglePlayerOne = new ShootAngle(player: _players[0], isRight: true);
-                PressSpace velocityBarPlayerOne = new PressSpace(_players[0], 2, _players[0].Color);               
+                PressSpace velocityBarPlayerOne = new PressSpace(_players[0], 2, _players[0].Color);
                 Ball ballPlayerOne = BallPowerAndAngle(_players[0], anglePlayerOne, velocityBarPlayerOne, true);
                 SoundEffect.PlaySound("throw");
                 Thread.Sleep(150);
@@ -78,19 +77,19 @@ namespace Bowmasters
 
         private bool CollisionsTower(Ball ball, Tower tower)
         {
-            if (ball.ActualPosition.X < (tower.TowerPosition.X + tower.HitBox.Length) && ball.ActualPosition.X >= tower.TowerPosition.X
+            /*if (ball.ActualPosition.X < (tower.TowerPosition.X + tower.HitBox.Length) && ball.ActualPosition.X >= tower.TowerPosition.X
                 && ball.ActualPosition.Y < tower.TowerPosition.Y + tower.HitBox.Height && ball.ActualPosition.Y >= tower.TowerPosition.Y)
+            {*/
+            foreach (TowerPiece piece in tower.Pieces)
             {
-                foreach (TowerPiece piece in tower.Pieces)
+                if (ball.ActualPosition.X == piece.Position.X && ball.ActualPosition.Y == piece.Position.Y && !piece.IsDestroyed)
                 {
-                    if (ball.ActualPosition.X == piece.Position.X && ball.ActualPosition.Y == piece.Position.Y && !piece.IsDestroyed)
-                    {
-                        piece.DestroyPiece();
-                        piece.IsDestroyed = true;
-                    }
+                    piece.DestroyPiece();
+                    piece.IsDestroyed = true;
+                    return true;
                 }
-                return true;
             }
+            // }
             return false;
         }
 
@@ -121,7 +120,7 @@ namespace Bowmasters
         {
 
             double ballAngle = angle.UpdateBallAngle();
-            
+
             double velocity = ballVelocity.Start();
             Debug.Write(" angle : " + ballAngle + " || vitesse :  " + velocity);
 
@@ -137,8 +136,17 @@ namespace Bowmasters
 
         }
 
+        /// <summary>
+        /// Lance la balle selon le joueur et arrête le tour en fonction de si la balle touche une tour, un joueur ou sort des limites du terrain
+        /// </summary>
+        /// <param name="ball">balle à lancer</param>
+        /// <param name="thrower">le joueur qui lance la balle</param>
+        /// <param name="ennemy">le joueur adverse</param>
+        /// <param name="myTower">la tour du lancer</param>
+        /// <param name="ennemyTower">la tour de l'ennemi</param>
         private void ThrowBall(Ball ball, Player thrower, Player ennemy, Tower myTower, Tower ennemyTower)
         {
+            bool endTurn = false;
             DateTime startTime = DateTime.Now;
             double time = 0;
             //SoundEffect.PlaySound("throw");
@@ -158,6 +166,7 @@ namespace Bowmasters
                     thrower.Score += 15;
                     ennemy.DisplayInfo();
                     thrower.DisplayInfo();
+                    endTurn = true;
                 }
                 else if (CollisionsTower(ball, myTower))
                 {
@@ -165,22 +174,28 @@ namespace Bowmasters
                     Thread.Sleep(100);
                     thrower.Score -= 5;
                     thrower.DisplayInfo();
+                    endTurn = true;
                 }
                 else if (CollisionsTower(ball, ennemyTower))
                 {
                     SoundEffect.PlaySound("hitTower");
                     Thread.Sleep(100);
-                    thrower.Score += 5;
+                    thrower.Score += 5;                   
                     thrower.DisplayInfo();
+                    endTurn = true;
                 }
 
                 Thread.Sleep(10);
                 ball.ErasePreviousBall();
 
-            } while (CheckBallInGame(ball) && !CollisionsPlayer(ball, ennemy) && !CollisionsTower(ball, myTower) && !CollisionsTower(ball, ennemyTower));
+            } while (CheckBallInGame(ball) && !endTurn /*!CollisionsPlayer(ball, ennemy) && !CollisionsTower(ball, myTower) && !CollisionsTower(ball, ennemyTower)*/);
 
         }
 
+        /// <summary>
+        /// Affiche tous les joueurs d'une liste
+        /// </summary>
+        /// <param name="players"></param>
         private void DisplayPlayers(List<Player> players)
         {
             // displays all players
@@ -191,6 +206,10 @@ namespace Bowmasters
             }
         }
 
+        /// <summary>
+        /// Affiche toutes les tours d'une liste
+        /// </summary>
+        /// <param name="towers">list of tower</param>
         private void DisplayTower(List<Tower> towers)
         {
             // displays all towers
