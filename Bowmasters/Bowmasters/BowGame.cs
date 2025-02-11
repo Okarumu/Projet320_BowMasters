@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using System.Timers;
 
 ///EMTL
 ///Auteur : Maël Naudet
@@ -138,13 +139,14 @@ namespace Bowmasters
 
         private void ThrowBall(Ball ball, Player thrower, Player ennemy, Tower myTower, Tower ennemyTower)
         {
+            DateTime startTime = DateTime.Now;
             double time = 0;
             //SoundEffect.PlaySound("throw");
             do
             {
 
                 ball.UpdateBallPosition(time);
-                time = Math.Round(time + 0.01, 2);
+                time = (DateTime.Now - startTime).TotalSeconds;
                 ball.DisplayBallInTime();
 
                 if (CollisionsPlayer(ball, ennemy))
@@ -172,7 +174,7 @@ namespace Bowmasters
                     thrower.DisplayInfo();
                 }
 
-                Thread.Sleep(1);
+                Thread.Sleep(10);
                 ball.ErasePreviousBall();
 
             } while (CheckBallInGame(ball) && !CollisionsPlayer(ball, ennemy) && !CollisionsTower(ball, myTower) && !CollisionsTower(ball, ennemyTower));
