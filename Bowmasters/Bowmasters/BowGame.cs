@@ -17,6 +17,7 @@ namespace Bowmasters
     {
         private List<Player> _players;
         private List<Tower> _towers;
+        private const int AMOUNT_OF_DAMAGE = 1;
 
         public BowGame(List<Player> players, List<Tower> _towers)
         {
@@ -176,7 +177,7 @@ namespace Bowmasters
 
                     // on raffiche le joueur en lui enlevant de la vie
                     ennemy.Display();
-                    ennemy.Life--;
+                    ennemy.TakeDamage(AMOUNT_OF_DAMAGE);
                     // on rajoute du score au lanceur
                     thrower.Score += 15;
 

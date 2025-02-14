@@ -1,6 +1,6 @@
 ﻿namespace Bowmasters
 {
-    public class HitBox
+    public class Hitbox
     {
         private byte _length;
         private byte _height;
@@ -17,7 +17,7 @@
             set { _height = value; }
         }
 
-        public HitBox(byte length, byte height)
+        public Hitbox(byte length, byte height)
         {
             Length = length;
             Height = height;

@@ -39,9 +39,9 @@ namespace Bowmasters
 			@" / \ ",
 		};
 
-		private readonly HitBox _hitbox;
+		private readonly Hitbox _hitbox;
 
-		public HitBox Hitbox
+		public Hitbox Hitbox
 		{
 			get
 			{
@@ -88,7 +88,7 @@ namespace Bowmasters
 			this._position = new PositionByte(xPosition, yPosition);
 			this._color = color;
 			this.playerNumber = playernumber;
-			this._hitbox = new HitBox((byte)_playerModel[0].Length, (byte)_playerModel.Count());
+			this._hitbox = new Hitbox((byte)_playerModel[0].Length, (byte)_playerModel.Count());
 		}
 
 		/// <summary>

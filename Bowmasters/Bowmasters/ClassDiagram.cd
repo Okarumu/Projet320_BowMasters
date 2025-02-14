@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Bowmasters.Balistic">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAABAAAAAAAAAAAAAACAAAAAAEAIAAAA=</HashCode>
+      <FileName>Balistic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bowmasters.Ball">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAACAACAIKAAAAAAAAAAAACAAAAAAAAAAAACRAAAA=</HashCode>
+      <FileName>Ball.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bowmasters.BowGame">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAQAAEAAQggAQAQAgAAABAACAAAAAAAAAAQAEA=</HashCode>
+      <FileName>BowGame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bowmasters.Config">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAgAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Config.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bowmasters.Custom">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Custom.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bowmasters.EndScreen">
+    <Position X="2.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EndScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bowmasters.Hitbox">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABACAAAAAAAAAAABAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>HitBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bowmasters.Player">
+    <Position X="10.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAMEgigAgEAAQAAAAgAAAAAABAAgAABAAA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bowmasters.PositionByte">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>PositionByte.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bowmasters.PressSpace">
+    <Position X="2.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAADAIBAAgAAAgIABAAAAAAAAQAAgAgAAAIAA=</HashCode>
+      <FileName>PressSpace.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bowmasters.Program">
+    <Position X="4" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bowmasters.ShootAngle">
+    <Position X="7.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAKAQAAAABAAgAhAECAAAAAAAAAAAAAAggAAAAEA=</HashCode>
+      <FileName>ShootAngle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bowmasters.SoundEffect">
+    <Position X="0.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>SoundEffect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bowmasters.Tower">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAQAQAQAAAAAAAAAAAAgAIAAAAAQ=</HashCode>
+      <FileName>Tower.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bowmasters.TowerPiece">
+    <Position X="4" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAwAAAAAAAABCAAAAAAAAIAgAAAEAA=</HashCode>
+      <FileName>TowerPiece.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
