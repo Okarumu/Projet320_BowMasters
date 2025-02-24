@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
-using System.Diagnostics;
-[assembly:InternalsVisibleTo("BowMastersTests")]
-
+﻿///*******************************************************
 /// ETML
 /// Auteur : Maël Naudet
 /// Date : 17.01.2024
 /// Description : Jeu où 2 joueurs, séparés par 2 tours s'affrontent en se lançant des balles chacun à leur tour.
-/// *******************************************************************************************************************************
+///*******************************************************
+
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+[assembly:InternalsVisibleTo("BowMastersTests")]
 
 namespace Bowmasters
 {

@@ -1,6 +1,8 @@
-﻿///ETML
-///Auteur : Maël Naudet
-///Date : 17.01.2025
+﻿///*******************************************************
+/// ETML
+/// Auteur : Maël Naudet
+/// Date : 17.01.2025
+///*******************************************************
 
 using System;
 using System.Linq;
@@ -8,20 +10,20 @@ using System.Linq;
 namespace Bowmasters
 {
 	/// <summary>
-	/// Joueur qui sera afficher avec un nombre de vies pouvant se prendre des dégats.
+	/// Joueur qui sera afficher avec un nombre de vies, un score et pouvant se prendre des dégats
 	/// </summary>
     public class Player
     {
 		//Déclaration des propriétés **********************************************************
 
-		private byte _life;					//vie du joueur
+		private byte _life;							//vie du joueur
 		public byte Life
 		{
 			get { return _life; }
 			set { _life = value; }
 		}
 
-		private readonly PositionByte _position;
+		private readonly PositionByte _position;	// position du joueur
 
 		public PositionByte Position
 		{
@@ -39,7 +41,7 @@ namespace Bowmasters
 			@" / \ ",
 		};
 
-		private readonly Hitbox _hitbox;
+		private readonly Hitbox _hitbox;	// hitbox du joueur	
 
 		public Hitbox Hitbox
 		{
@@ -49,9 +51,16 @@ namespace Bowmasters
 			}
 		}
 
-		private readonly byte playerNumber;
+		private readonly byte _playerNumber;		// numéro de joueur
+		public byte PlayerNumber
+		{
+			get
+			{
+				return _playerNumber;
+			}
+		}
 
-		private readonly ConsoleColor _color;
+		private readonly ConsoleColor _color;		// couleur du joueur
 		public ConsoleColor Color
 		{
 			get
@@ -60,7 +69,7 @@ namespace Bowmasters
 			}
 		}
 
-		private int _score;
+		private int _score;							// score du joueur
 		public int Score
 		{
 			get
@@ -87,7 +96,7 @@ namespace Bowmasters
 			this.Life = life;
 			this._position = new PositionByte(xPosition, yPosition);
 			this._color = color;
-			this.playerNumber = playernumber;
+			this._playerNumber = playernumber;
 			this._hitbox = new Hitbox((byte)_playerModel[0].Length, (byte)_playerModel.Count(), xPosition, yPosition);
 		}
 
@@ -133,6 +142,9 @@ namespace Bowmasters
 			Life -= damage;
 		}
 
+		/// <summary>
+		/// Efface les informations du joueurs et la barre de lancer et les réaffiche 
+		/// </summary>
 		public void DisplayInfo()
 		{
 			EraseInfo();
@@ -140,7 +152,7 @@ namespace Bowmasters
 			Console.SetCursorPosition(Position.X - 5, Position.Y - 30);
 			Console.Write("╔═════════════════════╗");
             Console.SetCursorPosition(Position.X - 5, Position.Y - 29);
-			Console.Write($"║  Joueur {playerNumber}           ║");
+			Console.Write($"║  Joueur {_playerNumber}           ║");
             Console.SetCursorPosition(Position.X - 5, Position.Y - 28);
 			Console.Write($"║  Score :            ║");
             Console.SetCursorPosition(Position.X - 5, Position.Y - 27);
@@ -155,6 +167,9 @@ namespace Bowmasters
 			Console.ForegroundColor = ConsoleColor.White;
         }
 
+		/// <summary>
+		/// Affiche le nombre de point de vie sous forme de coeur
+		/// </summary>
 		private void DisplayLife()
 		{
 			Console.SetCursorPosition(Position.X + 12, Position.Y - 29);
@@ -164,12 +179,18 @@ namespace Bowmasters
             }
         }
 
+		/// <summary>
+		/// Affiche le score du joueur
+		/// </summary>
 		private void DisplayScore()
 		{
             Console.SetCursorPosition(Position.X + 12, Position.Y - 28);
 			Console.Write(Score);
         }
 
+		/// <summary>
+		/// Efface toutes les informations
+		/// </summary>
 		private void EraseInfo()
 		{
             Console.SetCursorPosition(Position.X - 5, Position.Y - 30);

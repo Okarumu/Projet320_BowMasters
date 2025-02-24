@@ -1,13 +1,15 @@
-﻿using System;
+﻿///*******************************************************
+/// EMTL
+/// Auteur : Maël Naudet
+/// Date : 31.01.2025
+/// TODO : AJOUTER SON DE LEGO YODA QUI DECEDE AVEC LE BRUIT DE LEGO QUI SE CASSE ET LE SON DE VICTOIRE HAPPY WHEELS
+///*******************************************************
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-
-///EMTL
-///Auteur : Maël Naudet
-///Date : 31.01.2025
-///TODO : AJOUTER SON DE LEGO YODA QUI DECEDE AVEC LE BRUIT DE LEGO QUI SE CASSE ET LE SON DE VICTOIRE HAPPY WHEELS
 
 namespace Bowmasters
 {

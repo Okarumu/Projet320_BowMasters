@@ -1,8 +1,10 @@
-﻿using System;
+﻿///*******************************************************
+/// ETML
+/// Auteur : Maël Naudet
+/// Date : 31.01.2025
+///*******************************************************
 
-///ETML
-///Auteur : Maël Naudet
-///Date : 31.01.2025
+using System;
 
 namespace Bowmasters
 {

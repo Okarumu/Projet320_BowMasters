@@ -1,14 +1,13 @@
-﻿
-///*******************************************************
-///ETML
-///Auteur : Maël Naudet
-///Date : 24.01.2025
+﻿///*******************************************************
+/// ETML
+/// Auteur : Maël Naudet
+/// Date : 24.01.2025
 ///*******************************************************
 
 namespace Bowmasters
 {
     /// <summary>
-    /// Permet de stocker une position x et y
+    /// Permet de stocker une position x et y avec des bytes
     /// </summary>
     public class PositionByte
     {

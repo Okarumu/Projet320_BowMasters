@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿///*******************************************************
+/// ETML
+/// Auteur : Maël Naudet
+/// Date : 24.01.2025
+///*******************************************************
 
 namespace Bowmasters
 {
-    /*public class PositionDouble
+    /// <summary>
+    /// Permet de sotcker une position avec des coordonnées x et y avec des double
+    /// </summary>
+    public class PositionDouble
     {
         /// <summary>
         /// Attributs
@@ -54,5 +57,5 @@ namespace Bowmasters
             X = xPosition;
             Y = yPosition;
         }
-    }*/
+    }
 }

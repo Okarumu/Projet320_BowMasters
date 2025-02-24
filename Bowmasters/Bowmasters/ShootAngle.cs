@@ -1,10 +1,12 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using System.Threading;
+﻿///*******************************************************
 ///ETML
 ///Auteur : Maël Naudet
 ///Date : 24.01.2025
+///*******************************************************
 
+using System;
+using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace Bowmasters
 {

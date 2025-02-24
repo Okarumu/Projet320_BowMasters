@@ -1,8 +1,10 @@
-﻿using System;
+﻿///*******************************************************
+/// ETML
+/// Auteur : Maël Naudet
+/// Date : 20.01.2025
+///*******************************************************
 
-///ETML
-///Auteur : Maël Naudet
-///Date : 20.01.2025
+using System;
 
 namespace Bowmasters
 {
@@ -12,12 +14,13 @@ namespace Bowmasters
     public class Ball
     {
         //Déclaraton des propriétés ***************************************
-        private double _velocity;
-        private double _angle;
-        private readonly PositionByte _initialPosition;
-        private PositionByte _actualPosition;
-        private ConsoleColor _color;
+        private double _velocity;                       // vélocité de la balle
+        private double _angle;                          // angle de la balle
+        private readonly PositionByte _initialPosition; // position initiale de la balle
+        private PositionByte _actualPosition;           // position updatée de la balle
+        private ConsoleColor _color;                    // couleur de la balle
 
+        // getter de la position initiale de la balle
         public PositionByte InitialPosition
         {
             get
@@ -26,6 +29,7 @@ namespace Bowmasters
             }
         }
 
+        // getter/setter de la position updatée de la balle
         public PositionByte ActualPosition
         {
             get
@@ -38,7 +42,13 @@ namespace Bowmasters
             }
         }
 
-        //Déclaration des constructeurs ***********************************
+        /// <summary>
+        /// Constructeur par défaut
+        /// </summary>
+        /// <param name="velocity">vélocité de la balle</param>
+        /// <param name="angle">angle de la balle</param>
+        /// <param name="initialXPosition">position initiale x de la balle</param>
+        /// <param name="initialYPosition">position initiale y de la balle</param>
         public Ball(double velocity, double angle, byte initialXPosition, byte initialYPosition)
         {
             this._velocity = velocity;
@@ -59,6 +69,7 @@ namespace Bowmasters
                 ActualPosition.X = Convert.ToByte(Balistic.MovementOnXAxis(initialX: InitialPosition.X, time: time, velocity: this._velocity, angle: this._angle));
                 ActualPosition.Y = Convert.ToByte(Balistic.MovementOnYAxis(initialY: InitialPosition.Y, time: time, velocity: this._velocity, angle: this._angle));
            }
+            // vérifier que la balle se situe bien dans les limites de la console
            catch (System.OverflowException)
            {
            }
@@ -70,14 +81,17 @@ namespace Bowmasters
         /// 
         public void DisplayBallInTime()
         {
+            // met la couleur du curseur à la couleur donnée aléatoirement plus haut
             Console.ForegroundColor = _color;
             try
             {
                 Console.SetCursorPosition(Convert.ToInt16(ActualPosition.X), Convert.ToInt16(ActualPosition.Y));
                 Console.Write("X");
             }
+            // vérifie que la balle ne soit pas en dehors de la console
             catch (System.ArgumentOutOfRangeException) { }
-            Console.ForegroundColor = ConsoleColor.White;
+            // remet les couleurs de base
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -90,6 +104,7 @@ namespace Bowmasters
                 Console.SetCursorPosition(Convert.ToInt16(ActualPosition.X), Convert.ToInt16(ActualPosition.Y));
                 Console.Write(" ");
             }
+            // Vérifie que la balle ne soit pas en dehors de la console
             catch(System.ArgumentOutOfRangeException) { }           
         }
     }
