@@ -96,11 +96,18 @@ namespace Bowmasters
 
         private bool CollisionsPlayer(Ball ball, Player ennemy)
         {
-            if (ball.ActualPosition.X <= ennemy.Position.X + ennemy.Hitbox.Length && ball.ActualPosition.X > ennemy.Position.X
+            foreach (PositionByte position in ennemy.Hitbox.HitBoxes)
+            {
+                if(ball.ActualPosition == position)
+                {
+                    return true;
+                }
+            }
+            /*if (ball.ActualPosition.X <= ennemy.Position.X + ennemy.Hitbox.Length && ball.ActualPosition.X > ennemy.Position.X
                 && ball.ActualPosition.Y <= ennemy.Position.Y + ennemy.Hitbox.Height && ball.ActualPosition.Y > ennemy.Position.Y)
             {
-                return true;
-            }
+                
+            }*/
             return false;
         }
 

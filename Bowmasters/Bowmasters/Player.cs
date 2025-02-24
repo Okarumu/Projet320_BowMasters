@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
-
-///ETML
+﻿///ETML
 ///Auteur : Maël Naudet
 ///Date : 17.01.2025
+
+using System;
+using System.Linq;
 
 namespace Bowmasters
 {
@@ -88,7 +88,7 @@ namespace Bowmasters
 			this._position = new PositionByte(xPosition, yPosition);
 			this._color = color;
 			this.playerNumber = playernumber;
-			this._hitbox = new Hitbox((byte)_playerModel[0].Length, (byte)_playerModel.Count());
+			this._hitbox = new Hitbox((byte)_playerModel[0].Length, (byte)_playerModel.Count(), xPosition, yPosition);
 		}
 
 		/// <summary>
