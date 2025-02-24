@@ -98,7 +98,7 @@ namespace Bowmasters
         {
             foreach (PositionByte position in ennemy.Hitbox.HitBoxes)
             {
-                if(ball.ActualPosition == position)
+                if(ball.ActualPosition.X == position.X && ball.ActualPosition.Y == position.Y)
                 {
                     return true;
                 }
@@ -134,10 +134,14 @@ namespace Bowmasters
 
             if (throwRight)
             {
-                return new Ball(velocity, ballAngle, (byte)(angle.Position[(int)Math.Round(ballAngle / 22.5)].X + 1), (byte)(angle.Position[(int)Math.Round(ballAngle / 22.5)].Y));
+                //return new Ball(velocity, ballAngle, (byte)(angle.Position[(int)Math.Round(ballAngle / 22.5)].X + 1), (byte)(angle.Position[(int)Math.Round(ballAngle / 22.5)].Y));
+                
+                // à décommenter si on veut tester pour toucher directement le joueur 2
+                return new Ball(32, 45, (byte)(angle.Position[(int)Math.Round(90 / 22.5)].X + 1), (byte)(angle.Position[(int)Math.Round(90 / 22.5)].Y));
+                
             }
             else
-            {
+            { 
                 return new Ball(velocity, ballAngle, (byte)(angle.Position[(int)Math.Round((ballAngle - 90) / 22.5)].X - 1), (byte)(angle.Position[(int)Math.Round((ballAngle - 90) / 22.5)].Y));
             }
 
