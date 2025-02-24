@@ -86,7 +86,6 @@ namespace Bowmasters
         /// <summary>
         /// efface les points de l'endroits où ils sont censé être.
         /// </summary>
-        /// TODO REBIEN FAIRE FRR
         internal void EraseModel()
         {
 

@@ -100,14 +100,6 @@ namespace Bowmasters
 			this._hitbox = new Hitbox((byte)_playerModel[0].Length, (byte)_playerModel.Count(), xPosition, yPosition);
 		}
 
-		/// <summary>
-		/// Constructeur par défaut avec uniquement 3 vies
-		/// </summary>
-		public Player()
-		{
-			this._life = 3;
-		}
-
 		//Méthodes du joueur ********************************************************************
 
 		/// <summary>
