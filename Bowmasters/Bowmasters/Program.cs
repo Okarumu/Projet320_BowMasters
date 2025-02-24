@@ -49,6 +49,9 @@ namespace Bowmasters
 
             game.Initialize();
             game.GameLoop();
+            game.EndGame();
+
+
             
 
         }

@@ -7,6 +7,7 @@ using System.Threading;
 ///EMTL
 ///Auteur : Maël Naudet
 ///Date : 31.01.2025
+///TODO : AJOUTER SON DE LEGO YODA QUI DECEDE AVEC LE BRUIT DE LEGO QUI SE CASSE ET LE SON DE VICTOIRE HAPPY WHEELS
 
 namespace Bowmasters
 {
@@ -18,6 +19,7 @@ namespace Bowmasters
         private List<Player> _players;
         private List<Tower> _towers;
         private const int AMOUNT_OF_DAMAGE = 1;
+        private string winner;
 
         public BowGame(List<Player> players, List<Tower> _towers)
         {
@@ -66,14 +68,6 @@ namespace Bowmasters
                     velocityBarPlayerTwo.EraseBar();
                 }
             } while (_players.All(v => v.Life != 0));
-
-            Console.Clear();
-            Console.WriteLine("FINITO");
-        }
-
-        public void EndGame()
-        {
-
         }
 
         private bool CollisionsTower(Ball ball, Tower tower)
@@ -263,5 +257,30 @@ namespace Bowmasters
                 towers[i].Display();
             }
         }
+
+        public void EndGame()
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+            if (_players[0].Life != 0)
+            {
+                winner = "Joueur 1";
+            }
+            else
+            {
+                winner = "Joueur 2";
+            }
+            Console.SetCursorPosition(63, 15);
+            Console.WriteLine($"Félicitations au {winner}");
+
+            Console.ReadLine();
+        }
+
+        /*private void ShowScores(string player, int score, int xPosition)
+        {
+            Console.SetCursorPosition(xPosition, 15);
+            Console.Write(player);
+            Console.SetCursorPosition(xPosition, 16);
+            Console.Write("Score : " + score);
+        }*/
     }
 }
