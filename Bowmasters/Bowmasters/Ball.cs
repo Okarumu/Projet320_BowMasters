@@ -13,15 +13,16 @@ namespace Bowmasters
     /// </summary>
     public class Ball
     {
-        //Déclaraton des propriétés ***************************************
-        private double _velocity;                       // vélocité de la balle
-        private double _angle;                          // angle de la balle
-        private readonly PositionByte _initialPosition; // position initiale de la balle
-        private PositionByte _actualPosition;           // position updatée de la balle
-        private ConsoleColor _color;                    // couleur de la balle
+        // Déclaration des attributs ***************************************
+        private double _velocity;                       // Vélocité de la balle
+        private double _angle;                          // Angle de la balle
+        private readonly PositionByte _initialPosition; // Position initiale de la balle (non modifiable)
+        private PositionByte _actualPosition;           // Position actuelle de la balle (modifiée en jeu)
+        private ConsoleColor _color;                    // Couleur de la balle
 
-        // getter de la position initiale de la balle
-        public PositionByte InitialPosition
+
+        // Déclaration des propriétés **************************************
+        public PositionByte InitialPosition         // Obtient la position initiale (en lecture seule)
         {
             get
             {
@@ -29,8 +30,7 @@ namespace Bowmasters
             }
         }
 
-        // getter/setter de la position updatée de la balle
-        public PositionByte ActualPosition
+        public PositionByte ActualPosition          // Obtient ou définit la position actuelle
         {
             get
             {
@@ -41,6 +41,8 @@ namespace Bowmasters
                 _actualPosition = value;
             }
         }
+
+        //////////////////////////// Déclaration et implémentation des méthodes ////////////////////////////
 
         /// <summary>
         /// Constructeur par défaut
@@ -78,7 +80,6 @@ namespace Bowmasters
         /// <summary>
         /// Affiche la balle si elle est dans la console
         /// </summary>
-        /// 
         public void DisplayBallInTime()
         {
             // met la couleur du curseur à la couleur donnée aléatoirement plus haut

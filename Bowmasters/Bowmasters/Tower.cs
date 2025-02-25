@@ -16,8 +16,8 @@ namespace Bowmasters
             get { return _hitboxTower; } 
         }
 
-        private TowerPiece[] _pieces;      //liste de toutes les pièces
-        public TowerPiece[] Pieces
+        private TowerPiece[,] _pieces;      //liste de toutes les pièces
+        public TowerPiece[,] Pieces
         {
             get { 
                 return _pieces; 
@@ -52,19 +52,19 @@ namespace Bowmasters
             _towerPosition = new PositionByte(xPosition, yPosition);
 
             //déclare la liste des pièces
-            _pieces = new TowerPiece[towerWidth * towerHeight];
+            _pieces = new TowerPiece[towerWidth, towerHeight];
 
-            /* for (byte i = 0; i < towerWidth; i++)
+             for (byte i = 0; i < towerWidth; i++)
             {
                 for (int j = 0; j < towerHeight; j++)
                 {
                     _pieces[i, j] = new TowerPiece(xPosition: (byte)(this.TowerPosition.X + i), yPosition: (byte)(this.TowerPosition.Y + j));
                 }
-            }*/
-            for(int i = 0; i < towerWidth * towerHeight; i++)
+            }
+            /*for(int i = 0; i < towerWidth * towerHeight; i++)
             {
                 _pieces[i] = new TowerPiece(xPosition: HitboxTower.HitBoxes[i].X, yPosition: HitboxTower.HitBoxes[i].Y);
-            }
+            }*/
         }
 
         //Méthodes ******************************************************************
@@ -74,18 +74,18 @@ namespace Bowmasters
         /// </summary>
         public void Display()
         {
-            /*for (int i = 0; i < HitboxTower.Length; i++)
+            for (int i = 0; i < HitboxTower.HitBoxes.GetLength(0); i++)
             {
-                for (int j = 0; j < HitboxTower.Height; j++)
+                for (int j = 0; j < HitboxTower.HitBoxes.GetLength(1); j++)
                 {
                     _pieces[i, j].DisplayPiece();
                 }
-            }*/
+            }
 
-            for(int i = 0; i < Pieces.Length; i++)
+            /*for(int i = 0; i < Pieces.Length; i++)
             {
                 _pieces[i].DisplayPiece();
-            }
+            }*/
         }
     }
 }

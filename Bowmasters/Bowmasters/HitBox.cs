@@ -13,30 +13,13 @@ namespace Bowmasters
     /// </summary>
     public class Hitbox
     {
-        // liste de positions définissant la hitbox
-        private List<PositionByte> _hitBoxes = new List<PositionByte>();
+        // Déclaration des attributs ************************************        
+        private readonly PositionByte[,] _hitBoxes;
 
-        public List<PositionByte> HitBoxes
+        public PositionByte[,] HitBoxes
         {
-            get
-            {
-                return _hitBoxes;
-            }
+            get { return _hitBoxes; }
         }
-        /* private byte _length;
-        private byte _height;
-
-        public byte Length
-        {
-            get { return _length; }
-            set { _length = value; }
-        }
-
-        public byte Height
-        {
-            get { return _height; }
-            set { _height = value; }
-        } */
 
         /// <summary>
         /// Constructeur par défaut
@@ -46,13 +29,14 @@ namespace Bowmasters
         /// <param name="xPosition">position initiale x</param>
         /// <param name="yPosition">position initiale y</param>
         public Hitbox(byte length, byte height, byte xPosition, byte yPosition)
-        {           
+        {
+            _hitBoxes = new PositionByte[length, height];
             for (int i = 0; i < length; i++)
             {
                 for(int j = 0; j < height; j++)
                 {
                     // On ajoute une position pour chaque coordonnée qui compose le rectangle de la hitbox
-                    _hitBoxes.Add(new PositionByte((byte)(xPosition + i), (byte)(yPosition + j)));
+                    _hitBoxes[i, j] = new PositionByte((byte)(xPosition + i), (byte)(yPosition + j));
                 }
             }
         }

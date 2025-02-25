@@ -13,8 +13,8 @@ namespace Bowmasters
     /// </summary>
     static class Custom
     {
-        //liste des couleurs possibles
-        static private ConsoleColor[] colors = {
+        // Déclaration des attributs *****************************************
+        static private ConsoleColor[] colors = {            // tableau de couleurs possibles
             ConsoleColor.DarkBlue,
             ConsoleColor.DarkGreen,
             ConsoleColor.DarkCyan,
@@ -25,6 +25,8 @@ namespace Bowmasters
             ConsoleColor.DarkGray,
             ConsoleColor.Blue
         };
+
+        //////////////////////////// Déclaration et implémentation des méthodes ////////////////////////////
 
         /// <summary>
         /// retourne une couleur aléatoire
