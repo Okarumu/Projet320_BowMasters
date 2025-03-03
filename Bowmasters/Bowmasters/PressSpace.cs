@@ -1,7 +1,7 @@
 ﻿///*******************************************************
-///ETML
-///Auteur : Maël Naudet
-///Date : 31.01.2025
+/// ETML
+/// Auteur : Maël Naudet
+/// Date : 31.01.2025
 ///*******************************************************
 
 using System;
@@ -10,30 +10,35 @@ using System.Runtime.InteropServices;
 namespace Bowmasters
 {
     /// <summary>
-    /// Affiche une bar de progression et quand on appuie sur espace, retourne le temps d'attente avant la pression (max 5 secondes)
+    /// Affiche une barre de progression et quand on appuie sur espace, retourne le temps d'attente avant la pression (max 5 secondes)
     /// </summary>
     internal class PressSpace
     {
-        [DllImport("user32.dll")]
-        private static extern short GetAsyncKeyState(int vKey);
-        private const int VK_SPACE = 0x20;
-        private bool isSpaceHeld = false;
-        private DateTime startTime = DateTime.Now;
-        /// <summary>
-        /// Propriétés
-        /// </summary>
-        private PositionByte position ;
+
+
+        // Déclaration des constantes **********************************************
+        private const byte X_DIFFERENCE_PROGRESSION_BAR = 4;    // ajustement de la position x de la barre
+        private const byte Y_DIFFERENCE_PROGRESSION_BAR = 26;   // ajustement de la position y de la barre
+        private const byte PROGRESSION_BAR_SIZE = 20;           // taille de la barre de progression
+        private const int VK_SPACE = 0x20;                      // clé virtuelle de la barre espace
+
+        // Déclaration des attributs ***********************************************
+        private bool isSpaceHeld = false;                       // savoir si la barre espace a déjà été enfoncée
+        private DateTime startTime = new DateTime();            // timer qui permet d'augmenter la barre de progression
+        private readonly ConsoleColor _color;                   // couleur de la barre de progression
+        private readonly float maxHoldTime;                     // temps max possible de pression
+        private float holdTime;                                 // temps de pression 
+
+
+        // Déclaration des propriétés **********************************************
+        private PositionByte position;     // Position de la barre
         public PositionByte Position
         {
             get { return position; }
             set { position = value; }
         }
 
-        private readonly ConsoleColor _color;
-
-        private  readonly float maxHoldTime;    //temps max possible de pression
-        private float holdTime;                 //temps de pression 
-
+        // Déclaration du constructeur *********************************************
         /// <summary>
         /// Constructeur qui demande une position et un temps max de pression
         /// </summary>
@@ -42,98 +47,85 @@ namespace Bowmasters
         /// <param name="maxHoldTime">temps max de pression</param>
         public PressSpace(Player player, float maxHoldTime, ConsoleColor color)
         {
-            Position = new PositionByte(player.Position.X, player.Position.Y);
+            // se positionne au bon endroit
+            Position = new PositionByte((byte)(player.Position.X - X_DIFFERENCE_PROGRESSION_BAR), (byte)(player.Position.Y - Y_DIFFERENCE_PROGRESSION_BAR));
             this.maxHoldTime = maxHoldTime;
             holdTime = 0;
             this._color = color;
         }
 
+        // Déclaration et implémentation des méthodes *******************************
         /// <summary>
-        /// Affiche la progression de la bar
+        /// Récupère l'état actuel d'une touche spécifiée du clavier
+        /// Utilise l'API Windows via P/Invoke.
+        /// </summary>
+        /// <param name="vKey">Code virtuel de la touche (VK_*) à vérifier.</param>
+        /// <returns>
+        /// Un entier court contenant l'état de la touche :
+        /// - Le bit de poids faible indique si la touche est actuellement enfoncée.
+        /// - Le bit de poids fort indique si la touche a été pressée depuis le dernier appel.
+        /// </returns>
+        [DllImport("user32.dll")]
+        private static extern short GetAsyncKeyState(int vKey);
+
+        /// <summary>
+        /// Affiche la progression de la barre
         /// </summary>
         private void DisplayBar()
         {
             Console.ForegroundColor = _color;
-            // on se positionne en fonction du temps passé
-            Console.SetCursorPosition(Position.X - 4 + (int)(holdTime / maxHoldTime * 20), Position.Y - 26);
+            // Positionnement en fonction du temps passé
+            Console.SetCursorPosition(Position.X + (int)(holdTime / maxHoldTime * PROGRESSION_BAR_SIZE), Position.Y);
             Console.Write("■");
         }
 
         /// <summary>
-        /// Efface la bar en entier
+        /// Efface la barre en entier
         /// </summary>
         public void EraseBar()
         {
-            for(int i = 0; i <  21; i++) 
+            // parcourt toute la barre pour l'effacer
+            for (int i = 0; i <= PROGRESSION_BAR_SIZE; i++)
             {
-                Console.SetCursorPosition(Position.X - 4 + i, Position.Y - 26);
+                Console.SetCursorPosition(Position.X + i, Position.Y);
                 Console.Write(" ");
-            }           
+            }
         }
 
         /// <summary>
-        /// Démarre le processus de chargement de la vitesse de la balle,
-        /// Affiche une barre de progression qui augmente en fonction du temps d'attente,
-        /// jusqu'à ce que l'utilisateur appuie sur espace.
+        /// Commence une boucle tant que l'utilisateur n'a pas appuyé une fois sur espace et qu'il ne relâche pas une fois appuyé
+        /// Augmente un timer et affiche la progression de la barre en fonction de ce timer
         /// </summary>
         /// <returns> le temps tenu </returns>
         public float Start()
         {
-            while (true)
+            // boucle
+            do
             {
-                if ((GetAsyncKeyState(VK_SPACE) & 0x8000) != 0)
+                // si l'utilisateur appuie sur espace
+                if (((GetAsyncKeyState(VK_SPACE) & 0x8000) != 0) && !isSpaceHeld)
                 {
-                    if (!isSpaceHeld)
-                    {
-                        startTime = DateTime.Now;
-                        isSpaceHeld = true;
-                    }
+                    // temps de départ
+                    startTime = DateTime.Now;
+                    // indique qu'il appuie
+                    isSpaceHeld = true;
+                }
+                // la touche est appuyée
+                if (isSpaceHeld)
+                {
+                    // on ajoute un timer en fonction de quand il a appuyé la première fois
                     holdTime = (float)(DateTime.Now - startTime).TotalSeconds;
-                    holdTime = Math.Min(holdTime, maxHoldTime); // Limite à maxHoldTime
+                    // Limite le temps à maxHoldTime
+                    holdTime = Math.Min(holdTime, maxHoldTime); 
+                }     
 
-                    DisplayBar();
+                // Affiche la barre
+                DisplayBar();
 
-                    //Thread.Sleep(50);
-                }
-                else
-                {
-                    if (isSpaceHeld)
-                    {
-                        return (holdTime / maxHoldTime) * 50;
-                    }
-                }
-            }
-            
-            /*
-            // temps au début
-            DateTime startTime = DateTime.Now;
-            // pour savoir quand l'utilisateur appuie
-            bool notPressed = false;
+            } while (((GetAsyncKeyState(VK_SPACE) & 0x8000) != 0) || !isSpaceHeld); // tant que l'utilisateur n'a pas appuyé une fois sur espace et qu'il ne relâche pas une fois appuyé
 
-            // tant que l'utilisateur n'appuie pas
-            while(!notPressed)
-            {
-                // s'il appuie sur espace
-                if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Spacebar)
-                {
-                    //on sort
-                    notPressed = true;
-                }
-                // sinon
-                else
-                {
-                    // Calcul du temps écoulé depuis le début
-                    holdTime = (float)(DateTime.Now - startTime).TotalSeconds;
-                    holdTime = Math.Min(holdTime, maxHoldTime); // Limite à maxHoldTime
-
-                    // Affichage de la barre de progression
-                    DisplayBar();                  
-                }
-                // petit temps d'attente
-                Thread.Sleep(50);
-            }
-            // retourne le temps 
-            return (holdTime / maxHoldTime) * 50;*/
+            // retourne un chiffre entre 0 et 50 en fonction du pourcentage de temps appuyé
+            return (holdTime / maxHoldTime) * 50;
         }
     }
 }
