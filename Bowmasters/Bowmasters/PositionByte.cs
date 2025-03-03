@@ -11,16 +11,13 @@ namespace Bowmasters
     /// </summary>
     public class PositionByte
     {
-        /// <summary>
-        /// Attributs
-        /// </summary>
+
+        // Déclaration des attributs ******************************************
         private byte _x; //position x
         private byte _y; //position y
         
-        /// <summary>
-        /// Position X
-        /// </summary>
-        public byte X
+        // Déclaration des propriétés *****************************************
+        public byte X           // position x
         {
             get
             {
@@ -32,10 +29,7 @@ namespace Bowmasters
             }
         }
 
-        /// <summary>
-        /// Position Y
-        /// </summary>
-        public byte Y
+        public byte Y           // position y
         {
             get
             {
@@ -48,7 +42,7 @@ namespace Bowmasters
         }
 
         /// <summary>
-        /// Seul constructeur à utiliser permettant de choisir une position x et y
+        /// Constructeur à utiliser permettant de choisir une position x et y
         /// </summary>
         /// <param name="xPosition">position x</param>
         /// <param name="yPosition">position y</param>
