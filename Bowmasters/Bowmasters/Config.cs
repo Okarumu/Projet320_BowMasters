@@ -21,12 +21,13 @@ namespace Bowmasters
         //////////////////////////// Déclaration et implémentation des méthodes ////////////////////////////
 
         /// <summary>
-        /// Met la fenêtre de la bonne taille et fais en sorte de ne pas pouvoir scroll
+        /// Met la fenêtre de la bonne taille, fais en sorte de ne pas pouvoir scroll et rend le curseur invisible
         /// </summary>
-        static public void SetWindowSize()
+        static public void SetGameOptions()
         {
             Console.SetWindowSize(SCREEN_WIDTH, SCREEN_HEIGHT);
             Console.SetBufferSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+            Console.CursorVisible = false;
         }
     }
 }

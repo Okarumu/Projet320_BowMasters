@@ -15,27 +15,45 @@ namespace Bowmasters
     /// </summary>
     internal class ShootAngle
     {
-        /// <summary>
-        /// propreties
-        /// </summary>
-        [DllImport("user32.dll")]
-        private static extern short GetAsyncKeyState(int vKey);
+        // Déclaration et initialisation des constantes *********************************************************
         private const int VK_SPACE = 0x20;
-        private char _model = '.';           // modèle graphique du point
-        private readonly Player _player;
+        private const char _MODEL = '.';           // modèle graphique du point
+        // Déclaration et initialisation des attributs **********************************************************
         private readonly PositionByte[] _position;    // positions possibles des points
         private double _angle;           // angle à retourner
         private bool _isRight;
         private byte rightPosition = 0;
         private byte previousPosition = 0;
         private bool _goingUp;
+        // Déclaration des propriété ****************************************************************************
+        public PositionByte[] Position 
+        { 
+            get 
+            { 
+                return _position; 
+            }
+        }
+        // Déclaration des constructeurs ************************************************************************
+        // Déclaration et implémentation des méthodes ***********************************************************
+        [DllImport("user32.dll")]
+        private static extern short GetAsyncKeyState(int vKey);
+
+        
+        
+
+        
+        
 
 
-        public PositionByte[] Position { get { return _position; } }
+        
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="isRight"></param>
         public ShootAngle(Player player, bool isRight)
         {
-            _player = player;
             _isRight = isRight;
             _goingUp = true;
             if (isRight)
@@ -79,7 +97,7 @@ namespace Bowmasters
             }
 
             // affiche le point
-            Console.Write(_model);
+            Console.Write(_MODEL);
 
         }
 
@@ -225,7 +243,6 @@ namespace Bowmasters
                         }*/
                         if (_angle % 22.5 == 0)
                         {
-                            // TODO : FAIRE EN SORTE QUE CA EFFACE BIEN LE BON TRUC
                             EraseModel();
                             // on affiche le modèle si l'angle le permet
                             DisplayModel();

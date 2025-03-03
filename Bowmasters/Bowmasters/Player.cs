@@ -15,12 +15,12 @@ namespace Bowmasters
     public class Player
     {
 		// Déclaration des constantes *********************************************************
-		private const byte X_DIFFERENCE_INFORMATION_TAB = 5;
-		private const byte Y_DIFFERENCE_INFORMATION_TAB = 30;
-		private const byte X_DIFFERENCE_LIFE_TAB = 12;
-		private const byte Y_DIFFERENCE_LIFE_TAB = 29;
-		private const byte X_DIFFERENCE_SCORE_TAB = 12;
-		private const byte Y_DIFFERENCE_SCORE_TAB = 28;
+		private const byte X_DIFFERENCE_INFORMATION_TAB = 5;	// ajustement x du tableau d'informations
+		private const byte Y_DIFFERENCE_INFORMATION_TAB = 30;   // ajustement y du tableau d'informations
+        private const byte X_DIFFERENCE_LIFE_TAB = 12;          // ajustement x du nombre de vie
+        private const byte Y_DIFFERENCE_LIFE_TAB = 29;          // ajustement y du nombre de vie
+        private const byte X_DIFFERENCE_SCORE_TAB = 12;         // ajustement x du score
+        private const byte Y_DIFFERENCE_SCORE_TAB = 28;			// ajustement y du score
 
         // Déclaration des attributs **********************************************************
         private readonly byte _playerNumber;        // numéro de joueur en lecture seule
@@ -109,7 +109,7 @@ namespace Bowmasters
             };
 		}
 
-		//Méthodes du joueur ********************************************************************
+		// Méthodes du joueur ********************************************************************
 
 		/// <summary>
 		/// affiche le joueur à un endroit dans la carte
