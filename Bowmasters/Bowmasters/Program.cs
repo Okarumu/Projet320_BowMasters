@@ -16,40 +16,52 @@ namespace Bowmasters
     {
         static void Main()
         {
-            //Déclaration des constantes *****************************************************************************
-            
+            // Déclaration et initialisation des constantes *******************************************************************
+            const byte AMOUNT_OF_LIFE_PER_PLAYER = 3;                   // nombre de points de vie par joueur
+            const byte PLAYER_NUMBER_FOR_PLAYER_ONE = 1;                // nombre du joueur 1
+            const byte PLAYER_NUMBER_FOR_PLAYER_TWO = 2;                // nombre du joueur 2
+            const byte X_POSITION_PLAYER_1 = 20;                        // position x du joueur 1
+            const byte X_POSITION_PLAYER_2 = 127;                       // position x du joueur 2
+            const byte Y_POSITION_PLAYER_1_AND_2 = 37;                  // position y des joueurs 1 et 2
+            const ConsoleColor COLOR_PLAYER_1 = ConsoleColor.Green;     // couleur du joueur 1
+            const ConsoleColor COLOR_PLAYER_2 = ConsoleColor.Red;       // couleur du joueur 2
+            const byte TOWER_HEIGHT = 6;                                // hauteur des tours
+            const byte TOWER_WITDH = 3;                                 // largeur des tours
+            const byte X_POSITION_TOWER_ONE = 40;                       // position x de la tour du joueur 1
+            const byte X_POSITION_TOWER_TWO = 107;                      // position x de la tour du joueur 2
+            const byte Y_POSITION_TOWER_ONE_AND_TWO = 34;               // position y des tours du joueur 1 et 2
 
-            //Déclaration des variables ******************************************************************************
 
-            //Changement de taille de la fenêtre de jeu
-            Config.SetWindowSize();
+            // Déclaration et initialisation des variables ********************************************************************
+            BowGame game;                                       // variable pour lancer le jeu
+            List<Player> players = new List<Player>();          // liste des joueurs
+            Player player1 = new Player(life: AMOUNT_OF_LIFE_PER_PLAYER, xPosition: X_POSITION_PLAYER_1, yPosition: Y_POSITION_PLAYER_1_AND_2, color: COLOR_PLAYER_1, PLAYER_NUMBER_FOR_PLAYER_ONE);    // joueur 1
+            Player player2 = new Player(life: AMOUNT_OF_LIFE_PER_PLAYER, xPosition: X_POSITION_PLAYER_2, yPosition: Y_POSITION_PLAYER_1_AND_2, color: COLOR_PLAYER_2, PLAYER_NUMBER_FOR_PLAYER_TWO);    // joueur 2
+            List<Tower> towers = new List<Tower>();             // liste des tours
+            Tower tower1 = new Tower(towerHeight: TOWER_HEIGHT, towerWidth: TOWER_WITDH, xPosition: X_POSITION_TOWER_ONE, yPosition: Y_POSITION_TOWER_ONE_AND_TWO); // tour du joueur 1
+            Tower tower2 = new Tower(towerHeight: TOWER_HEIGHT, towerWidth: TOWER_WITDH, xPosition: X_POSITION_TOWER_TWO, yPosition: Y_POSITION_TOWER_ONE_AND_TWO); // tour du joueur 2
 
-            Console.CursorVisible = false;
 
-            List<Player> players = new List<Player>();
-
-            Player player1 = new Player(life: 3, xPosition: 20, yPosition: 37, color: ConsoleColor.Green, 1);
-
-            Player player2 = new Player(life: 3, xPosition: 127, yPosition: 37, color: ConsoleColor.Red, 2);
-
-            players.Add(player1);
+            // Programme principal ***************************************************************************
+            players.Add(player1);       // ajoute les joueurs dans la liste
             players.Add(player2);
-
-            List<Tower> towers = new List<Tower>();
-            Tower tower1 = new Tower(towerHeight: 6, towerWidth: 3, xPosition: 40, yPosition: 34);
-            Tower tower2 = new Tower(towerHeight: 6, towerWidth: 3, xPosition: 107, yPosition: 34);
-            towers.Add(tower1);
+            towers.Add(tower1);         // ajoute les tours dans la liste
             towers.Add(tower2);
 
-            BowGame game = new BowGame(players, towers);
+            // Initialise la variable de jeu
+            game = new BowGame(players, towers);
 
-            game.Initialize();
-            game.GameLoop();
-            game.EndGame();
-
-
+            // Charge les options du jeu (changement de fenêtre, enlève le curseur...)
+            Config.SetGameOptions();        
             
+            // Commence le jeu
+            game.Initialize();
 
+            // Boucle de jeu
+            game.GameLoop();
+
+            // Fin du jeu
+            game.EndGame();
         }
     }
 }
