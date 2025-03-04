@@ -4,8 +4,6 @@
 /// Date : 03.02.2025
 ///*******************************************************
 
-using System.Collections.Generic;
-
 namespace Bowmasters
 {
     /// <summary>
@@ -13,16 +11,18 @@ namespace Bowmasters
     /// </summary>
     public class Hitbox
     {
-        // Déclaration des attributs ************************************        
+        // Déclaration des attributs **************************************************      
         private readonly PositionByte[,] _hitBoxes;
 
+        // Déclaration des propriétés *************************************************
         public PositionByte[,] HitBoxes
         {
             get { return _hitBoxes; }
         }
 
+        // Déclaration du constructeur *************************************************
         /// <summary>
-        /// Constructeur par défaut
+        /// Constructeur qui crée la liste de position en fonction du rectangle donné
         /// </summary>
         /// <param name="length">longueur de la hitbox</param>
         /// <param name="height">hauteur de la hitbox</param>

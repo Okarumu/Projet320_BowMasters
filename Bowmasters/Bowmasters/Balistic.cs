@@ -13,12 +13,12 @@ namespace Bowmasters
     /// </summary>
     internal static class Balistic
     {
-        // Déclaration des attributs **************************************************
-        private const double GRAVITATIONAL_CONSTANT = 9.81; //constante gravitationnelle
+        // Déclaration et initialisation des attributs ********************************
+        /// constante gravitationnelle
+        private const double _GRAVITATIONAL_CONSTANT = 9.81; 
 
 
-        //////////////////////////// Déclaration et implémentation des méthodes ////////////////////////////
-
+        // Déclaration et implémentation des méthodes *********************************
         /// <summary>
         /// calcule la coordonnée y d'un objet lancé grâce à la balistique
         /// </summary>
@@ -29,7 +29,7 @@ namespace Bowmasters
         /// <returns>une coordonnée y</returns>
         public static double MovementOnYAxis(double initialY, double time, double velocity, double angle)
         {
-            return initialY - ((velocity * Math.Sin(DegToRad(angle)) * time) - ((GRAVITATIONAL_CONSTANT * Math.Pow(time, 2)) / 2));
+            return initialY - ((velocity * Math.Sin(DegToRad(angle)) * time) - ((_GRAVITATIONAL_CONSTANT * Math.Pow(time, 2)) / 2));
         }
 
         /// <summary>

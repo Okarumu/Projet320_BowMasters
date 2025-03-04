@@ -35,18 +35,18 @@ namespace Bowmasters
             // Déclaration et initialisation des variables ********************************************************************
             BowGame game;                                       // variable pour lancer le jeu
             List<Player> players = new List<Player>();          // liste des joueurs
-            Player player1 = new Player(life: AMOUNT_OF_LIFE_PER_PLAYER, xPosition: X_POSITION_PLAYER_1, yPosition: Y_POSITION_PLAYER_1_AND_2, color: COLOR_PLAYER_1, PLAYER_NUMBER_FOR_PLAYER_ONE);    // joueur 1
-            Player player2 = new Player(life: AMOUNT_OF_LIFE_PER_PLAYER, xPosition: X_POSITION_PLAYER_2, yPosition: Y_POSITION_PLAYER_1_AND_2, color: COLOR_PLAYER_2, PLAYER_NUMBER_FOR_PLAYER_TWO);    // joueur 2
+            Player player1 = new Player(AMOUNT_OF_LIFE_PER_PLAYER, X_POSITION_PLAYER_1, Y_POSITION_PLAYER_1_AND_2, COLOR_PLAYER_1, PLAYER_NUMBER_FOR_PLAYER_ONE);    // joueur 1
+            Player player2 = new Player(AMOUNT_OF_LIFE_PER_PLAYER, X_POSITION_PLAYER_2, Y_POSITION_PLAYER_1_AND_2, COLOR_PLAYER_2, PLAYER_NUMBER_FOR_PLAYER_TWO);    // joueur 2
             List<Tower> towers = new List<Tower>();             // liste des tours
-            Tower tower1 = new Tower(towerHeight: TOWER_HEIGHT, towerWidth: TOWER_WITDH, xPosition: X_POSITION_TOWER_ONE, yPosition: Y_POSITION_TOWER_ONE_AND_TWO); // tour du joueur 1
-            Tower tower2 = new Tower(towerHeight: TOWER_HEIGHT, towerWidth: TOWER_WITDH, xPosition: X_POSITION_TOWER_TWO, yPosition: Y_POSITION_TOWER_ONE_AND_TWO); // tour du joueur 2
+            Tower tower1 = new Tower(TOWER_HEIGHT, TOWER_WITDH, X_POSITION_TOWER_ONE, Y_POSITION_TOWER_ONE_AND_TWO); // tour du joueur 1
+            Tower tower2 = new Tower(TOWER_HEIGHT, TOWER_WITDH, X_POSITION_TOWER_TWO, Y_POSITION_TOWER_ONE_AND_TWO); // tour du joueur 2
 
 
             // Programme principal ***************************************************************************
-            players.Add(player1);       // ajoute les joueurs dans la liste
-            players.Add(player2);
-            towers.Add(tower1);         // ajoute les tours dans la liste
-            towers.Add(tower2);
+            players.Add(item: player1);       // ajoute les joueurs dans la liste
+            players.Add(item: player2);
+            towers.Add(item: tower1);         // ajoute les tours dans la liste
+            towers.Add(item: tower2);
 
             // Initialise la variable de jeu
             game = new BowGame(players, towers);

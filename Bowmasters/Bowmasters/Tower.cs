@@ -6,30 +6,23 @@
 
 namespace Bowmasters
 {
+    /// <summary>
+    /// Tours des joueurs composées de pièces de tour
+    /// </summary>
     public class Tower
     {
-        //Propriétés *************************************************************
-        private readonly Hitbox _hitboxTower;
+        // Déclaration des attributs *********************************************
+        private readonly Hitbox _hitboxTower;           // hitbox de la tour
+        private readonly PositionByte _towerPosition;   // position de la tour
+        private TowerPiece[,] _pieces;                  // tableau de toutes les pièces
 
-        public Hitbox HitboxTower 
-        { 
-            get { return _hitboxTower; } 
-        }
-
-        private TowerPiece[,] _pieces;      //liste de toutes les pièces
-        public TowerPiece[,] Pieces
+        // Déclaration des propriétés ********************************************
+        public Hitbox HitboxTower                       // hitbox de la tour
         {
-            get { 
-                return _pieces; 
-            }
-            set {
-                _pieces = value; 
-            }
+            get { return _hitboxTower; }
         }
 
-        private readonly PositionByte _towerPosition;
-
-        public PositionByte TowerPosition
+        public PositionByte TowerPosition               // position de la tour
         {
             get
             {
@@ -37,8 +30,19 @@ namespace Bowmasters
             }
         }
 
-        //Constructeur de Tower ****************************************************
+        public TowerPiece[,] Pieces                     // tableau de toutes les pièces
+        {
+            get
+            {
+                return _pieces;
+            }
+            set
+            {
+                _pieces = value;
+            }
+        }
 
+        // Déclaration du constructeur *******************************************
         /// <summary>
         /// Créer la tour et le tableau de pièces qu'on va utiliser
         /// </summary>
@@ -48,44 +52,38 @@ namespace Bowmasters
         /// <param name="yPosition">position y</param>
         public Tower(byte towerHeight, byte towerWidth, byte xPosition, byte yPosition)
         {
+            // initialise la hitbox de la tour ainsi que sa position
             _hitboxTower = new Hitbox(towerWidth, towerHeight, xPosition, yPosition);
             _towerPosition = new PositionByte(xPosition, yPosition);
 
-            //déclare la liste des pièces
+            // initialise le tableau des pièces
             _pieces = new TowerPiece[towerWidth, towerHeight];
 
-             for (byte i = 0; i < towerWidth; i++)
+            // parcourt le tableau des pièces
+            for (byte i = 0; i < towerWidth; i++)
             {
                 for (int j = 0; j < towerHeight; j++)
                 {
+                    // crée des pièces pour chaque case dans le tableau
                     _pieces[i, j] = new TowerPiece(xPosition: (byte)(this.TowerPosition.X + i), yPosition: (byte)(this.TowerPosition.Y + j));
                 }
             }
-            /*for(int i = 0; i < towerWidth * towerHeight; i++)
-            {
-                _pieces[i] = new TowerPiece(xPosition: HitboxTower.HitBoxes[i].X, yPosition: HitboxTower.HitBoxes[i].Y);
-            }*/
         }
-
-        //Méthodes ******************************************************************
-
+        // Déclaration et implémentation des méthodes ****************************
         /// <summary>
-        /// Affiche la tour
+        /// Affiche toutes les pièces de la tour
         /// </summary>
         public void Display()
         {
+            // parcourt la liste de pièces
             for (int i = 0; i < HitboxTower.HitBoxes.GetLength(0); i++)
             {
                 for (int j = 0; j < HitboxTower.HitBoxes.GetLength(1); j++)
                 {
+                    // les affiche
                     _pieces[i, j].DisplayPiece();
                 }
             }
-
-            /*for(int i = 0; i < Pieces.Length; i++)
-            {
-                _pieces[i].DisplayPiece();
-            }*/
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Bowmasters
     /// </summary>
     public class PositionDouble
     {
-        // Déclaration des attributs ********************************************
+        // Déclaration des attributs **************************************************
         private double _x; // position x
         private double _y; // position y
 

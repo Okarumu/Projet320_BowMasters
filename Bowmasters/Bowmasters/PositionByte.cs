@@ -12,7 +12,7 @@ namespace Bowmasters
     public class PositionByte
     {
 
-        // Déclaration des attributs ******************************************
+        // Déclaration des attributs **************************************************
         private byte _x; // position x dans la console
         private byte _y; // position y dans la console
         

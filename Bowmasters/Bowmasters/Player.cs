@@ -14,30 +14,30 @@ namespace Bowmasters
 	/// </summary>
     public class Player
     {
-		// Déclaration des constantes *********************************************************
-		private const byte X_DIFFERENCE_INFORMATION_TAB = 5;	// ajustement x du tableau d'informations
-		private const byte Y_DIFFERENCE_INFORMATION_TAB = 30;   // ajustement y du tableau d'informations
-        private const byte X_DIFFERENCE_LIFE_TAB = 12;          // ajustement x du nombre de vie
-        private const byte Y_DIFFERENCE_LIFE_TAB = 29;          // ajustement y du nombre de vie
-        private const byte X_DIFFERENCE_SCORE_TAB = 12;         // ajustement x du score
-        private const byte Y_DIFFERENCE_SCORE_TAB = 28;			// ajustement y du score
-
-        // Déclaration des attributs **********************************************************
-        private readonly byte _playerNumber;        // numéro de joueur en lecture seule
-        private readonly PositionByte _position;    // position du joueur en lecture seule
-        private readonly Hitbox _hitbox;			// hitbox du joueur	en lecture seule
-        private readonly ConsoleColor _color;       // couleur du joueur en lecture seule
-        private readonly string[] infos;			// affiche les informations des joueurs
-        private byte _life;                         // vie du joueur
-        private int _score;                         // score du joueur
-        private string[] _playerModel =				// modèle du joueur
+		// Déclaration et initialisation des constantes *******************************
+		private const byte _X_DIFFERENCE_INFORMATION_TAB = 5;	// ajustement x du tableau d'informations
+		private const byte _Y_DIFFERENCE_INFORMATION_TAB = 30;  // ajustement y du tableau d'informations
+        private const byte _X_DIFFERENCE_LIFE_TAB = 12;         // ajustement x du nombre de vie
+        private const byte _Y_DIFFERENCE_LIFE_TAB = 29;         // ajustement y du nombre de vie
+        private const byte _X_DIFFERENCE_SCORE_TAB = 12;        // ajustement x du score
+        private const byte _Y_DIFFERENCE_SCORE_TAB = 28;        // ajustement y du score
+        private string[] _PLAYER_MODEL =						// modèle du joueur
 		{
             @"  o  ",
             @" /░\ ",
             @" / \ ",
         };
 
-        // Déclaration des propriétés *********************************************************
+        // Déclaration des attributs **************************************************
+        private readonly byte _playerNumber;        // numéro de joueur en lecture seule
+        private readonly PositionByte _position;    // position du joueur en lecture seule
+        private readonly Hitbox _hitbox;			// hitbox du joueur	en lecture seule
+        private readonly ConsoleColor _color;       // couleur du joueur en lecture seule
+        private readonly string[] _infos;			// affiche les informations des joueurs
+        private byte _life;                         // vie du joueur
+        private int _score;                         // score du joueur
+
+        // Déclaration des propriétés **************************************************
         public PositionByte Position		// Obtient la position du joueur
 		{
 			get
@@ -83,8 +83,7 @@ namespace Bowmasters
 		}
 
 
-        //Constructeurs du joueur **************************************************************
-
+        // Déclaration du constructeur ***********************************************************
         /// <summary>
         /// Constructeur normal avec un nombre de vie personnalisé
         /// </summary>
@@ -97,10 +96,10 @@ namespace Bowmasters
 			this._position = new PositionByte(xPosition, yPosition);
 			this._color = color;
 			this._playerNumber = playernumber;
-			this._hitbox = new Hitbox((byte)_playerModel[0].Length, (byte)_playerModel.Count(), xPosition, yPosition);
+			this._hitbox = new Hitbox((byte)_PLAYER_MODEL[0].Length, (byte)_PLAYER_MODEL.Count(), xPosition, yPosition);
 
 			// initialise les informations du joueur + la barre de progression
-			infos = new string[]{
+			_infos = new string[]{
                 "╔═════════════════════╗",
 				$"║  Joueur {_playerNumber}           ║",
 				"║  Score :            ║",
@@ -109,8 +108,7 @@ namespace Bowmasters
             };
 		}
 
-		// Méthodes du joueur ********************************************************************
-
+		// Déclaration et implémentation des méthodes du joueur ***********************************
 		/// <summary>
 		/// affiche le joueur à un endroit dans la carte
 		/// </summary>
@@ -119,17 +117,17 @@ namespace Bowmasters
 			Console.ForegroundColor = this._color;
 
 			//boucle pour parcourir les strings
-			for(byte i = 0; i < _playerModel.Length; i++)
+			for(byte i = 0; i < _PLAYER_MODEL.Length; i++)
 			{
 				//endroit ou le string doit etre placé
 				Console.SetCursorPosition(Position.X, Position.Y);
-				Console.Write(_playerModel[i]);
+				Console.Write(_PLAYER_MODEL[i]);
 				//on descend de 1
 				Position.Y++;
 			}
 
 			//on remet la position Y du joueur à celle de base
-			Position.Y = Convert.ToByte(Position.Y - _playerModel.Length);
+			Position.Y = Convert.ToByte(Position.Y - _PLAYER_MODEL.Length);
 
 			Console.ForegroundColor = ConsoleColor.White;
 		}
@@ -154,10 +152,10 @@ namespace Bowmasters
 			Console.ForegroundColor = this.Color;
 
 			// Tableau des informations, se positionne juste au dessus du joueur
-			for(int i = 0; i < infos.Length; i++)
+			for(int i = 0; i < _infos.Length; i++)
 			{
-				Console.SetCursorPosition(Position.X - X_DIFFERENCE_INFORMATION_TAB, Position.Y - Y_DIFFERENCE_INFORMATION_TAB + i);
-				Console.Write(infos[i]);				
+				Console.SetCursorPosition(Position.X - _X_DIFFERENCE_INFORMATION_TAB, Position.Y - _Y_DIFFERENCE_INFORMATION_TAB + i);
+				Console.Write(_infos[i]);				
 			}
 
 			// Affiche les informations nécessaires
@@ -173,7 +171,7 @@ namespace Bowmasters
 		/// </summary>
 		private void DisplayLife()
 		{
-			Console.SetCursorPosition(Position.X + X_DIFFERENCE_LIFE_TAB, Position.Y - Y_DIFFERENCE_LIFE_TAB);
+			Console.SetCursorPosition(Position.X + _X_DIFFERENCE_LIFE_TAB, Position.Y - _Y_DIFFERENCE_LIFE_TAB);
             for(byte i = 0; i < Life; i++)
 			{
                 Console.Write("♥");
@@ -185,7 +183,7 @@ namespace Bowmasters
 		/// </summary>
 		private void DisplayScore()
 		{
-            Console.SetCursorPosition(Position.X + X_DIFFERENCE_SCORE_TAB, Position.Y - Y_DIFFERENCE_SCORE_TAB);
+            Console.SetCursorPosition(Position.X + _X_DIFFERENCE_SCORE_TAB, Position.Y - _Y_DIFFERENCE_SCORE_TAB);
 			Console.Write(Score);
         }
 
@@ -194,9 +192,9 @@ namespace Bowmasters
 		/// </summary>
 		private void EraseInfo()
 		{
-			for(int i = 0; i < infos.Length;i++)
+			for(int i = 0; i < _infos.Length;i++)
 			{
-				Console.SetCursorPosition(Position.X - X_DIFFERENCE_INFORMATION_TAB, Position.Y - Y_DIFFERENCE_INFORMATION_TAB + i);
+				Console.SetCursorPosition(Position.X - _X_DIFFERENCE_INFORMATION_TAB, Position.Y - _Y_DIFFERENCE_INFORMATION_TAB + i);
 				Console.Write("                       ");
 			}
         }

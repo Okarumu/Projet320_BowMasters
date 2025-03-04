@@ -16,39 +16,33 @@ namespace Bowmasters
     internal class ShootAngle
     {
         // Déclaration et initialisation des constantes *********************************************************
-        private const int VK_SPACE = 0x20;
-        private const char _MODEL = '.';           // modèle graphique du point
-        // Déclaration et initialisation des attributs **********************************************************
-        private readonly PositionByte[] _position;    // positions possibles des points
-        private double _angle;           // angle à retourner
-        private bool _isRight;
-        private byte rightPosition = 0;
-        private byte previousPosition = 0;
-        private bool _goingUp;
+        private const int _VK_SPACE = 0x20;             // clé virtuelle de la barre espace
+        private const char _MODEL = '.';                // modèle graphique du point
+        private const double _ANGLE_DIFFERENCE = 0.5;   // différence d'angle à chaque itération de la boucle
+        private const double _ANGLE_DIVIDER = 22.5;     // angle à diviser (le point va être affiché en fonction de si l'angle est un multiple de ce nombre)
+
+        // Déclaration des attributs ****************************************************************************
+        private readonly PositionByte[] _position;      // positions possibles des points
+        private readonly byte _minimum_angle;           // angle minimum quand on tire à droite
+        private readonly byte _maximum_angle;           // angle maximum quand on tire à droite
+        private double _angle;                          // angle à retourner
+        private bool _isRight;                          // savoir si on tire à droite ou à gauche
+        private byte _rightPosition;                    // position actuelle du point
+        private byte _previousPosition;                 // position précédente du point
+        private bool _goingUp;                          // savoir dans quelle direction va les points (de haut en bas ou de bas en haut)
+
         // Déclaration des propriété ****************************************************************************
-        public PositionByte[] Position 
-        { 
-            get 
-            { 
-                return _position; 
+        public PositionByte[] Position                  // positions possible des points
+        {
+            get
+            {
+                return _position;
             }
         }
-        // Déclaration des constructeurs ************************************************************************
-        // Déclaration et implémentation des méthodes ***********************************************************
-        [DllImport("user32.dll")]
-        private static extern short GetAsyncKeyState(int vKey);
 
-        
-        
-
-        
-        
-
-
-        
-
+        // Déclaration du constructeur **************************************************************************
         /// <summary>
-        /// 
+        /// Constructeur qui initialise certaines variables et qui construit les différents points possibles
         /// </summary>
         /// <param name="player"></param>
         /// <param name="isRight"></param>
@@ -56,6 +50,8 @@ namespace Bowmasters
         {
             _isRight = isRight;
             _goingUp = true;
+            _rightPosition = 0;
+            _previousPosition = 0;
             if (isRight)
             {
                 // création des positions des points
@@ -66,6 +62,9 @@ namespace Bowmasters
                 new PositionByte(Convert.ToByte(player.Position.X + 3), Convert.ToByte(player.Position.Y - 2)),
                 new PositionByte(Convert.ToByte(player.Position.X + 1), Convert.ToByte(player.Position.Y - 2))
                 };
+                // on met les angles pour tirer à droite
+                _minimum_angle = 0;
+                _maximum_angle = 90;
             }
             else
             {
@@ -77,28 +76,48 @@ namespace Bowmasters
                 new PositionByte(Convert.ToByte(player.Position.X - 2), Convert.ToByte(player.Position.Y - 1)),
                 new PositionByte(Convert.ToByte(player.Position.X - 2), Convert.ToByte(player.Position.Y))
                 };
+                // on met les angles pour tirer à gauche
+                _minimum_angle = 90;
+                _maximum_angle = 180;
             }
         }
+        // Déclaration et implémentation des méthodes ***********************************************************
+        /// <summary>
+        /// Récupère l'état actuel d'une touche spécifiée du clavier
+        /// Utilise l'API Windows via P/Invoke.
+        /// </summary>
+        /// <param name="vKey">Code virtuel de la touche (VK_*) à vérifier.</param>
+        /// <returns>
+        /// Un entier court contenant l'état de la touche :
+        /// - Le bit de poids faible indique si la touche est actuellement enfoncée.
+        /// - Le bit de poids fort indique si la touche a été pressée depuis le dernier appel.
+        /// </returns>
+        [DllImport("user32.dll")]
+        private static extern short GetAsyncKeyState(int vKey);
 
         /// <summary>
         /// Displays the points
         /// </summary>
         private void DisplayModel()
         {
-            Console.SetCursorPosition(_position[rightPosition].X, _position[rightPosition].Y);
-            previousPosition = rightPosition;
+            // se positionner au bon endroit en fonction de la position actuelle
+            Console.SetCursorPosition(_position[_rightPosition].X, _position[_rightPosition].Y);
+            // on donne la position précédente
+            _previousPosition = _rightPosition;
+            // on monte
             if (_goingUp)
             {
-                rightPosition++;
+                // on augmente la position
+                _rightPosition++;
             }
+            // on descend
             else
             {
-                rightPosition--;
+                // on diminue la position
+                _rightPosition--;
             }
-
             // affiche le point
             Console.Write(_MODEL);
-
         }
 
         /// <summary>
@@ -106,9 +125,9 @@ namespace Bowmasters
         /// </summary>
         internal void EraseModel()
         {
-
-            Console.SetCursorPosition(_position[previousPosition].X, _position[previousPosition].Y);
-            // on écrit un ensemble vide
+            // on se met sur la position précédente
+            Console.SetCursorPosition(_position[_previousPosition].X, _position[_previousPosition].Y);
+            // on écrit du vide
             Console.Write(" ");
 
         }
@@ -122,133 +141,55 @@ namespace Bowmasters
         /// <returns>retourne l'angle en double</returns>
         public double UpdateBallAngle()
         {
+            // on se met en blanc
             Console.ForegroundColor = ConsoleColor.White;
-            // en fonction de si on tire à droite ou non
-            // on tire à droite
-            if (_isRight)
+
+            // boucle jusqu'à ce que l'utilisateur appuie sur espace
+            while (true)
             {
-
-                // boucle
-                while (true)
+                // comme on commence, ça veut dire que les points montent
+                _goingUp = true;
+                // de l'angle min à l'angle max
+                for (_angle = _minimum_angle; _angle < _maximum_angle; _angle += _ANGLE_DIFFERENCE)
                 {
-                    _goingUp = true;
-                    // de 0 à 90 degré
-                    for (_angle = 0; _angle < 90; _angle += 0.5)
+                    // si l'utilisateur appuie sur espace
+                    if ((GetAsyncKeyState(_VK_SPACE) & 0x8000) != 0)
                     {
-
-                        if ((GetAsyncKeyState(VK_SPACE) & 0x8000) != 0)
-                        {
-                            return _angle;
-                        }
-                        
-                        /*// si on appuie sur la touche espace
-                        if (Console.KeyAvailable)
-                        {
-                            var key = Console.ReadKey(true);
-                            if (key.Key == ConsoleKey.Spacebar)
-                            {
-                                // on retourne l'angle
-                                return _angle;
-                            }
-                        }*/
-                        if (_angle % 22.5 == 0)
-                        {
-                            EraseModel();
-                            // on affiche le modèle si l'angle le permet
-                            DisplayModel();
-                        }
-                        Thread.Sleep(10);
+                        // retourne l'angle
+                        return _angle;
                     }
-                    _goingUp = false;
-                    // de 90 à 0 degré
-                    for (_angle = 90; _angle > 0; _angle -= 0.5)
+                    // si l'angle est dans les 5 angles possibles (0, 22.5, 45, 67.5 ou 90 pour tirer à droite)
+                    if (_angle % _ANGLE_DIVIDER == 0)
                     {
-                        if ((GetAsyncKeyState(VK_SPACE) & 0x8000) != 0)
-                        {
-                            return _angle;
-                        }
-                        // si on appuie sur la touche espace
-                        /*if (Console.KeyAvailable)
-                        {
-                            var key = Console.ReadKey(true);
-                            if (key.Key == ConsoleKey.Spacebar)
-                            {
-                                // on retourne l'angle
-                                return _angle;
-                            }
-                        }*/
-                        if (_angle % 22.5 == 0)
-                        {
-                            // TODO : FAIRE EN SORTE QUE CA EFFACE BIEN LE BON TRUC
-                            EraseModel();
-                            // on affiche le modèle si l'angle le permet
-                            DisplayModel();
-                        }
-                        Thread.Sleep(10);
+                        // on efface le modèle
+                        EraseModel();
+                        // on affiche la nouvelle position
+                        DisplayModel();
                     }
+                    // petit temps d'attente
+                    Thread.Sleep(10);
                 }
-            }
-            // si on tire à gauche
-            else
-            {
-                // boucle
-                while (true)
+                // on indique que les points descendent maintenant
+                _goingUp = false;
+                // de l'angle max à l'angle min
+                for (_angle = _maximum_angle; _angle > _minimum_angle; _angle -= _ANGLE_DIFFERENCE)
                 {
-                    _goingUp = true;
-                    // de 90 à 180 degrés
-                    for (_angle = 90; _angle < 180; _angle += 0.5)
+                    // si l'utilisatuer appuie sur espace
+                    if ((GetAsyncKeyState(_VK_SPACE) & 0x8000) != 0)
                     {
-
-                        if ((GetAsyncKeyState(VK_SPACE) & 0x8000) != 0)
-                        {
-                            return _angle;
-                        }
-                        // si on appuie sur la touche espace
-                        /*if (Console.KeyAvailable)
-                        {
-                            var key = Console.ReadKey(true);
-                            if (key.Key == ConsoleKey.Spacebar)
-                            {
-                                // on retourne l'angle
-                                return _angle;
-                            }
-                        }*/
-                        if (_angle % 22.5 == 0)
-                        {
-                            // TODO : FAIRE EN SORTE QUE CA EFFACE BIEN LE BON TRUC
-                            EraseModel();
-                            // on affiche le modèle si l'angle le permet
-                            DisplayModel();
-                        }
-                        Thread.Sleep(10);
+                        // retourne l'angle
+                        return _angle;
                     }
-                    _goingUp = false;
-                    // de 180 à 90 degré
-                    for (_angle = 180; _angle > 90; _angle -= 0.5)
+                    // si l'angle est dans les 5 angles possibles (0, 22.5, 45, 67.5 ou 90 pour tirer à droite)
+                    if (_angle % _ANGLE_DIVIDER == 0)
                     {
-
-                        if ((GetAsyncKeyState(VK_SPACE) & 0x8000) != 0)
-                        {
-                            return _angle;
-                        }
-                        // si on appuie sur la touche espace
-                        /*if (Console.KeyAvailable)
-                        {
-                            var key = Console.ReadKey(true);
-                            if (key.Key == ConsoleKey.Spacebar)
-                            {
-                                // on retourne l'angle
-                                return _angle;
-                            }
-                        }*/
-                        if (_angle % 22.5 == 0)
-                        {
-                            EraseModel();
-                            // on affiche le modèle si l'angle le permet
-                            DisplayModel();
-                        }
-                        Thread.Sleep(10);
+                        // on efface le modèle
+                        EraseModel();
+                        // on affiche la nouvelle position
+                        DisplayModel();
                     }
+                    // petit temps d'attente
+                    Thread.Sleep(10);
                 }
             }
         }

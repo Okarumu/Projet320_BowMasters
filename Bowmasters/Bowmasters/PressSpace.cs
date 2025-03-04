@@ -16,26 +16,26 @@ namespace Bowmasters
     {
 
 
-        // Déclaration des constantes **********************************************
-        private const byte X_DIFFERENCE_PROGRESSION_BAR = 4;    // ajustement de la position x de la barre
-        private const byte Y_DIFFERENCE_PROGRESSION_BAR = 26;   // ajustement de la position y de la barre
-        private const byte PROGRESSION_BAR_SIZE = 20;           // taille de la barre de progression
-        private const int VK_SPACE = 0x20;                      // clé virtuelle de la barre espace
+        // Déclaration et initialisation des constantes ****************************
+        private const byte _X_DIFFERENCE_PROGRESSION_BAR = 4;   // ajustement de la position x de la barre
+        private const byte _Y_DIFFERENCE_PROGRESSION_BAR = 26;  // ajustement de la position y de la barre
+        private const byte _PROGRESSION_BAR_SIZE = 20;          // taille de la barre de progression
+        private const int _VK_SPACE = 0x20;                     // clé virtuelle de la barre espace
 
         // Déclaration des attributs ***********************************************
-        private bool isSpaceHeld = false;                       // savoir si la barre espace a déjà été enfoncée
-        private DateTime startTime = new DateTime();            // timer qui permet d'augmenter la barre de progression
+        private bool _isSpaceHeld = false;                      // savoir si la barre espace a déjà été enfoncée
+        private DateTime _startTime = new DateTime();           // timer qui permet d'augmenter la barre de progression
         private readonly ConsoleColor _color;                   // couleur de la barre de progression
-        private readonly float maxHoldTime;                     // temps max possible de pression
-        private float holdTime;                                 // temps de pression 
-
+        private readonly float _maxHoldTime;                    // temps max possible de pression
+        private float _holdTime;                                // temps de pression 
+        private PositionByte _position;                         // Position de la barre
 
         // Déclaration des propriétés **********************************************
-        private PositionByte position;     // Position de la barre
+
         public PositionByte Position
         {
-            get { return position; }
-            set { position = value; }
+            get { return _position; }
+            set { _position = value; }
         }
 
         // Déclaration du constructeur *********************************************
@@ -48,9 +48,9 @@ namespace Bowmasters
         public PressSpace(Player player, float maxHoldTime, ConsoleColor color)
         {
             // se positionne au bon endroit
-            Position = new PositionByte((byte)(player.Position.X - X_DIFFERENCE_PROGRESSION_BAR), (byte)(player.Position.Y - Y_DIFFERENCE_PROGRESSION_BAR));
-            this.maxHoldTime = maxHoldTime;
-            holdTime = 0;
+            Position = new PositionByte((byte)(player.Position.X - _X_DIFFERENCE_PROGRESSION_BAR), (byte)(player.Position.Y - _Y_DIFFERENCE_PROGRESSION_BAR));
+            this._maxHoldTime = maxHoldTime;
+            _holdTime = 0;
             this._color = color;
         }
 
@@ -75,7 +75,7 @@ namespace Bowmasters
         {
             Console.ForegroundColor = _color;
             // Positionnement en fonction du temps passé
-            Console.SetCursorPosition(Position.X + (int)(holdTime / maxHoldTime * PROGRESSION_BAR_SIZE), Position.Y);
+            Console.SetCursorPosition(Position.X + (int)(_holdTime / _maxHoldTime * _PROGRESSION_BAR_SIZE), Position.Y);
             Console.Write("■");
         }
 
@@ -85,7 +85,7 @@ namespace Bowmasters
         public void EraseBar()
         {
             // parcourt toute la barre pour l'effacer
-            for (int i = 0; i <= PROGRESSION_BAR_SIZE; i++)
+            for (int i = 0; i <= _PROGRESSION_BAR_SIZE; i++)
             {
                 Console.SetCursorPosition(Position.X + i, Position.Y);
                 Console.Write(" ");
@@ -103,29 +103,29 @@ namespace Bowmasters
             do
             {
                 // si l'utilisateur appuie sur espace
-                if (((GetAsyncKeyState(VK_SPACE) & 0x8000) != 0) && !isSpaceHeld)
+                if (((GetAsyncKeyState(_VK_SPACE) & 0x8000) != 0) && !_isSpaceHeld)
                 {
                     // temps de départ
-                    startTime = DateTime.Now;
+                    _startTime = DateTime.Now;
                     // indique qu'il appuie
-                    isSpaceHeld = true;
+                    _isSpaceHeld = true;
                 }
                 // la touche est appuyée
-                if (isSpaceHeld)
+                if (_isSpaceHeld)
                 {
                     // on ajoute un timer en fonction de quand il a appuyé la première fois
-                    holdTime = (float)(DateTime.Now - startTime).TotalSeconds;
+                    _holdTime = (float)(DateTime.Now - _startTime).TotalSeconds;
                     // Limite le temps à maxHoldTime
-                    holdTime = Math.Min(holdTime, maxHoldTime); 
+                    _holdTime = Math.Min(_holdTime, _maxHoldTime); 
                 }     
 
                 // Affiche la barre
                 DisplayBar();
 
-            } while (((GetAsyncKeyState(VK_SPACE) & 0x8000) != 0) || !isSpaceHeld); // tant que l'utilisateur n'a pas appuyé une fois sur espace et qu'il ne relâche pas une fois appuyé
+            } while (((GetAsyncKeyState(_VK_SPACE) & 0x8000) != 0) || !_isSpaceHeld); // tant que l'utilisateur n'a pas appuyé une fois sur espace et qu'il ne relâche pas une fois appuyé
 
             // retourne un chiffre entre 0 et 50 en fonction du pourcentage de temps appuyé
-            return (holdTime / maxHoldTime) * 50;
+            return (_holdTime / _maxHoldTime) * 50;
         }
     }
 }

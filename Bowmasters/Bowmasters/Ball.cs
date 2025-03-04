@@ -13,16 +13,40 @@ namespace Bowmasters
     /// </summary>
     public class Ball
     {
-        // Déclaration des attributs ***************************************
-        private double _velocity;                       // Vélocité de la balle
-        private double _angle;                          // Angle de la balle
-        private readonly PositionByte _initialPosition; // Position initiale de la balle (non modifiable)
-        private PositionByte _actualPosition;           // Position actuelle de la balle (modifiée en jeu)
-        private ConsoleColor _color;                    // Couleur de la balle
+        // Déclaration des attributs **************************************************
+
+        /// <summary>
+        /// Vélocité de la balle
+        /// </summary>
+        private double _velocity;
+
+        /// <summary>
+        /// Angle de la balle
+        /// </summary>
+        private double _angle;
+ 
+        /// <summary>
+        /// Position initiale de la balle (non modifiable)
+        /// </summary>
+        private readonly PositionByte _initialPosition;
+
+        /// <summary>
+        /// Position actuelle de la balle (modifiée en jeu)
+        /// </summary>
+        private PositionByte _actualPosition;
+
+        /// <summary>
+        /// Couleur de la balle
+        /// </summary>
+        private ConsoleColor _color;
 
 
-        // Déclaration des propriétés **************************************
-        public PositionByte InitialPosition         // Obtient la position initiale (en lecture seule)
+        // Déclaration des propriétés **********************************************
+
+        /// <summary>
+        /// Obtient la position initiale (en lecture seule)
+        /// </summary>
+        public PositionByte InitialPosition         
         {
             get
             {
@@ -30,7 +54,10 @@ namespace Bowmasters
             }
         }
 
-        public PositionByte ActualPosition          // Obtient ou définit la position actuelle
+        /// <summary>
+        /// Obtient ou définit la position actuelle
+        /// </summary>
+        public PositionByte ActualPosition          
         {
             get
             {
@@ -42,7 +69,7 @@ namespace Bowmasters
             }
         }
 
-        //////////////////////////// Déclaration et implémentation des méthodes ////////////////////////////
+        // Déclaration du constructeur *********************************************
 
         /// <summary>
         /// Constructeur par défaut
@@ -59,6 +86,8 @@ namespace Bowmasters
             ActualPosition = new PositionByte(initialXPosition, initialYPosition);
             _color = Custom.GetRandomColor();
         }
+
+        // Déclaration et implémentation des méthodes ******************************
 
         /// <summary>
         /// Update la position de la balle en fonction du temps

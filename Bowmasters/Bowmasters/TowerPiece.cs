@@ -13,29 +13,29 @@ namespace Bowmasters
     /// </summary>
     public class TowerPiece
     {
-        //Propriétés ****************************************************
+        // Déclaration et initialisation des constantes **********************************
+        private const string _TOWERPIECEMODEL = "█";                    // Modèle d'une pièce
+        private const ConsoleColor _COLOR = ConsoleColor.DarkGray;      // couleur de la pièce
 
-        private const string _TOWERPIECEMODEL = "█";  //modèle d'une pièce
-        private readonly PositionByte _position;
-        private bool _isDestroyed;
-        private const ConsoleColor _COLOR = ConsoleColor.DarkGray;
+        // Déclaration des attributs *****************************************************
+        private readonly PositionByte _position;                        // position de la pièce
+        private bool _isDestroyed;                                      // savoir si une pièce est détruite ou non
 
-        public bool IsDestroyed
-        {
-            get { return _isDestroyed; }
-            set { _isDestroyed = value; }
-        }
-
-        public PositionByte Position
+        // Déclaration des propriétés ****************************************************
+        public PositionByte Position            // position de la pièce
         {
             get
             {
                 return _position;
             }
         }
+        public bool IsDestroyed                 // savoir si une pièce est détruite ou non
+        {
+            get { return _isDestroyed; }
+            set { _isDestroyed = value; }
+        }     
 
-        //Constructeur **************************************************
-
+        // Déclaration des constructeurs *************************************************
         /// <summary>
         /// permet de faire une pièce en indiquant sa position
         /// </summary>
@@ -47,13 +47,13 @@ namespace Bowmasters
             IsDestroyed = false;
         }
 
-        //Méthodes ******************************************************
-
+        // Déclaration et implémentation des méthodes ************************************
         /// <summary>
         /// Affiche la pièce
         /// </summary>
         public void DisplayPiece()
         {
+            // met la couleur de la pièce
             Console.ForegroundColor = _COLOR;
             //se met à la position de la pièce et l'affiche
             Console.SetCursorPosition(Position.X, Position.Y);
