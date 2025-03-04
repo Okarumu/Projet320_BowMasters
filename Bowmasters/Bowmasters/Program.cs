@@ -34,19 +34,17 @@ namespace Bowmasters
 
             // Déclaration et initialisation des variables ********************************************************************
             BowGame game;                                       // variable pour lancer le jeu
-            List<Player> players = new List<Player>();          // liste des joueurs
+            Players players;
             Player player1 = new Player(AMOUNT_OF_LIFE_PER_PLAYER, X_POSITION_PLAYER_1, Y_POSITION_PLAYER_1_AND_2, COLOR_PLAYER_1, PLAYER_NUMBER_FOR_PLAYER_ONE);    // joueur 1
             Player player2 = new Player(AMOUNT_OF_LIFE_PER_PLAYER, X_POSITION_PLAYER_2, Y_POSITION_PLAYER_1_AND_2, COLOR_PLAYER_2, PLAYER_NUMBER_FOR_PLAYER_TWO);    // joueur 2
-            List<Tower> towers = new List<Tower>();             // liste des tours
+            Towers towers;
             Tower tower1 = new Tower(TOWER_HEIGHT, TOWER_WITDH, X_POSITION_TOWER_ONE, Y_POSITION_TOWER_ONE_AND_TWO); // tour du joueur 1
             Tower tower2 = new Tower(TOWER_HEIGHT, TOWER_WITDH, X_POSITION_TOWER_TWO, Y_POSITION_TOWER_ONE_AND_TWO); // tour du joueur 2
 
 
             // Programme principal ***************************************************************************
-            players.Add(item: player1);       // ajoute les joueurs dans la liste
-            players.Add(item: player2);
-            towers.Add(item: tower1);         // ajoute les tours dans la liste
-            towers.Add(item: tower2);
+            players = new Players(player1, player2);
+            towers = new Towers(tower1, tower2);
 
             // Initialise la variable de jeu
             game = new BowGame(players, towers);

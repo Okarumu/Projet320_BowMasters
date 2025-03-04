@@ -32,7 +32,6 @@ namespace Bowmasters
         public bool IsDestroyed                 // savoir si une pièce est détruite ou non
         {
             get { return _isDestroyed; }
-            set { _isDestroyed = value; }
         }     
 
         // Déclaration des constructeurs *************************************************
@@ -44,7 +43,7 @@ namespace Bowmasters
         public TowerPiece(byte xPosition, byte yPosition)
         {
             _position = new PositionByte(xPosition, yPosition);
-            IsDestroyed = false;
+            _isDestroyed = false;
         }
 
         // Déclaration et implémentation des méthodes ************************************
@@ -62,13 +61,14 @@ namespace Bowmasters
         }
 
         /// <summary>
-        /// enlève la pièce
+        /// enlève la pièce et ajoute qu'elle a été détruite
         /// </summary>
         public void DestroyPiece()
         {
             //se met à la position de la pièce et l'enlève
             Console.SetCursorPosition(Position.X, Position.Y);
             Console.Write(" ");
+            _isDestroyed = true;
         }
     }
 }

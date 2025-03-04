@@ -65,6 +65,7 @@
     <Compile Include="Custom.cs" />
     <Compile Include="HitBox.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="Players.cs" />
     <Compile Include="PositionByte.cs" />
     <Compile Include="PositionDouble.cs" />
     <Compile Include="PressSpace.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="SoundEffect.cs" />
     <Compile Include="Tower.cs" />
     <Compile Include="TowerPiece.cs" />
+    <Compile Include="Towers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
