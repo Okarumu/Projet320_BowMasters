@@ -1,106 +1,123 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="Bowmasters.Balistic" Collapsed="true">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Position X="3.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAEBAAAAAAAAAAAAAACAAAAAAEAIAAAA=</HashCode>
       <FileName>Balistic.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Bowmasters.Ball">
-    <Position X="10" Y="2.25" Width="1.5" />
+  <Class Name="Bowmasters.Ball" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAAAACAACAIKAAAAAAAAAAAACAAAAAAAAAAAACRAAAA=</HashCode>
       <FileName>Ball.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="_actualPosition" />
-      <Field Name="_initialPosition" />
-    </ShowAsAssociation>
   </Class>
-  <Class Name="Bowmasters.BowGame">
-    <Position X="12.5" Y="1" Width="1.5" />
+  <Class Name="Bowmasters.BowGame" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAAAAAQAAEAAYggAQAQAgAAABAACAAAAAAAAAAQAEA=</HashCode>
+      <HashCode>EABAAAAQAAEEAYogAYAQAgAAABAAAAQAAAAAAAAQAEA=</HashCode>
       <FileName>BowGame.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Bowmasters.Config" Collapsed="true">
-    <Position X="5.75" Y="0.5" Width="1.5" />
+    <Position X="8.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAQAAAAQAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAQAgAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Config.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Bowmasters.Custom" Collapsed="true">
-    <Position X="0.5" Y="1.5" Width="1.5" />
+    <Position X="3.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAAQAAAAAAAAAAAAAA=</HashCode>
       <FileName>Custom.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Bowmasters.Hitbox" Collapsed="true">
-    <Position X="2.25" Y="1.5" Width="1.5" />
+    <Position X="5.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAABAAAAAAAAAAA=</HashCode>
       <FileName>HitBox.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Bowmasters.Player" Collapsed="true">
-    <Position X="4" Y="1.5" Width="1.5" />
+    <Position X="7" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BBAAAEAAAAAMEkggCgkAAUAAAAgAAAAAgAAggAABAAA=</HashCode>
+      <HashCode>BBAAAEIAIAAMEkggCgkAAEAAAAgBAAAAgAAggAABAAA=</HashCode>
       <FileName>Player.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Bowmasters.PositionByte" Collapsed="true">
-    <Position X="5.75" Y="1.5" Width="1.5" />
+    <Position X="8.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
       <FileName>PositionByte.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Bowmasters.PressSpace" Collapsed="true">
-    <Position X="0.5" Y="2.5" Width="1.5" />
+  <Class Name="Bowmasters.PositionDouble" Collapsed="true">
+    <Position X="3.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAYCAIIBggAAAAIADAAAAAAAAQAAQAgAABAAA=</HashCode>
+      <HashCode>AAAAAAAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>PositionDouble.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bowmasters.PressSpace" Collapsed="true">
+    <Position X="5.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAYCAIIBkgAAAAAADAAAAAAAAQAAQAgAABAAA=</HashCode>
       <FileName>PressSpace.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Bowmasters.Program" Collapsed="true">
-    <Position X="2.25" Y="2.5" Width="1.5" />
+    <Position X="7" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Bowmasters.ShootAngle">
-    <Position X="4" Y="2.5" Width="1.5" />
+  <Class Name="Bowmasters.ShootAngle" Collapsed="true">
+    <Position X="8.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAACALAAAACCKBAgABAEQAAAAAAAAAAACAAggAAAAEA=</HashCode>
+      <HashCode>CAACALAAAACCKAAgABAEAAAAAAAAAAAACAAAgAAAAEA=</HashCode>
       <FileName>ShootAngle.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Bowmasters.SoundEffect" Collapsed="true">
-    <Position X="5.75" Y="2.5" Width="1.5" />
+    <Position X="3.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAQAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAIAAAA=</HashCode>
       <FileName>SoundEffect.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Bowmasters.Tower" Collapsed="true">
-    <Position X="0.5" Y="3.5" Width="1.5" />
+    <Position X="5.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAAAAAAAAAAAAAAQAQAQAAAAAAAAAAAAgAIAAAAAQ=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAQAAAAAAAAAAAAgAIAAAAAQ=</HashCode>
       <FileName>Tower.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Bowmasters.TowerPiece" Collapsed="true">
-    <Position X="2.25" Y="3.5" Width="1.5" />
+    <Position X="7" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAACAAAAAAAwAAAAAAAABCAAAAAAAAIAgAAAEAA=</HashCode>
       <FileName>TowerPiece.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Struct Name="Bowmasters.Players" Collapsed="true">
+    <Position X="3.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAwAAAAAAAAABAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Players.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Bowmasters.Towers" Collapsed="true">
+    <Position X="5.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAgAQAAAAAAAAA=</HashCode>
+      <FileName>Towers.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
