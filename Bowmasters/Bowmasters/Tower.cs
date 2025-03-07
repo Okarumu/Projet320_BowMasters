@@ -12,17 +12,23 @@ namespace Bowmasters
     public class Tower
     {
         // Déclaration des attributs *********************************************
-        private readonly Hitbox _hitboxTower;           // hitbox de la tour
-        private readonly PositionByte _towerPosition;   // position de la tour
-        private TowerPiece[,] _pieces;                  // tableau de toutes les pièces
+
+        /// <summary>
+        /// position de la tour
+        /// </summary>
+        private readonly PositionByte _towerPosition;
+
+        /// <summary>
+        /// tableau de toutes les pièces
+        /// </summary>
+        private TowerPiece[,] _pieces;
 
         // Déclaration des propriétés ********************************************
-        public Hitbox HitboxTower                       // hitbox de la tour
-        {
-            get { return _hitboxTower; }
-        }
 
-        public PositionByte TowerPosition               // position de la tour
+        /// <summary>
+        /// obtient la position de la tour
+        /// </summary>
+        public PositionByte TowerPosition               
         {
             get
             {
@@ -30,7 +36,10 @@ namespace Bowmasters
             }
         }
 
-        public TowerPiece[,] Pieces                     // tableau de toutes les pièces
+        /// <summary>
+        /// obtient et peut modifier le tableau de toutes les pièces
+        /// </summary>
+        public TowerPiece[,] Pieces                     
         {
             get
             {
@@ -52,8 +61,7 @@ namespace Bowmasters
         /// <param name="yPosition">position y</param>
         public Tower(byte towerHeight, byte towerWidth, byte xPosition, byte yPosition)
         {
-            // initialise la hitbox de la tour ainsi que sa position
-            _hitboxTower = new Hitbox(towerWidth, towerHeight, xPosition, yPosition);
+            // initialise la position de la tour
             _towerPosition = new PositionByte(xPosition, yPosition);
 
             // initialise le tableau des pièces
@@ -76,9 +84,9 @@ namespace Bowmasters
         public void Display()
         {
             // parcourt la liste de pièces
-            for (int i = 0; i < HitboxTower.HitBoxes.GetLength(0); i++)
+            for (int i = 0; i < _pieces.GetLength(0); i++)
             {
-                for (int j = 0; j < HitboxTower.HitBoxes.GetLength(1); j++)
+                for (int j = 0; j < _pieces.GetLength(1); j++)
                 {
                     // les affiche
                     _pieces[i, j].DisplayPiece();

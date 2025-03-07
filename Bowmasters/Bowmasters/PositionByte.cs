@@ -13,11 +13,23 @@ namespace Bowmasters
     {
 
         // Déclaration des attributs **************************************************
-        private byte _x; // position x dans la console
-        private byte _y; // position y dans la console
-        
+
+        /// <summary>
+        /// position x dans la console
+        /// </summary>
+        private byte _x;
+
+        /// <summary>
+        /// position y dans la console
+        /// </summary>
+        private byte _y;
+
         // Déclaration des propriétés *****************************************
-        public byte X           // position x dans la console
+
+        /// <summary>
+        /// Obtient et peut modifier la position x dans la console
+        /// </summary>
+        public byte X           
         {
             get
             {
@@ -29,7 +41,10 @@ namespace Bowmasters
             }
         }
 
-        public byte Y           // position y dans la console
+        /// <summary>
+        /// Obtient et peut modifier la position y dans la console
+        /// </summary>
+        public byte Y           
         {
             get
             {
@@ -40,6 +55,8 @@ namespace Bowmasters
                 _y = value;
             }
         }
+
+        // Déclaration du constructeur ****************************************
 
         /// <summary>
         /// Constructeur à utiliser permettant de choisir une position x et y avec des bytes

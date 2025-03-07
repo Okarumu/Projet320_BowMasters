@@ -1,12 +1,24 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿///*******************************************************
+/// ETML
+/// Auteur : Maël Naudet
+/// Date : 21.01.2025
+///*******************************************************
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Bowmasters;
 
 namespace BowMastersTests
 {
+    /// <summary>
+    /// Les différents tests unitaires utiles au projet, principalement des tests pour la ballistique du jeu
+    /// </summary>
     [TestClass]
     public class BowMastersTests
     {
+        /// <summary>
+        /// Vérifie que le mouvement de la balle sur l'axe y soit correcte
+        /// </summary>
         [TestMethod]
         public void Balistic_OnYAxis_From_0_After5Sec_Result_51dot91()
         {
@@ -14,7 +26,7 @@ namespace BowMastersTests
             int initialY = 0;
             double time = 5;
             double velocity = 0;
-            double angle = 0.785398;
+            double angle = 45;
             double result;
 
             // Act
@@ -24,6 +36,9 @@ namespace BowMastersTests
             Assert.AreEqual(122.625, result, "Le résultat doit être 122.625");
         }
 
+        /// <summary>
+        /// Vérifie que le mouvement de la balle sur l'axe X soit correct
+        /// </summary>
         [TestMethod]
         public void Balistic_OnXAxist_From_0_After5Sec_Result_70dot71()
         {
@@ -31,7 +46,7 @@ namespace BowMastersTests
             int initialX = 0;
             double time = 5;
             double velocity = 20;
-            double angle = 2.35619;
+            double angle = 135;
             double result;
 
             // Act

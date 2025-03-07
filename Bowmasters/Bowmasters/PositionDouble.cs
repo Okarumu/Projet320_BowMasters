@@ -7,16 +7,28 @@
 namespace Bowmasters
 {
     /// <summary>
-    /// Permet de sotcker une position avec des coordonnées x et y avec des double
+    /// Permet de stocker une position avec des coordonnées x et y avec des double
     /// </summary>
     public class PositionDouble
     {
         // Déclaration des attributs **************************************************
-        private double _x; // position x
-        private double _y; // position y
+
+        /// <summary>
+        /// position x
+        /// </summary>
+        private double _x;
+
+        /// <summary>
+        /// position y
+        /// </summary>
+        private double _y;
 
         // Déclaration des propriétés *******************************************
-        public double X         // position x
+
+        /// <summary>
+        /// Obtient et peut modifier la position x
+        /// </summary>
+        public double X         
         {
             get
             {
@@ -28,7 +40,10 @@ namespace Bowmasters
             }
         }
 
-        public double Y         // position y
+        /// <summary>
+        /// Obtient et peut modifier la position y
+        /// </summary>
+        public double Y         
         {
             get
             {
@@ -39,6 +54,8 @@ namespace Bowmasters
                 _y = value;
             }
         }
+
+        // Déclaration du constructeur ****************************************
 
         /// <summary>
         /// Constructeur à utiliser permettant de choisir une position x et y avec des doubles

@@ -15,7 +15,11 @@ namespace Bowmasters
     internal class SoundEffect
     {
         // Déclaration et initialisation des attributs *********************************************
-        private static Dictionary<string, SoundPlayer> _soundPlayers = new Dictionary<string, SoundPlayer>();   // Dictionnaire qui permet de stocker un nom ainsi qu'un SoundPlayer ensemble
+
+        /// <summary>
+        /// Dictionnaire qui permet de stocker un nom ainsi qu'un SoundPlayer ensemble
+        /// </summary>
+        private static Dictionary<string, SoundPlayer> _soundPlayers = new Dictionary<string, SoundPlayer>();   
 
         // Déclaration et implémentations des méthodes *********************************************
         /// <summary>

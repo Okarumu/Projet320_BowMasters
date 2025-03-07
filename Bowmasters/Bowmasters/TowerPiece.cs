@@ -14,24 +14,51 @@ namespace Bowmasters
     public class TowerPiece
     {
         // Déclaration et initialisation des constantes **********************************
-        private const string _TOWERPIECEMODEL = "█";                    // Modèle d'une pièce
-        private const ConsoleColor _COLOR = ConsoleColor.DarkGray;      // couleur de la pièce
+
+        /// <summary>
+        /// Modèle d'une pièce
+        /// </summary>
+        private const string _TOWERPIECEMODEL = "█";
+
+        /// <summary>
+        /// couleur de la pièce
+        /// </summary>
+        private const ConsoleColor _COLOR = ConsoleColor.DarkGray;
 
         // Déclaration des attributs *****************************************************
-        private readonly PositionByte _position;                        // position de la pièce
-        private bool _isDestroyed;                                      // savoir si une pièce est détruite ou non
+
+        /// <summary>
+        /// position de la pièce
+        /// </summary>
+        private readonly PositionByte _position;
+
+        /// <summary>
+        /// savoir si une pièce est détruite ou non
+        /// </summary>
+        private bool _isDestroyed;
 
         // Déclaration des propriétés ****************************************************
-        public PositionByte Position            // position de la pièce
+
+        /// <summary>
+        /// Obitnet la position de la pièce
+        /// </summary>
+        public PositionByte Position            
         {
             get
             {
                 return _position;
             }
         }
-        public bool IsDestroyed                 // savoir si une pièce est détruite ou non
+
+        /// <summary>
+        /// Retourne si la pièce est détruite ou non
+        /// </summary>
+        public bool IsDestroyed                 
         {
-            get { return _isDestroyed; }
+            get 
+            { 
+                return _isDestroyed; 
+            }
         }     
 
         // Déclaration des constructeurs *************************************************

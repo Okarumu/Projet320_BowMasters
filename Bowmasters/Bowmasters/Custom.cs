@@ -14,7 +14,11 @@ namespace Bowmasters
     static class Custom
     {
         // Déclaration et initialisation des attributs ***************************************
-        static private ConsoleColor[] _colors = {            // tableau de couleurs possibles
+
+        /// <summary>
+        /// tableau de couleurs possibles
+        /// </summary>
+        static private ConsoleColor[] _colors = {            
             ConsoleColor.DarkBlue,
             ConsoleColor.DarkGreen,
             ConsoleColor.DarkCyan,

@@ -11,10 +11,18 @@ namespace Bowmasters
     /// </summary>
     public class Hitbox
     {
-        // Déclaration des attributs **************************************************      
+        // Déclaration des attributs **************************************************
+        
+        /// <summary>
+        /// Tableau de positions qui composent la hitbox
+        /// </summary>
         private readonly PositionByte[,] _hitBoxes;
 
         // Déclaration des propriétés *************************************************
+
+        /// <summary>
+        /// Propriété qui retourne simplement un tableau avec les positions composant la hitbox
+        /// </summary>
         public PositionByte[,] HitBoxes
         {
             get { return _hitBoxes; }

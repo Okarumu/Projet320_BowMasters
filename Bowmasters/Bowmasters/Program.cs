@@ -32,21 +32,58 @@ namespace Bowmasters
             const byte Y_POSITION_TOWER_ONE_AND_TWO = Config.SCREEN_HEIGHT - TOWER_HEIGHT;               // position y des tours du joueur 1 et 2
 
 
-            // Déclaration et initialisation des variables ********************************************************************
-            BowGame game;                                       // variable pour lancer le jeu
+            // Déclaration des variables ********************************************************************
+
+            /// <summary>
+            /// Contient les différentes méthodes pour bien lancer le jeu
+            /// </summary>
+            BowGame game;
+
+            /// <summary>
+            /// Stocke 2 joueur
+            /// </summary>
             Players players;
-            Player player1 = new Player(AMOUNT_OF_LIFE_PER_PLAYER, X_POSITION_PLAYER_1, Y_POSITION_PLAYER_1_AND_2, COLOR_PLAYER_1, PLAYER_NUMBER_FOR_PLAYER_ONE);    // joueur 1
-            Player player2 = new Player(AMOUNT_OF_LIFE_PER_PLAYER, X_POSITION_PLAYER_2, Y_POSITION_PLAYER_1_AND_2, COLOR_PLAYER_2, PLAYER_NUMBER_FOR_PLAYER_TWO);    // joueur 2
+
+            /// <summary>
+            /// Joueur 1
+            /// </summary>
+            Player player1;
+
+            /// <summary>
+            /// Joueur 2
+            /// </summary>
+            Player player2;
+
+            /// <summary>
+            /// Stocke 2 tours
+            /// </summary>
             Towers towers;
-            Tower tower1 = new Tower(TOWER_HEIGHT, TOWER_WIDTH, X_POSITION_TOWER_ONE, Y_POSITION_TOWER_ONE_AND_TWO); // tour du joueur 1
-            Tower tower2 = new Tower(TOWER_HEIGHT, TOWER_WIDTH, X_POSITION_TOWER_TWO, Y_POSITION_TOWER_ONE_AND_TWO); // tour du joueur 2
+
+            /// <summary>
+            /// Tour 1
+            /// </summary>
+            Tower tower1;
+
+            /// <summary>
+            /// Tour 2
+            /// </summary>
+            Tower tower2;
 
 
             // Programme principal ***************************************************************************
-            players = new Players(player1, player2);
-            towers = new Towers(tower1, tower2);
 
-            // Initialise la variable de jeu
+            // Initialisation des variables utilisées dans le jeu ***********************
+            // Initialisation des joueurs
+            player1 = new Player(AMOUNT_OF_LIFE_PER_PLAYER, X_POSITION_PLAYER_1, Y_POSITION_PLAYER_1_AND_2, COLOR_PLAYER_1, PLAYER_NUMBER_FOR_PLAYER_ONE);    
+            player2 = new Player(AMOUNT_OF_LIFE_PER_PLAYER, X_POSITION_PLAYER_2, Y_POSITION_PLAYER_1_AND_2, COLOR_PLAYER_2, PLAYER_NUMBER_FOR_PLAYER_TWO);
+            players = new Players(player1, player2);
+
+            // Iniialisation des tours
+            tower1 = new Tower(TOWER_HEIGHT, TOWER_WIDTH, X_POSITION_TOWER_ONE, Y_POSITION_TOWER_ONE_AND_TWO); 
+            tower2 = new Tower(TOWER_HEIGHT, TOWER_WIDTH, X_POSITION_TOWER_TWO, Y_POSITION_TOWER_ONE_AND_TWO);             
+            towers = new Towers(tower1, tower2); 
+            
+            // Initialisation du jeu en lui-même
             game = new BowGame(players, towers);
 
             // Charge les options du jeu (changement de fenêtre, enlève le curseur...)

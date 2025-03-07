@@ -16,23 +16,70 @@ namespace Bowmasters
     internal class ShootAngle
     {
         // Déclaration et initialisation des constantes *********************************************************
-        private const int _VK_SPACE = 0x20;             // clé virtuelle de la barre espace
-        private const char _MODEL = '.';                // modèle graphique du point
-        private const double _ANGLE_DIFFERENCE = 0.5;   // différence d'angle à chaque itération de la boucle
-        private const double _ANGLE_DIVIDER = 22.5;     // angle à diviser (le point va être affiché en fonction de si l'angle est un multiple de ce nombre)
+
+        /// <summary>
+        /// clé virtuelle de la barre espace
+        /// </summary>
+        private const int _VK_SPACE = 0x20;
+
+        /// <summary>
+        /// modèle graphique du point
+        /// </summary>
+        private const char _MODEL = '.';
+
+        /// <summary>
+        /// différence d'angle à chaque itération de la boucle
+        /// </summary>
+        private const double _ANGLE_DIFFERENCE = 0.5;
+
+        /// <summary>
+        /// angle à diviser (le point va être affiché en fonction de si l'angle est un multiple de ce nombre)
+        /// </summary>
+        private const double _ANGLE_DIVIDER = 22.5;
 
         // Déclaration des attributs ****************************************************************************
-        private readonly PositionByte[] _position;      // positions possibles des points
-        private readonly byte _minimum_angle;           // angle minimum quand on tire à droite
-        private readonly byte _maximum_angle;           // angle maximum quand on tire à droite
-        private double _angle;                          // angle à retourner
-        private bool _isRight;                          // savoir si on tire à droite ou à gauche
-        private byte _rightPosition;                    // position actuelle du point
-        private byte _previousPosition;                 // position précédente du point
-        private bool _goingUp;                          // savoir dans quelle direction va les points (de haut en bas ou de bas en haut)
+
+        /// <summary>
+        /// positions possibles des points
+        /// </summary>
+        private readonly PositionByte[] _position;
+
+        /// <summary>
+        /// angle minimum de tir
+        /// </summary>
+        private readonly byte _minimum_angle;
+
+        /// <summary>
+        /// angle maximum de tir
+        /// </summary>
+        private readonly byte _maximum_angle;
+
+        /// <summary>
+        /// angle à retourner
+        /// </summary>
+        private double _angle;
+
+        /// <summary>
+        /// position actuelle du point
+        /// </summary>
+        private byte _rightPosition;
+
+        /// <summary>
+        /// position précédente du point
+        /// </summary>
+        private byte _previousPosition;
+
+        /// <summary>
+        /// savoir dans quelle direction va les points (de haut en bas ou de bas en haut)
+        /// </summary>
+        private bool _goingUp;
 
         // Déclaration des propriété ****************************************************************************
-        public PositionByte[] Position                  // positions possible des points
+
+        /// <summary>
+        /// positions possible des points
+        /// </summary>
+        public PositionByte[] Position                  
         {
             get
             {
@@ -48,10 +95,11 @@ namespace Bowmasters
         /// <param name="isRight"></param>
         public ShootAngle(Player player, bool isRight)
         {
-            _isRight = isRight;
             _goingUp = true;
             _rightPosition = 0;
             _previousPosition = 0;
+
+            // tirer à droite
             if (isRight)
             {
                 // création des positions des points
@@ -66,6 +114,7 @@ namespace Bowmasters
                 _minimum_angle = 0;
                 _maximum_angle = 90;
             }
+            // tirer à gauche
             else
             {
                 // création des positions des points
@@ -135,9 +184,6 @@ namespace Bowmasters
         /// <summary>
         /// Affiche des points et retourne un angle en fonction d'un input utilisateur
         /// </summary>
-        /// <param name="xPosition">position x des points originaux</param>
-        /// <param name="yPosition">position y des points originaux</param>
-        /// <param name="isRight">il faut tirer à droite (angle entre 0 et 90)</param>
         /// <returns>retourne l'angle en double</returns>
         public double UpdateBallAngle()
         {

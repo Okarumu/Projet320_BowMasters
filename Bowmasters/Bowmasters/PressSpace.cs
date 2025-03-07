@@ -17,21 +17,69 @@ namespace Bowmasters
 
 
         // Déclaration et initialisation des constantes ****************************
-        private const byte _X_DIFFERENCE_PROGRESSION_BAR = 4;   // ajustement de la position x de la barre
-        private const byte _Y_DIFFERENCE_PROGRESSION_BAR = 26;  // ajustement de la position y de la barre
-        private const byte _PROGRESSION_BAR_SIZE = 20;          // taille de la barre de progression
-        private const int _VK_SPACE = 0x20;                     // clé virtuelle de la barre espace
+
+        /// <summary>
+        /// ajustement de la position x de la barre
+        /// </summary>
+        private const byte _X_DIFFERENCE_PROGRESSION_BAR = 4;
+
+        /// <summary>
+        /// ajustement de la position y de la barre
+        /// </summary>
+        private const byte _Y_DIFFERENCE_PROGRESSION_BAR = 26;
+
+        /// <summary>
+        /// taille de la barre de progression
+        /// </summary>
+        private const byte _PROGRESSION_BAR_SIZE = 20;
+
+        /// <summary>
+        /// clé virtuelle de la barre espace
+        /// </summary>
+        private const int _VK_SPACE = 0x20;
+
+        /// <summary>
+        /// Vitesse maximum de la balle
+        /// </summary>
+        private const byte _MAX_SPEED = 50;
 
         // Déclaration des attributs ***********************************************
-        private bool _isSpaceHeld = false;                      // savoir si la barre espace a déjà été enfoncée
-        private DateTime _startTime = new DateTime();           // timer qui permet d'augmenter la barre de progression
-        private readonly ConsoleColor _color;                   // couleur de la barre de progression
-        private readonly float _maxHoldTime;                    // temps max possible de pression
-        private float _holdTime;                                // temps de pression 
-        private PositionByte _position;                         // Position de la barre
+
+        /// <summary>
+        /// savoir si la barre espace a déjà été enfoncée
+        /// </summary>
+        private bool _isSpaceHeld = false;
+
+        /// <summary>
+        /// timer qui permet d'augmenter la barre de progression
+        /// </summary>
+        private DateTime _startTime = new DateTime();
+
+        /// <summary>
+        /// couleur de la barre de progression
+        /// </summary>
+        private readonly ConsoleColor _color;
+
+        /// <summary>
+        /// temps max possible de pression
+        /// </summary>
+        private readonly float _maxHoldTime;
+
+        /// <summary>
+        /// temps de pression 
+        /// </summary>
+        private float _holdTime;
+
+        /// <summary>
+        /// Position de la barre
+        /// </summary>
+        private PositionByte _position;                         
 
         // Déclaration des propriétés **********************************************
 
+        /// <summary>
+        /// Obtient et peut modifier la position de l'objet
+        /// </summary>
         public PositionByte Position
         {
             get { return _position; }
@@ -125,7 +173,7 @@ namespace Bowmasters
             } while (((GetAsyncKeyState(_VK_SPACE) & 0x8000) != 0) || !_isSpaceHeld); // tant que l'utilisateur n'a pas appuyé une fois sur espace et qu'il ne relâche pas une fois appuyé
 
             // retourne un chiffre entre 0 et 50 en fonction du pourcentage de temps appuyé
-            return (_holdTime / _maxHoldTime) * 50;
+            return (_holdTime / _maxHoldTime) * _MAX_SPEED;
         }
     }
 }

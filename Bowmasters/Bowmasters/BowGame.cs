@@ -317,7 +317,7 @@ namespace Bowmasters
                     Thread.Sleep(100);
 
                     // on raffiche le joueur en lui enlevant de la vie
-                    ennemy.Display();
+                    ennemy.DisplayStanding();
                     ennemy.TakeDamage(_AMOUNT_OF_DAMAGE);
                     // on rajoute du score au lanceur
                     thrower.Score += _SCORE_ADDER * 3;
@@ -336,7 +336,7 @@ namespace Bowmasters
                     SoundEffect.PlaySound("hitTower");
                     Thread.Sleep(100);
                     // on enlève du score au joueur et on le remontre
-                    thrower.Score -= _SCORE_ADDER;
+                    thrower.Score -= _SCORE_ADDER / 2;
                     thrower.DisplayInfo();
 
                     // on indique que le tour est fini
@@ -364,7 +364,6 @@ namespace Bowmasters
 
             } // tant que la balle est dans le jeu et que le tour n'est pas fini 
             while (CheckBallInGame(ball) && !endTurn);
-
         }
 
         /// <summary>
@@ -376,7 +375,7 @@ namespace Bowmasters
             // affiche tous les joueurs et leurs infos
             for (byte i = 0; i < players.Length; i++)
             {
-                players[i].Display();
+                players[i].DisplayStanding();
                 players[i].DisplayInfo();
             }
         }

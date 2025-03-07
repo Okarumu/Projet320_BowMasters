@@ -13,17 +13,24 @@ namespace Bowmasters
     /// </summary>
     public class Ball
     {
+        // Déclaration des constantes *************************************************
+
+        /// <summary>
+        /// Modèle de la balle
+        /// </summary>
+        private const char _MODEL = '×';
+
         // Déclaration des attributs **************************************************
 
         /// <summary>
         /// Vélocité de la balle
         /// </summary>
-        private double _velocity;
+        private readonly double _velocity;
 
         /// <summary>
         /// Angle de la balle
         /// </summary>
-        private double _angle;
+        private readonly double _angle;
  
         /// <summary>
         /// Position initiale de la balle (non modifiable)
@@ -97,10 +104,11 @@ namespace Bowmasters
         {
            try
            {
+                // Donne la position de la balle après un temps t
                 ActualPosition.X = Convert.ToByte(Balistic.MovementOnXAxis(initialX: InitialPosition.X, time: time, velocity: this._velocity, angle: this._angle));
                 ActualPosition.Y = Convert.ToByte(Balistic.MovementOnYAxis(initialY: InitialPosition.Y, time: time, velocity: this._velocity, angle: this._angle));
            }
-            // vérifier que la balle se situe bien dans les limites de la console
+            // vérifie que la balle se situe bien dans les limites du type byte (entre 0 et 255)
            catch (System.OverflowException)
            {
            }
@@ -116,7 +124,7 @@ namespace Bowmasters
             try
             {
                 Console.SetCursorPosition(Convert.ToInt16(ActualPosition.X), Convert.ToInt16(ActualPosition.Y));
-                Console.Write("X");
+                Console.Write(_MODEL);
             }
             // vérifie que la balle ne soit pas en dehors de la console
             catch (System.ArgumentOutOfRangeException) { }
@@ -125,7 +133,7 @@ namespace Bowmasters
         }
 
         /// <summary>
-        /// Effacer la balle si elle est dans la console
+        /// Efface la balle si elle est dans la console
         /// </summary>
         public void ErasePreviousBall()
         {
@@ -134,7 +142,7 @@ namespace Bowmasters
                 Console.SetCursorPosition(Convert.ToInt16(ActualPosition.X), Convert.ToInt16(ActualPosition.Y));
                 Console.Write(" ");
             }
-            // Vérifie que la balle ne soit pas en dehors de la console
+            // Vérifie que la balle ne soit pas en dehors de la console ce qui n'est normalement pas possible
             catch(System.ArgumentOutOfRangeException) { }           
         }
     }
