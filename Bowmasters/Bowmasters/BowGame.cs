@@ -12,23 +12,61 @@ using System.Threading;
 namespace Bowmasters
 {
     /// <summary>
-    /// Jeu principal de BowMasters
+    /// Logique principale dans le jeu
     /// </summary>
     internal class BowGame
     {
         // Déclaration des constantes **********************************************************
 
+        /// <summary>
+        /// Nombre de dégat pris lors d'une attaque
+        /// </summary>
         private const byte _AMOUNT_OF_DAMAGE = 1;
+
+        /// <summary>
+        /// Temps maximum de pression pour la barre de progression
+        /// </summary>
         private const byte _MAX_HOLD_TIME = 2;
+
+        /// <summary>
+        /// Coordonnée X pour le message de fin de partie
+        /// </summary>
+        private const byte _X_COORDINATE_END_SCREEN = 63;
+
+        /// <summary>
+        /// Coordonnée Y pour le message de fin de partie
+        /// </summary>
+        private const byte _Y_COORDINATE_END_SCREEN = 15;
+
+        /// <summary>
+        /// Nombre de points attribués par coup (multiplié par un certain bonus) 
+        /// </summary>
+        private const int _SCORE_ADDER = 50;
 
         // Déclaration des attributs  **********************************************************
 
+        /// <summary>
+        /// Tableau qui contient les 2 joueurs du jeu
+        /// </summary>
         private Player[] _players;
+
+        /// <summary>
+        /// Tableau qui contient les tours de chaque joueur
+        /// </summary>
         private Tower[] _towers;
-        private string winner;
+
+        /// <summary>
+        /// Caractère pour le numéro du vainqueur
+        /// </summary>
+        private char winner;
 
         // Déclaration des constructeurs *******************************************************
 
+        /// <summary>
+        /// Constructeur avec 2 joueurs et 2 tours
+        /// </summary>
+        /// <param name="players">struct qui possède les 2 joueurs du jeu</param>
+        /// <param name="towers">struct qui possède les tours des 2 joueurs</param>
         public BowGame(Players players, Towers towers)
         {
             _players = new Player[2] { players.Player1, players.Player2 };
@@ -74,7 +112,7 @@ namespace Bowmasters
                 Thread.Sleep(150);
 
                 // Lancement de la balle jusqu'à ce qu'elle touche quelque chose ou qu'elle sorte des limites du terrain
-                ThrowBall(ballPlayerOne, _players[0], _players[1], _towers[0], _towers[1]);
+                ThrowBall(ball : ballPlayerOne, thrower: _players[0], ennemy:  _players[1], myTower: _towers[0], ennemyTower:  _towers[1]);
 
                 // Efface les points des angles et la barre de progression
                 anglePlayerOne.EraseModel();
@@ -100,7 +138,7 @@ namespace Bowmasters
                     Thread.Sleep(150);
 
                     // Lance la balle jusqu'à ce qu'elle touche quelque chose ou qu'elle sorte des limites du terrain
-                    ThrowBall(ballPlayerTwo, _players[1], _players[0], _towers[1], _towers[0]);
+                    ThrowBall(ball: ballPlayerTwo, thrower: _players[1], ennemy: _players[0], myTower: _towers[1], ennemyTower: _towers[0]);
 
                     // Efface les points des angles et la barre de progression
                     anglePlayerTwo.EraseModel();
@@ -114,21 +152,24 @@ namespace Bowmasters
 
         /// <summary>
         /// Message de fin de jeu
-        /// TODO : A REFAIRE
         /// </summary>
         public void EndGame()
         {
             Console.ForegroundColor = ConsoleColor.White;
+
+            // Choix de quel joueur a gagné
             if (_players[0].Life != 0)
             {
-                winner = "Joueur 1";
+                winner = '1';
             }
             else
             {
-                winner = "Joueur 2";
+                winner = '2';
             }
-            Console.SetCursorPosition(63, 15);
-            Console.WriteLine($"Félicitations au {winner}");
+
+            // Ecriture du message de victoire
+            Console.SetCursorPosition(_X_COORDINATE_END_SCREEN, _Y_COORDINATE_END_SCREEN);
+            Console.WriteLine($"Félicitations au joueur {winner}");
 
             Console.ReadLine();
         }
@@ -147,9 +188,9 @@ namespace Bowmasters
                 // balle au même endroit qu'une pièce + la pièce n'est pas déjà détruite
                 if (ball.ActualPosition.X == piece.Position.X && ball.ActualPosition.Y == piece.Position.Y && !piece.IsDestroyed)
                 {
-                    // on détruit la pièce
+                    // détruit la pièce
                     piece.DestroyPiece();
-                    // on indique qu'elle a été touchée
+                    // indique qu'elle a été touchée
                     return true;
                 }
             }
@@ -231,6 +272,9 @@ namespace Bowmasters
             {
                 // retourne une balle qui part depuis le point angle le plus proche
                 return new Ball(velocity, ballAngle, (byte)(angle.Position[(int)Math.Round((ballAngle - 90) / 22.5)].X - 1), (byte)(angle.Position[(int)Math.Round((ballAngle - 90) / 22.5)].Y));
+
+                // à décommenter si on veut tester pour toucher directement le joueur 1
+                //return new Ball(32, 135, (byte)(angle.Position[(int)Math.Round(90 / 22.5)].X + 1), (byte)(angle.Position[(int)Math.Round(90 / 22.5)].Y));
             }
         }
 
@@ -256,7 +300,7 @@ namespace Bowmasters
             {
                 // on update la position de la balle en fonction du temps
                 ball.UpdateBallPosition(time);
-                // on augment le timer
+                // on augmente le timer
                 time = (DateTime.Now - startTime).TotalSeconds;
                 // on affiche la balle
                 ball.DisplayBallInTime();
@@ -276,7 +320,7 @@ namespace Bowmasters
                     ennemy.Display();
                     ennemy.TakeDamage(_AMOUNT_OF_DAMAGE);
                     // on rajoute du score au lanceur
-                    thrower.Score += 15;
+                    thrower.Score += _SCORE_ADDER * 3;
 
                     // on raffiche les infos des joueurs updatés
                     ennemy.DisplayInfo();
@@ -292,7 +336,7 @@ namespace Bowmasters
                     SoundEffect.PlaySound("hitTower");
                     Thread.Sleep(100);
                     // on enlève du score au joueur et on le remontre
-                    thrower.Score -= 5;
+                    thrower.Score -= _SCORE_ADDER;
                     thrower.DisplayInfo();
 
                     // on indique que le tour est fini
@@ -306,7 +350,7 @@ namespace Bowmasters
                     Thread.Sleep(100);
 
                     // on ajoute du score au lanceur et on l'update
-                    thrower.Score += 5;
+                    thrower.Score += _SCORE_ADDER;
                     thrower.DisplayInfo();
 
                     // on indique que le tour est fini
@@ -349,7 +393,5 @@ namespace Bowmasters
                 towers[i].Display();
             }
         }
-
-
     }
 }
