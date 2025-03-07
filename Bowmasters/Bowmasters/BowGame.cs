@@ -157,16 +157,20 @@ namespace Bowmasters
         {
             Console.ForegroundColor = ConsoleColor.White;
 
-            // Choix de quel joueur a gagné
+            // Choix de quel joueur a gagné et met le bon joueur à terre
             if (_players[0].Life != 0)
             {
                 winner = '1';
+                _players[1].DisplayLying();
             }
             else
             {
                 winner = '2';
+                _players[2].DisplayLying();
             }
-
+            //SON DE YODA QUI MEURT
+            Thread.Sleep(500);
+            //SON DE VICTOIRE HAPPY WHEELS
             // Ecriture du message de victoire
             Console.SetCursorPosition(_X_COORDINATE_END_SCREEN, _Y_COORDINATE_END_SCREEN);
             Console.WriteLine($"Félicitations au joueur {winner}");

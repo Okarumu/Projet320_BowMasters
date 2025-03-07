@@ -14,55 +14,130 @@ namespace Bowmasters
 	/// </summary>
     public class Player
     {
-		// Déclaration et initialisation des constantes *******************************
-		private const byte _X_DIFFERENCE_INFORMATION_TAB = 5;	// ajustement x du tableau d'informations
-		private const byte _Y_DIFFERENCE_INFORMATION_TAB = 30;  // ajustement y du tableau d'informations
-        private const byte _X_DIFFERENCE_LIFE_TAB = 12;         // ajustement x du nombre de vie
-        private const byte _Y_DIFFERENCE_LIFE_TAB = 29;         // ajustement y du nombre de vie
-        private const byte _X_DIFFERENCE_SCORE_TAB = 12;        // ajustement x du score
-        private const byte _Y_DIFFERENCE_SCORE_TAB = 28;        // ajustement y du score
-        private string[] _PLAYER_MODEL =						// modèle du joueur
+        // Déclaration et initialisation des constantes *******************************
+
+        /// <summary>
+        /// ajustement x du tableau d'informations
+        /// </summary>
+        private const byte _X_DIFFERENCE_INFORMATION_TAB = 5;
+
+        /// <summary>
+        ///  ajustement y du tableau d'informations
+        /// </summary>
+        private const byte _Y_DIFFERENCE_INFORMATION_TAB = 30;
+
+        /// <summary>
+		/// ajustement x du nombre de vie
+		/// </summary>
+        private const byte _X_DIFFERENCE_LIFE_TAB = 12;
+
+        /// <summary>
+		/// ajustement y du nombre de vie
+		/// </summary>
+        private const byte _Y_DIFFERENCE_LIFE_TAB = 29;
+
+        /// <summary>
+		/// ajustement x du score
+		/// </summary>
+        private const byte _X_DIFFERENCE_SCORE_TAB = 12;
+
+        /// <summary>
+		/// ajustement y du score
+		/// </summary>
+        private const byte _Y_DIFFERENCE_SCORE_TAB = 28;
+
+        /// <summary>
+		/// modèle du joueur
+		/// </summary>
+        private string[] _PLAYER_MODEL =						
 		{
             @"  o  ",
             @" /░\ ",
             @" / \ ",
         };
 
+		private string[] _PLAYER_MODEL_DOWN =
+		{
+			@" |  /",
+			@"o--- ",
+		};
+
         // Déclaration des attributs **************************************************
-        private readonly byte _playerNumber;        // numéro de joueur en lecture seule
-        private readonly PositionByte _position;    // position du joueur en lecture seule
-        private readonly Hitbox _hitbox;			// hitbox du joueur	en lecture seule
-        private readonly ConsoleColor _color;       // couleur du joueur en lecture seule
-        private readonly string[] _infos;			// affiche les informations des joueurs
-        private byte _life;                         // vie du joueur
-        private int _score;                         // score du joueur
+
+        /// <summary>
+		/// numéro de joueur en lecture seule
+		/// </summary>
+        private readonly byte _playerNumber;
+
+        /// <summary>
+		/// position du joueur en lecture seule
+		/// </summary>
+        private readonly PositionByte _position;
+
+        /// <summary>
+		/// hitbox du joueur	en lecture seule
+		/// </summary>
+        private readonly Hitbox _hitbox;
+
+        /// <summary>
+		/// couleur du joueur en lecture seule
+		/// </summary>
+        private readonly ConsoleColor _color;
+
+        /// <summary>
+		/// affiche les informations des joueurs
+		/// </summary>
+        private readonly string[] _infos;
+
+        /// <summary>
+		/// vie du joueur
+		/// </summary>
+        private byte _life;
+
+        /// <summary>
+		/// score du joueur
+		/// </summary>
+        private int _score;
 
         // Déclaration des propriétés **************************************************
-        public PositionByte Position		// Obtient la position du joueur
+
+        /// <summary>
+		/// Obtient la position du joueur
+		/// </summary>
+        public PositionByte Position		
 		{
 			get
 			{
 				return _position;
 			}
 		}
-		
 
-		public Hitbox Hitbox				// Obtient la hitbox du joueur
+        /// <summary>
+		/// Obtient la hitbox du joueur
+		/// </summary>
+        public Hitbox Hitbox				
 		{
 			get
 			{
 				return _hitbox;
 			}
 		}
-		
-		public ConsoleColor Color			// Obtient la couleur du joueur
+
+        /// <summary>
+		/// Obtient la couleur du joueur
+		/// </summary>
+        public ConsoleColor Color			
 		{
 			get
 			{
 				return _color;
 			}
 		}
-        public byte Life					// Obtient le nombre de point de vie du joueur
+
+        /// <summary>
+		/// Obtient le nombre de point de vie du joueur
+		/// </summary>
+        public byte Life					
         {
             get 
 			{ 
@@ -70,7 +145,10 @@ namespace Bowmasters
 			}
         }
 
-        public int Score					// Obtient le score du joueur et permet de le modifier
+        /// <summary>
+		/// Obtient le score du joueur et permet de le modifier
+		/// </summary>
+        public int Score					
 		{
 			get
 			{
@@ -112,7 +190,7 @@ namespace Bowmasters
 		/// <summary>
 		/// affiche le joueur à un endroit dans la carte
 		/// </summary>
-		public void Display()
+		public void DisplayStanding()
 		{
 			Console.ForegroundColor = this._color;
 
@@ -131,6 +209,54 @@ namespace Bowmasters
 
 			Console.ForegroundColor = ConsoleColor.White;
 		}
+
+		/// <summary>
+		/// Affiche le modèle du joueur à terre
+		/// </summary>
+		public void DisplayLying()
+		{
+			// Efface d'abord le modèle du joueur de base
+			ErasePlayer();
+            Console.ForegroundColor = this._color;
+
+            //boucle pour parcourir les strings
+            for (byte i = 0; i < _PLAYER_MODEL_DOWN.Length; i++)
+            {
+                //endroit ou le string doit etre placé
+                Console.SetCursorPosition(Position.X, Position.Y + 1);
+                Console.Write(_PLAYER_MODEL_DOWN[i]);
+                //on descend de 1
+                Position.Y++;
+            }
+
+            //on remet la position Y du joueur à celle de base
+            Position.Y = Convert.ToByte(Position.Y - _PLAYER_MODEL_DOWN.Length);
+
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+		/// <summary>
+		/// Efface le modèle du joueur debout
+		/// </summary>
+		public void ErasePlayer()
+		{
+            Console.ForegroundColor = this._color;
+
+            //boucle pour parcourir les strings
+            for (byte i = 0; i < _PLAYER_MODEL.Length; i++)
+            {
+                //endroit ou le string doit etre placé
+                Console.SetCursorPosition(Position.X, Position.Y);
+                Console.Write("     ");
+                //on descend de 1
+                Position.Y++;
+            }
+
+            //on remet la position Y du joueur à celle de base
+            Position.Y = Convert.ToByte(Position.Y - _PLAYER_MODEL.Length);
+
+            Console.ForegroundColor = ConsoleColor.White;
+        }
 
 		/// <summary>
 		/// le joueur perd de la vie en fonction du nombre de dégat infligé
