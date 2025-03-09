@@ -31,7 +31,7 @@ namespace Bowmasters
         /// <summary>
         /// Coordonnée X pour le message de fin de partie
         /// </summary>
-        private const byte _X_COORDINATE_END_SCREEN = 63;
+        private const byte _X_COORDINATE_END_SCREEN = 57;
 
         /// <summary>
         /// Coordonnée Y pour le message de fin de partie
@@ -88,6 +88,8 @@ namespace Bowmasters
             SoundEffect.PreloadSound("throw", "SoundEffect/Bow Shot (Minecraft Sound) - Sound Effect for editingCUT.wav");
             SoundEffect.PreloadSound("hitPlayer", "SoundEffect/Minecraft-Damage-_Oof_-Sound-Effect-_HD_Cut.wav");
             SoundEffect.PreloadSound("hitTower", "SoundEffect/getting_thrown_againsed_something_(sound_effect)_outCut.wav");
+            SoundEffect.PreloadSound("deathSound", "SoundEffect/Lego yoda death sound.wav");
+            SoundEffect.PreloadSound("victorySong", "SoundEffect/Happy Wheels victory green screen.wav");
         }
 
         /// <summary>
@@ -168,12 +170,17 @@ namespace Bowmasters
                 winner = '2';
                 _players[2].DisplayLying();
             }
-            //SON DE YODA QUI MEURT
-            Thread.Sleep(500);
+            //
+            SoundEffect.PlaySound("deathSound");
+            Thread.Sleep(1000);
             //SON DE VICTOIRE HAPPY WHEELS
+            SoundEffect.PlaySound("victorySong");
+
             // Ecriture du message de victoire
             Console.SetCursorPosition(_X_COORDINATE_END_SCREEN, _Y_COORDINATE_END_SCREEN);
-            Console.WriteLine($"Félicitations au joueur {winner}");
+            Console.Write($"Félicitations au joueur {winner}.");
+            Console.SetCursorPosition(_X_COORDINATE_END_SCREEN, _Y_COORDINATE_END_SCREEN + 1);
+            Console.Write("Appuyez sur n'importe quelle touche pour fermer le jeu...");
 
             Console.ReadLine();
         }
@@ -265,20 +272,20 @@ namespace Bowmasters
             if (throwRight)
             {
                 // retourne une balle qui part depuis le point angle le plus proche
-                return new Ball(velocity, ballAngle, (byte)(angle.Position[(int)Math.Round(ballAngle / 22.5)].X + 1), (byte)(angle.Position[(int)Math.Round(ballAngle / 22.5)].Y));
+                //return new Ball(velocity, ballAngle, (byte)(angle.Position[(int)Math.Round(ballAngle / 22.5)].X + 1), (byte)(angle.Position[(int)Math.Round(ballAngle / 22.5)].Y));
 
                 // à décommenter si on veut tester pour toucher directement le joueur 2
-                //return new Ball(32, 45, (byte)(angle.Position[(int)Math.Round(90 / 22.5)].X + 1), (byte)(angle.Position[(int)Math.Round(90 / 22.5)].Y));
+                return new Ball(32, 45, (byte)(angle.Position[(int)Math.Round(90 / 22.5)].X + 1), (byte)(angle.Position[(int)Math.Round(90 / 22.5)].Y));
 
             }
             // tire à gauche
             else
             {
                 // retourne une balle qui part depuis le point angle le plus proche
-                return new Ball(velocity, ballAngle, (byte)(angle.Position[(int)Math.Round((ballAngle - 90) / 22.5)].X - 1), (byte)(angle.Position[(int)Math.Round((ballAngle - 90) / 22.5)].Y));
+                //return new Ball(velocity, ballAngle, (byte)(angle.Position[(int)Math.Round((ballAngle - 90) / 22.5)].X - 1), (byte)(angle.Position[(int)Math.Round((ballAngle - 90) / 22.5)].Y));
 
                 // à décommenter si on veut tester pour toucher directement le joueur 1
-                //return new Ball(32, 135, (byte)(angle.Position[(int)Math.Round(90 / 22.5)].X + 1), (byte)(angle.Position[(int)Math.Round(90 / 22.5)].Y));
+                return new Ball(32, 135, (byte)(angle.Position[(int)Math.Round(90 / 22.5)].X + 1), (byte)(angle.Position[(int)Math.Round(90 / 22.5)].Y));
             }
         }
 
