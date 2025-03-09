@@ -12,7 +12,7 @@ namespace Bowmasters
     /// <summary>
     /// Classe des sons qui permet de précharger et de lancer un son
     /// </summary>
-    internal class SoundEffect
+    internal static class SoundEffect
     {
         // Déclaration et initialisation des attributs *********************************************
 
