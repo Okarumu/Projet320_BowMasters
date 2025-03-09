@@ -182,7 +182,7 @@ namespace Bowmasters
             Console.SetCursorPosition(_X_COORDINATE_END_SCREEN, _Y_COORDINATE_END_SCREEN + 1);
             Console.Write("Appuyez sur n'importe quelle touche pour fermer le jeu...");
 
-            Console.ReadLine();
+            Console.ReadKey();
         }
 
         /// <summary>
