@@ -11,6 +11,9 @@ using System.Runtime.CompilerServices;
 
 namespace Bowmasters
 {
+    /// <summary>
+    /// Contient le code principal utile au bon fonctionnement du jeu. C'est ici qu'on initialise, qu'on lance la boucle et qu'on termine le jeu
+    /// </summary>
     internal class Program
     {
         static void Main()
@@ -52,34 +55,43 @@ namespace Bowmasters
             /// </summary>
             Tower tower2;
 
-
             // Programme principal ***************************************************************************
 
-            // Initialisation des variables utilisées dans le jeu ***********************
-            // Initialisation des joueurs
-            player1 = new Player(Config.AMOUNT_OF_LIFE_PER_PLAYER, Config.X_POSITION_PLAYER_1, Config.Y_POSITION_PLAYER_1_AND_2, Config.COLOR_PLAYER_1, Config.PLAYER_NUMBER_FOR_PLAYER_ONE);    
-            player2 = new Player(Config.AMOUNT_OF_LIFE_PER_PLAYER, Config.X_POSITION_PLAYER_2, Config.Y_POSITION_PLAYER_1_AND_2, Config.COLOR_PLAYER_2, Config.PLAYER_NUMBER_FOR_PLAYER_TWO);
-            players = new Players(player1, player2);
+            // boucle permettant de recommencer le jeu
+            do
+            {
+                // Efface la console
+                Console.Clear();
 
-            // Iniialisation des tours
-            tower1 = new Tower(Config.TOWER_HEIGHT, Config.TOWER_WIDTH, Config.X_POSITION_TOWER_ONE, Config.Y_POSITION_TOWER_ONE_AND_TWO); 
-            tower2 = new Tower(Config.TOWER_HEIGHT, Config.TOWER_WIDTH, Config.X_POSITION_TOWER_TWO, Config.Y_POSITION_TOWER_ONE_AND_TWO);             
-            towers = new Towers(tower1, tower2); 
-            
-            // Initialisation du jeu en lui-même
-            game = new BowGame(players, towers);
+                // Initialisation des variables utilisées dans le jeu ***********************
+                // Initialisation des joueurs
+                player1 = new Player(Config.AMOUNT_OF_LIFE_PER_PLAYER, Config.X_POSITION_PLAYER_1, Config.Y_POSITION_PLAYER_1_AND_2, Config.COLOR_PLAYER_1, Config.PLAYER_NUMBER_FOR_PLAYER_ONE);
+                player2 = new Player(Config.AMOUNT_OF_LIFE_PER_PLAYER, Config.X_POSITION_PLAYER_2, Config.Y_POSITION_PLAYER_1_AND_2, Config.COLOR_PLAYER_2, Config.PLAYER_NUMBER_FOR_PLAYER_TWO);
+                players = new Players(player1, player2);
 
-            // Charge les options du jeu (changement de fenêtre, enlève le curseur...)
-            Config.SetGameOptions();        
-            
-            // Commence le jeu
-            game.Initialize();
+                // Iniialisation des tours
+                tower1 = new Tower(Config.TOWER_HEIGHT, Config.TOWER_WIDTH, Config.X_POSITION_TOWER_ONE, Config.Y_POSITION_TOWER_ONE_AND_TWO);
+                tower2 = new Tower(Config.TOWER_HEIGHT, Config.TOWER_WIDTH, Config.X_POSITION_TOWER_TWO, Config.Y_POSITION_TOWER_ONE_AND_TWO);
+                towers = new Towers(tower1, tower2);
 
-            // Boucle de jeu
-            game.GameLoop();
+                // Initialisation du jeu en lui-même
+                game = new BowGame(players, towers);
 
-            // Fin du jeu
-            game.EndGame();
+                // Charge les options du jeu (changement de fenêtre, enlève le curseur...)
+                Config.SetGameOptions();
+
+                // Commence le jeu
+                game.Initialize();
+
+                // Boucle de jeu
+                game.GameLoop();
+
+                // Fin du jeu et demande de recommencement
+                game.EndGame();
+
+            } while (game.PlayAgain); // tant que les joueurs ne veulent pas recommencer
+
+            Console.Clear();
         }
     }
 }

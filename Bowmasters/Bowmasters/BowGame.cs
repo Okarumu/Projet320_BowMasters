@@ -2,7 +2,6 @@
 /// EMTL
 /// Auteur : Maël Naudet
 /// Date : 31.01.2025
-/// TODO : AJOUTER SON DE LEGO YODA QUI DECEDE AVEC LE BRUIT DE LEGO QUI SE CASSE ET LE SON DE VICTOIRE HAPPY WHEELS
 ///*******************************************************
 
 using System;
@@ -12,7 +11,7 @@ using System.Threading;
 namespace Bowmasters
 {
     /// <summary>
-    /// Logique principale dans le jeu
+    /// Logique principale dans le jeu. 2 joueurs s'affrontent à tour de rôle où ils vont chacun devoir définir un angle et une puissance de tir
     /// </summary>
     internal class BowGame
     {
@@ -31,7 +30,7 @@ namespace Bowmasters
         /// <summary>
         /// Coordonnée X pour le message de fin de partie
         /// </summary>
-        private const byte _X_COORDINATE_END_SCREEN = 57;
+        private const byte _X_COORDINATE_END_SCREEN = 35;
 
         /// <summary>
         /// Coordonnée Y pour le message de fin de partie
@@ -58,7 +57,25 @@ namespace Bowmasters
         /// <summary>
         /// Caractère pour le numéro du vainqueur
         /// </summary>
-        private char winner;
+        private char _winner;
+
+        /// <summary>
+        /// Booléen pour savoir si les joueurs veulent recommencer ou non
+        /// </summary>
+        private bool _playAgain;
+
+        // Déclaration des propriétés **********************************************************
+
+        /// <summary>
+        /// Obtient le booléen permettant de recommencer une partie
+        /// </summary>
+        public bool PlayAgain
+        {
+            get
+            {
+                return _playAgain;
+            }
+        }
 
         // Déclaration des constructeurs *******************************************************
 
@@ -162,12 +179,12 @@ namespace Bowmasters
             // Choix de quel joueur a gagné et met le bon joueur à terre
             if (_players[0].Life != 0)
             {
-                winner = '1';
+                _winner = '1';
                 _players[1].DisplayLying();
             }
             else
             {
-                winner = '2';
+                _winner = '2';
                 _players[2].DisplayLying();
             }
             //
@@ -178,11 +195,10 @@ namespace Bowmasters
 
             // Ecriture du message de victoire
             Console.SetCursorPosition(_X_COORDINATE_END_SCREEN, _Y_COORDINATE_END_SCREEN);
-            Console.Write($"Félicitations au joueur {winner}.");
-            Console.SetCursorPosition(_X_COORDINATE_END_SCREEN, _Y_COORDINATE_END_SCREEN + 1);
-            Console.Write("Appuyez sur n'importe quelle touche pour fermer le jeu...");
+            Console.Write($"Félicitations au joueur {_winner}.");
 
-            Console.ReadKey();
+            // possible recommencement du jeu
+            RestartGame();
         }
 
         /// <summary>
@@ -402,6 +418,43 @@ namespace Bowmasters
             {
                 towers[i].Display();
             }
+        }
+
+        /// <summary>
+        /// Demande aux joueurs s'ils veulent recommencer le jeu ou non
+        /// </summary>
+        private void RestartGame()
+        {
+            // Vide le buffer d'entrée si un utilisateur a déjà appuyé sur entrée ou espace pendant le jeu
+            while (Console.KeyAvailable)
+            {
+                Console.ReadKey(true);
+            } 
+
+            // variable pour stocker l'input utilisateur
+            ConsoleKeyInfo keyInputUser;
+
+            // message pour indiquer sur quoi appuyer
+            Console.SetCursorPosition(_X_COORDINATE_END_SCREEN, _Y_COORDINATE_END_SCREEN + 1);
+            Console.Write("Appuyez sur échap pour fermer le jeu ou sur entrée pour recommencer une partie");
+            
+            // boucle qui continue tant que les joueurs ne répondent pas à la question
+            do
+            {
+                // réponse des joueurs
+                keyInputUser = Console.ReadKey(true);
+
+                // input entrée = recommencer
+                if (keyInputUser.Key == ConsoleKey.Enter)
+                {
+                    _playAgain = true;
+                }
+                // input echap = arrêter
+                else if (keyInputUser.Key == ConsoleKey.Escape)
+                {
+                    _playAgain = false;
+                }
+            } while (keyInputUser.Key != ConsoleKey.Enter && keyInputUser.Key != ConsoleKey.Escape);    // tant que les joueurs n'ont pas spécifié s'ils recommencent ou s'ils arrêtent
         }
     }
 }
