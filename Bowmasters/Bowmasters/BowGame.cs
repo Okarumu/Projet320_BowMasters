@@ -25,7 +25,7 @@ namespace Bowmasters
         /// <summary>
         /// Temps maximum de pression pour la barre de progression
         /// </summary>
-        private const byte _MAX_HOLD_TIME = 2;
+        private const byte _MAX_HOLD_TIME = 1;
 
         /// <summary>
         /// Coordonnée X pour le message de fin de partie
@@ -288,20 +288,20 @@ namespace Bowmasters
             if (throwRight)
             {
                 // retourne une balle qui part depuis le point angle le plus proche
-                //return new Ball(velocity, ballAngle, (byte)(angle.Position[(int)Math.Round(ballAngle / 22.5)].X + 1), (byte)(angle.Position[(int)Math.Round(ballAngle / 22.5)].Y));
+                return new Ball(velocity, ballAngle, (byte)(angle.Position[(int)Math.Round(ballAngle / 22.5)].X + 1), (byte)(angle.Position[(int)Math.Round(ballAngle / 22.5)].Y));
 
                 // à décommenter si on veut tester pour toucher directement le joueur 2
-                return new Ball(32, 45, (byte)(angle.Position[(int)Math.Round(90 / 22.5)].X + 1), (byte)(angle.Position[(int)Math.Round(90 / 22.5)].Y));
+                //return new Ball(32, 45, (byte)(angle.Position[(int)Math.Round(90 / 22.5)].X + 1), (byte)(angle.Position[(int)Math.Round(90 / 22.5)].Y));
 
             }
             // tire à gauche
             else
             {
                 // retourne une balle qui part depuis le point angle le plus proche
-                //return new Ball(velocity, ballAngle, (byte)(angle.Position[(int)Math.Round((ballAngle - 90) / 22.5)].X - 1), (byte)(angle.Position[(int)Math.Round((ballAngle - 90) / 22.5)].Y));
+                return new Ball(velocity, ballAngle, (byte)(angle.Position[(int)Math.Round((ballAngle - 90) / 22.5)].X - 1), (byte)(angle.Position[(int)Math.Round((ballAngle - 90) / 22.5)].Y));
 
                 // à décommenter si on veut tester pour toucher directement le joueur 1
-                return new Ball(32, 135, (byte)(angle.Position[(int)Math.Round(90 / 22.5)].X + 1), (byte)(angle.Position[(int)Math.Round(90 / 22.5)].Y));
+                //return new Ball(32, 135, (byte)(angle.Position[(int)Math.Round(90 / 22.5)].X + 1), (byte)(angle.Position[(int)Math.Round(90 / 22.5)].Y));
             }
         }
 

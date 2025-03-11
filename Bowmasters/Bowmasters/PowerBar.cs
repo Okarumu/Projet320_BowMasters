@@ -158,15 +158,23 @@ namespace Bowmasters
                     // indique qu'il appuie
                     _isSpaceHeld = true;
                 }
+
                 // la touche est appuyée
                 if (_isSpaceHeld)
                 {
                     // on ajoute un timer en fonction de quand il a appuyé la première fois
                     _holdTime = (float)(DateTime.Now - _startTime).TotalSeconds;
                     // Limite le temps à maxHoldTime
-                    _holdTime = Math.Min(_holdTime, _maxHoldTime); 
-                }     
+                    _holdTime = Math.Min(_holdTime, _maxHoldTime);
 
+                    // Quand holdTime est au max on efface et on recommence
+                    if (_holdTime == _maxHoldTime)
+                    {
+                        _holdTime = 0;
+                        _startTime = DateTime.Now;
+                        EraseBar();
+                    }
+                }  
                 // Affiche la barre
                 DisplayBar();
 
