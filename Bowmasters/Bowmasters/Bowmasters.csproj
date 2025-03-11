@@ -68,7 +68,7 @@
     <Compile Include="Players.cs" />
     <Compile Include="PositionByte.cs" />
     <Compile Include="PositionDouble.cs" />
-    <Compile Include="PressSpace.cs" />
+    <Compile Include="PowerBar.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShootAngle.cs" />

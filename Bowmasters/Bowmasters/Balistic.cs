@@ -22,6 +22,7 @@ namespace Bowmasters
 
 
         // Déclaration et implémentation des méthodes *********************************
+
         /// <summary>
         /// calcule la coordonnée y d'un objet lancé grâce à la balistique
         /// </summary>

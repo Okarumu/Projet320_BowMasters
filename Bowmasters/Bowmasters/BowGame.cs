@@ -121,7 +121,7 @@ namespace Bowmasters
 
                 // Création de la gestion de l'angle et de la vitesse
                 ShootAngle anglePlayerOne = new ShootAngle(player: _players[0], isRight: true);
-                PressSpace velocityBarPlayerOne = new PressSpace(_players[0], _MAX_HOLD_TIME, _players[0].Color);
+                PowerBar velocityBarPlayerOne = new PowerBar(_players[0], _MAX_HOLD_TIME, _players[0].Color);
 
                 // Création de la balle
                 Ball ballPlayerOne = BallPowerAndAngle(angle: anglePlayerOne, ballVelocity: velocityBarPlayerOne, throwRight: true);
@@ -147,7 +147,7 @@ namespace Bowmasters
 
                     // Création de la gestion de l'angle et de la vitesse
                     ShootAngle anglePlayerTwo = new ShootAngle(player: _players[1], isRight: false);
-                    PressSpace velocityBarPlayerTwo = new PressSpace(_players[1], _MAX_HOLD_TIME, _players[1].Color);
+                    PowerBar velocityBarPlayerTwo = new PowerBar(_players[1], _MAX_HOLD_TIME, _players[1].Color);
 
                     // Création de la balle
                     Ball ballPlayerTwo = BallPowerAndAngle(angle: anglePlayerTwo, ballVelocity: velocityBarPlayerTwo, throwRight: false);
@@ -276,7 +276,7 @@ namespace Bowmasters
         /// <param name="ballVelocity">gestion de la vélocité de la balle de l'utilisateur</param>
         /// <param name="throwRight">savoir si l'utilisateur tire à droite ou à gauche</param>
         /// <returns>une balle prête à être utilisée</returns>
-        private Ball BallPowerAndAngle(ShootAngle angle, PressSpace ballVelocity, bool throwRight)
+        private Ball BallPowerAndAngle(ShootAngle angle, PowerBar ballVelocity, bool throwRight)
         {
             // gestion de l'angle de la balle
             double ballAngle = angle.UpdateBallAngle();

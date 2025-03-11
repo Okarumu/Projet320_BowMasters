@@ -12,7 +12,7 @@ namespace Bowmasters
     /// <summary>
     /// Affiche une barre de progression et quand on appuie sur espace, retourne le temps d'attente avant la pression (max 5 secondes)
     /// </summary>
-    internal class PressSpace
+    internal class PowerBar
     {
 
 
@@ -93,7 +93,7 @@ namespace Bowmasters
         /// <param name="xPosition">position x</param>
         /// <param name="yPosition">position y</param>
         /// <param name="maxHoldTime">temps max de pression</param>
-        public PressSpace(Player player, float maxHoldTime, ConsoleColor color)
+        public PowerBar(Player player, float maxHoldTime, ConsoleColor color)
         {
             // se positionne au bon endroit
             Position = new PositionByte((byte)(player.Position.X - _X_DIFFERENCE_PROGRESSION_BAR), (byte)(player.Position.Y - _Y_DIFFERENCE_PROGRESSION_BAR));
@@ -174,7 +174,7 @@ namespace Bowmasters
                         _startTime = DateTime.Now;
                         EraseBar();
                     }
-                }  
+                }
                 // Affiche la barre
                 DisplayBar();
 
