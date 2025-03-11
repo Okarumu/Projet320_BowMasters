@@ -33,7 +33,7 @@ namespace Bowmasters
         /// <summary>
         /// nombre de points de vie par joueur
         /// </summary>
-        public const byte AMOUNT_OF_LIFE_PER_PLAYER = 1;
+        public const byte AMOUNT_OF_LIFE_PER_PLAYER = 3;
 
         /// <summary>
         /// nombre du joueur 1
