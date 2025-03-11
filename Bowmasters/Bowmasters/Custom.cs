@@ -30,7 +30,9 @@ namespace Bowmasters
             ConsoleColor.Blue
         };
 
+
         // Déclaration et implémentation des méthodes *****************************************
+
         /// <summary>
         /// retourne une couleur aléatoire
         /// </summary>

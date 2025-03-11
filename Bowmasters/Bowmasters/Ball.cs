@@ -20,6 +20,7 @@ namespace Bowmasters
         /// </summary>
         private const char _MODEL = '×';
 
+
         // Déclaration des attributs **************************************************
 
         /// <summary>
@@ -76,6 +77,7 @@ namespace Bowmasters
             }
         }
 
+
         // Déclaration du constructeur *********************************************
 
         /// <summary>
@@ -93,6 +95,7 @@ namespace Bowmasters
             ActualPosition = new PositionByte(initialXPosition, initialYPosition);
             _color = Custom.GetRandomColor();
         }
+
 
         // Déclaration et implémentation des méthodes ******************************
 

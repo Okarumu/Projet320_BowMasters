@@ -23,6 +23,7 @@ namespace Bowmasters
         /// </summary>
         private Player _player2;
 
+
         // Déclaration des propriétés ****************************************
 
         /// <summary>
@@ -46,6 +47,8 @@ namespace Bowmasters
                 return _player2;
             }
         }
+
+
         // Déclaration du constructeur ***************************************
 
         /// <summary>

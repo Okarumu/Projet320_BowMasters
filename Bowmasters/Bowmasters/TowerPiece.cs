@@ -25,6 +25,7 @@ namespace Bowmasters
         /// </summary>
         private const ConsoleColor _COLOR = ConsoleColor.DarkGray;
 
+
         // Déclaration des attributs *****************************************************
 
         /// <summary>
@@ -36,6 +37,7 @@ namespace Bowmasters
         /// savoir si une pièce est détruite ou non
         /// </summary>
         private bool _isDestroyed;
+
 
         // Déclaration des propriétés ****************************************************
 
@@ -61,7 +63,9 @@ namespace Bowmasters
             }
         }     
 
+
         // Déclaration des constructeurs *************************************************
+
         /// <summary>
         /// permet de faire une pièce en indiquant sa position
         /// </summary>
@@ -73,7 +77,9 @@ namespace Bowmasters
             _isDestroyed = false;
         }
 
+
         // Déclaration et implémentation des méthodes ************************************
+
         /// <summary>
         /// Affiche la pièce
         /// </summary>

@@ -37,6 +37,7 @@ namespace Bowmasters
         /// </summary>
         private const double _ANGLE_DIVIDER = 22.5;
 
+
         // Déclaration des attributs ****************************************************************************
 
         /// <summary>
@@ -74,6 +75,7 @@ namespace Bowmasters
         /// </summary>
         private bool _goingUp;
 
+
         // Déclaration des propriété ****************************************************************************
 
         /// <summary>
@@ -87,7 +89,9 @@ namespace Bowmasters
             }
         }
 
+
         // Déclaration du constructeur **************************************************************************
+
         /// <summary>
         /// Constructeur qui initialise certaines variables et qui construit les différents points possibles
         /// </summary>
@@ -130,7 +134,10 @@ namespace Bowmasters
                 _maximum_angle = 180;
             }
         }
+
+
         // Déclaration et implémentation des méthodes ***********************************************************
+
         /// <summary>
         /// Récupère l'état actuel d'une touche spécifiée du clavier
         /// Utilise l'API Windows via P/Invoke.
@@ -215,6 +222,7 @@ namespace Bowmasters
                     // petit temps d'attente
                     Thread.Sleep(10);
                 }
+
                 // on indique que les points descendent maintenant
                 _goingUp = false;
                 // de l'angle max à l'angle min

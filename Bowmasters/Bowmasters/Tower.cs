@@ -23,6 +23,7 @@ namespace Bowmasters
         /// </summary>
         private TowerPiece[,] _pieces;
 
+
         // Déclaration des propriétés ********************************************
 
         /// <summary>
@@ -51,7 +52,9 @@ namespace Bowmasters
             }
         }
 
+
         // Déclaration du constructeur *******************************************
+
         /// <summary>
         /// Créer la tour et le tableau de pièces qu'on va utiliser
         /// </summary>
@@ -77,7 +80,10 @@ namespace Bowmasters
                 }
             }
         }
+
+
         // Déclaration et implémentation des méthodes ****************************
+
         /// <summary>
         /// Affiche toutes les pièces de la tour
         /// </summary>

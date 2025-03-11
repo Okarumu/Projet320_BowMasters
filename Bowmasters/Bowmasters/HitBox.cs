@@ -18,6 +18,7 @@ namespace Bowmasters
         /// </summary>
         private readonly PositionByte[,] _hitBoxes;
 
+
         // Déclaration des propriétés *************************************************
 
         /// <summary>
@@ -28,7 +29,9 @@ namespace Bowmasters
             get { return _hitBoxes; }
         }
 
+
         // Déclaration du constructeur *************************************************
+
         /// <summary>
         /// Constructeur qui crée la liste de position en fonction du rectangle donné
         /// </summary>

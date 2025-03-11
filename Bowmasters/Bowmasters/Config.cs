@@ -33,7 +33,7 @@ namespace Bowmasters
         /// <summary>
         /// nombre de points de vie par joueur
         /// </summary>
-        public const byte AMOUNT_OF_LIFE_PER_PLAYER = 3;
+        public const byte AMOUNT_OF_LIFE_PER_PLAYER = 1;
 
         /// <summary>
         /// nombre du joueur 1
@@ -94,6 +94,7 @@ namespace Bowmasters
         /// position y des tours du joueur 1 et 2
         /// </summary>
         public const byte Y_POSITION_TOWER_ONE_AND_TWO = _SCREEN_HEIGHT - TOWER_HEIGHT;               
+
 
         // Déclaration et implémentation des méthodes ********************
 

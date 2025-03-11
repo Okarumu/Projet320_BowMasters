@@ -14,8 +14,6 @@ namespace Bowmasters
     /// </summary>
     internal class PowerBar
     {
-
-
         // Déclaration et initialisation des constantes ****************************
 
         /// <summary>
@@ -42,6 +40,7 @@ namespace Bowmasters
         /// Vitesse maximum de la balle
         /// </summary>
         private const byte _MAX_SPEED = 50;
+
 
         // Déclaration des attributs ***********************************************
 
@@ -75,6 +74,7 @@ namespace Bowmasters
         /// </summary>
         private PositionByte _position;                         
 
+
         // Déclaration des propriétés **********************************************
 
         /// <summary>
@@ -86,7 +86,9 @@ namespace Bowmasters
             set { _position = value; }
         }
 
+
         // Déclaration du constructeur *********************************************
+
         /// <summary>
         /// Constructeur qui demande une position et un temps max de pression
         /// </summary>
@@ -102,7 +104,9 @@ namespace Bowmasters
             this._color = color;
         }
 
+
         // Déclaration et implémentation des méthodes *******************************
+
         /// <summary>
         /// Récupère l'état actuel d'une touche spécifiée du clavier
         /// Utilise l'API Windows via P/Invoke.

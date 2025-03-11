@@ -42,6 +42,7 @@ namespace Bowmasters
         /// </summary>
         private const int _SCORE_ADDER = 50;
 
+
         // Déclaration des attributs  **********************************************************
 
         /// <summary>
@@ -64,6 +65,7 @@ namespace Bowmasters
         /// </summary>
         private bool _playAgain;
 
+
         // Déclaration des propriétés **********************************************************
 
         /// <summary>
@@ -77,6 +79,7 @@ namespace Bowmasters
             }
         }
 
+
         // Déclaration des constructeurs *******************************************************
 
         /// <summary>
@@ -89,6 +92,7 @@ namespace Bowmasters
             _players = new Player[2] { players.Player1, players.Player2 };
             _towers = new Tower[2] { towers.Tower1, towers.Tower2 };
         }
+
 
         // Déclaration et implémentation des méthodes ******************************************
 
@@ -429,7 +433,7 @@ namespace Bowmasters
             while (Console.KeyAvailable)
             {
                 Console.ReadKey(true);
-            } 
+            }
 
             // variable pour stocker l'input utilisateur
             ConsoleKeyInfo keyInputUser;

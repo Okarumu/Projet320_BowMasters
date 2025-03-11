@@ -21,7 +21,9 @@ namespace Bowmasters
         /// </summary>
         private static Dictionary<string, SoundPlayer> _soundPlayers = new Dictionary<string, SoundPlayer>();   
 
+
         // Déclaration et implémentations des méthodes *********************************************
+
         /// <summary>
         /// Charge un son et l'ajoute dans le dictionnaire afin de pouvoir le lancer
         /// </summary>

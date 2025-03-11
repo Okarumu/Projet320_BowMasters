@@ -24,6 +24,7 @@ namespace Bowmasters
         /// </summary>
         private byte _y;
 
+
         // Déclaration des propriétés *****************************************
 
         /// <summary>
@@ -55,6 +56,7 @@ namespace Bowmasters
                 _y = value;
             }
         }
+
 
         // Déclaration du constructeur ****************************************
 

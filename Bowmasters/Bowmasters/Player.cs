@@ -62,6 +62,7 @@ namespace Bowmasters
 			@"o--- ",
 		};
 
+
         // Déclaration des attributs **************************************************
 
         /// <summary>
@@ -98,6 +99,7 @@ namespace Bowmasters
 		/// score du joueur
 		/// </summary>
         private int _score;
+
 
         // Déclaration des propriétés **************************************************
 
@@ -162,6 +164,7 @@ namespace Bowmasters
 
 
         // Déclaration du constructeur ***********************************************************
+
         /// <summary>
         /// Constructeur normal avec un nombre de vie personnalisé
         /// </summary>
@@ -186,7 +189,9 @@ namespace Bowmasters
             };
 		}
 
+
 		// Déclaration et implémentation des méthodes du joueur ***********************************
+
 		/// <summary>
 		/// affiche le joueur à un endroit dans la carte
 		/// </summary>

@@ -23,6 +23,7 @@ namespace Bowmasters
         /// </summary>
         private Tower _tower2;
 
+
         // Déclaration des propriétés ****************************************
 
         /// <summary>
@@ -46,6 +47,8 @@ namespace Bowmasters
                 return _tower2;
             }
         }
+
+
         // Déclaration du constructeur ***************************************
 
         /// <summary>
